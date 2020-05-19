@@ -25,7 +25,7 @@ class Chats{
 
   Chats.fromMap(Map<String, dynamic> map):
         sender = map['sender'],
-        receiver = map['receiver'],
+        receiver = map['reciever'],
         seen = map['seen'],
         date = map['date'],
         seenDate = map['seenDate'],
