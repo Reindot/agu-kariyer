@@ -37,4 +37,9 @@ class User {
         professional = map['professional'],
         company = map['company'];
 
+  @override
+  String toString() {
+    return 'User{userID: $userID, email: $email, profileURL: $profileURL, type: $type, name: $name, bio: $bio, professional: $professional, company: $company}';
+  }
+
 }
