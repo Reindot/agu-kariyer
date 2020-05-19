@@ -3,8 +3,6 @@ import 'package:agucareer/widgets/connections_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-//test d
-
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
