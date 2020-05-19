@@ -25,8 +25,8 @@ class ConnectionsWidget extends StatelessWidget {
                             Navigator.of(context, rootNavigator: true).push(
                                 MaterialPageRoute(
                                     builder: (context) => ChatPage(
-                                        me: _userModel.user,
-                                        it: userList[index])));
+                                        me: _userModel.user.userID,
+                                        it: userList[index].userID)));
                           },
                           child: Card(
                               margin: EdgeInsets.only(left: 40),

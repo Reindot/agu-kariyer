@@ -1,4 +1,5 @@
 import 'package:agucareer/models/chats_model.dart';
+import 'package:agucareer/pages/chat_page.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,11 +27,20 @@ class _AllChatsPageState extends State<AllChatsPage> {
             var allChats = chatList.data;
             return ListView.builder(itemBuilder: (context, index){
               var chat = allChats[index];
-              return ListTile(
-                title: Text(chat.name),
-                subtitle: Text(chat.last),
-                leading: CircleAvatar(
-                  backgroundImage: NetworkImage(chat.profileURL),
+              return GestureDetector(
+                onTap: () {
+                  Navigator.of(context, rootNavigator: true).push(
+                      MaterialPageRoute(
+                          builder: (context) => ChatPage(
+                              me: chat.sender,
+                              it: chat.receiver)));
+                },
+                child: ListTile(
+                  title: Text(chat.name),
+                  subtitle: Text(chat.last),
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(chat.profileURL),
+                  ),
                 ),
               );
             }, itemCount: allChats.length,);

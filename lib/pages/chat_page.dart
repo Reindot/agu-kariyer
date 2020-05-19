@@ -1,5 +1,4 @@
 import 'package:agucareer/models/message_model.dart';
-import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,8 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class ChatPage extends StatefulWidget {
-  final User me;
-  final User it;
+  final String me;
+  final String it;
 
   ChatPage({this.me, this.it});
 
@@ -25,15 +24,15 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     final _userModel = Provider.of<UserModel>(context);
-    User _from = widget.me;
-    User _to = widget.it;
+    String _from = widget.me;
+    String _to = widget.it;
 
     void _sendMessage() async {
       try {
         if (_messageController.text.trim().length > 0) {
           Message _sentMessage = Message(
-              from: _from.userID,
-              to: _to.userID,
+              from: _from,
+              to: _to,
               isMine: true,
               message: _messageController.text);
           var result = await _userModel.sendMessage(_sentMessage);
@@ -58,7 +57,7 @@ class _ChatPageState extends State<ChatPage> {
         children: <Widget>[
           Expanded(
             child: StreamBuilder<List<Message>>(
-              stream: _userModel.getMessages(_from.userID, _to.userID),
+              stream: _userModel.getMessages(_from, _to),
               builder: (context, streamData) {
                 if (!streamData.hasData) {
                   return Center(
@@ -160,7 +159,7 @@ class _ChatPageState extends State<ChatPage> {
             Row(
               children: <Widget>[
                 CircleAvatar(
-                  backgroundImage: NetworkImage(widget.it.profileURL),
+                  backgroundImage: NetworkImage(widget.it),
                 ),
                 Flexible(
                   child: Container(
