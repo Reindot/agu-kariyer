@@ -1,6 +1,6 @@
 # AGU Kariyer
 
-The Application of Agu Career
+AGU Kariyer Uygulaması
 
 ## Getting Started
 
