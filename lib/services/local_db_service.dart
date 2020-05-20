@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:agucareer/models/message_model.dart';
+import 'package:agucareer/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -31,20 +32,59 @@ class LocalDBService {
         "message TEXT, "
         "isMine TEXT, "
         "on_db TEXT);");
+
+    await db.execute("CREATE TABLE USER "
+        "(userID TEXT, "
+        "email TEXT, "
+        "profileURL TEXT, "
+        "type TEXT, "
+        "name TEXT, "
+        "bio TEXT, "
+        "professional TEXT, "
+        "company TEXT);");
+
   }
 
-  void getMessages() async {
+  /*
+
+  Future<List<Message>> queryMessages() async{
     var dbClient = await db;
-    var result = await dbClient.query("MESSAGES", orderBy: "date").asStream();
+    var result = await dbClient.query("MESSAGES", orderBy: "date");
+    debugPrint(">>>>>>>>>> $result");
+    return result.map((data) => Message.fromMap(data)).toList();
   }
 
-  Future<int> sendMessage(Message message) async {
+  @override
+  Stream<List<Message>>  getMessages(String fromID, String toID) {
+    return Stream.fromFuture(queryMessages());
+  }
+
+   */
+
+  @override
+  Future<bool> saveUser(User user) async {
     var dbClient = await db;
-    int id1 = await dbClient.rawInsert(
+    await dbClient.insert("USER", user.toMap());
+  }
+
+  @override
+  Future<User> getUser(String userID) async {
+    var dbClient = await db;
+    var result = await dbClient.query("MESSAGES", orderBy: "date");
+    List<User> user = result.map((data) => User.fromMap(data)).toList();
+    debugPrint("local_db_service >>> getUser() >>> ${user[0].toString()}");
+    return user[0];
+  }
+
+  @override
+  Future<bool> sendMessage(Message message) async {
+    var dbClient = await db;
+    int id = await dbClient.rawInsert(
         'INSERT INTO MESSAGES(receiver, date, message, isMine, on_db) '
             'VALUES("${message.receiver}", "${message.date}", "${message.message}", "${message.isMine}", "false")');
-    debugPrint("insterted into db >>>>>>>>$id1" );
-    return id1;
-
+    if(id != null)
+      return true;
+    return null;
   }
+
 }
