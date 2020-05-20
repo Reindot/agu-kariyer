@@ -4,7 +4,6 @@ import 'package:agucareer/models/chats_model.dart';
 import 'package:agucareer/models/message_model.dart';
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/services/db_service.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SqfliteDBService implements DBService {
@@ -30,12 +29,14 @@ class SqfliteDBService implements DBService {
         "CREATE TABLE MESSAGES(id INTEGER PRIMARY KEY, receiver INTEGER, message TEXT)");
   }
 
+  /*
   Future<List<Chats>> getChats() async{
     var dbClient = await db;
     var result = await dbClient.query("MESSAGES");
     debugPrint("adadfd" + result.toString());
     return null;
   }
+  */
 
   @override
   Stream<List<Message>> getMessages(String fromID, String toID) {
@@ -74,10 +75,15 @@ class SqfliteDBService implements DBService {
   }
 
   @override
-  Future<bool> updateUser(String userID, Map<String, > map) {
+  Future<bool> updateUser(String userID, Map<String, dynamic> map) {
     // TODO: implement updateUser
     return null;
   }
 
+  @override
+  Future<List<Chats>> getChats(String userID) {
+    // TODO: implement getChats
+    return null;
+  }
 
 }
