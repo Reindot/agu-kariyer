@@ -9,6 +9,7 @@ import 'package:agucareer/services/db_service.dart';
 import 'package:agucareer/services/fireabase_storage_service.dart';
 import 'package:agucareer/services/firebase_auth_service.dart';
 import 'package:agucareer/services/firestore_db_service.dart';
+import 'package:agucareer/services/local_db_service.dart';
 import 'package:agucareer/services/storage_service.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -19,6 +20,7 @@ enum StorageMode { FIREBASE }
 class UserRepository implements AuthService, DBService, StorageService {
   FirebaseAuthService _firebaseAuthService = locator<FirebaseAuthService>();
   FirestoreDBService _firestoreDBService = locator<FirestoreDBService>();
+  LocaleDBService _localeDBService = locator<LocaleDBService>();
   FirebaseStorageService _firebaseStorageService =
       locator<FirebaseStorageService>();
 
