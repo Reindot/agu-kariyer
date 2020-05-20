@@ -7,6 +7,7 @@ import 'package:sqflite/sqflite.dart';
 
 class LocalDBService {
   static Database _db;
+  String _path;
 
   Future<Database> get db async {
     if (_db != null) {
@@ -19,9 +20,9 @@ class LocalDBService {
 
   initDb() async {
     var databasesPath = await getDatabasesPath();
-    String path = databasesPath + '\\local.db';
-    debugPrint("dp createdd >>>>>> " + path);
-    return await openDatabase(path, onCreate: _onCreate, version: 1);
+    _path = databasesPath + '\\local.db';
+    debugPrint("dp createdd >>>>>> " + _path);
+    return await openDatabase(_path, onCreate: _onCreate, version: 1);
   }
 
   Future<FutureOr<void>> _onCreate(Database db, int version) async {
@@ -62,6 +63,12 @@ class LocalDBService {
    */
 
   @override
+  Future<bool> signOut() async {
+    deleteDatabase(_path);
+    return true;
+  }
+
+  @override
   Future<bool> saveUser(User user) async {
     var dbClient = await db;
     await dbClient.insert("USER", user.toMap());
@@ -70,9 +77,9 @@ class LocalDBService {
   @override
   Future<User> getUser(String userID) async {
     var dbClient = await db;
-    var result = await dbClient.query("MESSAGES", orderBy: "date");
+    var result = await dbClient.query("USER");
     List<User> user = result.map((data) => User.fromMap(data)).toList();
-    debugPrint("local_db_service >>> getUser() >>> ${user[0].toString()}");
+    debugPrint(">>> local_db_service >>> getUser() >>> ${user[0].toString()}");
     return user[0];
   }
 
