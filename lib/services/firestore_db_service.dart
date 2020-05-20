@@ -68,8 +68,8 @@ class FirestoreDBService implements DBService {
   @override
   Future<bool> sendMessage(Message message) async {
     var _messageID = _firestore.collection("connections").document().documentID;
-    var _meID = message.from + "." + message.to;
-    var _itID = message.to + "." + message.from;
+    var _meID = message.from + "." + message.receiver;
+    var _itID = message.receiver + "." + message.from;
     var _myData = message.toMap();
     var _itData = message.toMap();
     _itData['isMine'] = false;
@@ -81,7 +81,7 @@ class FirestoreDBService implements DBService {
         .setData(_myData);
     await _firestore.collection("connections").document(_meID).setData({
       "sender": message.from,
-      "reciever": message.to,
+      "reciever": message.receiver,
       "last": message.message,
       "seen": false,
       "date": FieldValue.serverTimestamp(),
@@ -93,7 +93,7 @@ class FirestoreDBService implements DBService {
         .document(_messageID)
         .setData(_itData);
     await _firestore.collection("connections").document(_itID).setData({
-      "sender": message.to,
+      "sender": message.receiver,
       "reciever": message.from,
       "last": message.message,
       "seen": false,

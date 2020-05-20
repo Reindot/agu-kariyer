@@ -26,7 +26,7 @@ class LocalDBService {
 
     await db.execute(
         "CREATE TABLE MESSAGES "
-            "(toW TEXT PRIMARY KEY, "
+            "(receiver TEXT PRIMARY KEY, "
             "date TEXT, "
             "message TEXT, "
             "isMine TEXT, "

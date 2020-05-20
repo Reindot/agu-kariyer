@@ -25,14 +25,14 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     final _userModel = Provider.of<UserModel>(context);
     String _from = widget.me;
-    String _to = widget.it;
+    String _receiver = widget.it;
 
     void _sendMessage() async {
       try {
         if (_messageController.text.trim().length > 0) {
           Message _sentMessage = Message(
               from: _from,
-              to: _to,
+              receiver: _receiver,
               isMine: true,
               message: _messageController.text);
           var result = await _userModel.sendMessage(_sentMessage);
@@ -57,7 +57,7 @@ class _ChatPageState extends State<ChatPage> {
         children: <Widget>[
           Expanded(
             child: StreamBuilder<List<Message>>(
-              stream: _userModel.getMessages(_from, _to),
+              stream: _userModel.getMessages(_from, _receiver),
               builder: (context, streamData) {
                 if (!streamData.hasData) {
                   return Center(
