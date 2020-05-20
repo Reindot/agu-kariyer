@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 
-//fdkjkfdjfjkd
-
 class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

@@ -32,6 +32,7 @@ class UserRepository implements AuthService, DBService, StorageService {
   Future<User> currentUser() async {
     if (_authMode == AuthMode.FIREBASE) {
       User _user = await _firebaseAuthService.currentUser();
+      debugPrint("Current User: >>>>>>>>>>> ${_user.toString()}");
       if (_user != null) return await _firestoreDBService.getUser(_user.userID);
     }
     return null;
