@@ -11,6 +11,6 @@ void setupLocator(){
   locator.registerLazySingleton(() => FirebaseAuthService());
   locator.registerLazySingleton(() => FirestoreDBService());
   locator.registerLazySingleton(() => FirebaseStorageService());
-  locator.registerLazySingleton(() => LocaleDBService());
+  locator.registerLazySingleton(() => LocalDBService());
   locator.registerLazySingleton(() => UserRepository());
 }

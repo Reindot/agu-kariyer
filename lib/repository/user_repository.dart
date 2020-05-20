@@ -20,7 +20,7 @@ enum StorageMode { FIREBASE }
 class UserRepository implements AuthService, DBService, StorageService {
   FirebaseAuthService _firebaseAuthService = locator<FirebaseAuthService>();
   FirestoreDBService _firestoreDBService = locator<FirestoreDBService>();
-  LocaleDBService _localeDBService = locator<LocaleDBService>();
+  LocalDBService _localeDBService = locator<LocalDBService>();
   FirebaseStorageService _firebaseStorageService =
       locator<FirebaseStorageService>();
 
