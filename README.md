@@ -4,6 +4,7 @@ AGU Kariyer Uygulaması
 
 ## Getting Started
 // BU SATIR RAŞİT AYDININ TESTİDİR
+// YİĞİT SELAMIN ALEYKÜM
 This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
@@ -24,4 +25,4 @@ samples, guidance on mobile development, and a full API reference.
 
 
 //TEST//
-//ENES TEST
+//ENES SA NBR
