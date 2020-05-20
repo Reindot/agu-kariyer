@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../values/colors.dart';
+
 String _email = "";
 
 class SifremiUnuttumWidget extends StatelessWidget {
@@ -16,7 +18,7 @@ class SifremiUnuttumWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.mainBackground,
+      backgroundColor: Color.fromARGB(255, 238, 230, 243),
       body: Container(
         constraints: BoxConstraints.expand(),
         margin: EdgeInsets.only(top: 10, bottom: 30),
@@ -30,10 +32,8 @@ class SifremiUnuttumWidget extends StatelessWidget {
                   height: 53,
                   margin: EdgeInsets.only(top: 20, left: 20),
                   child: FlatButton(
-                    onPressed: () => {},
-                        //this.onArrowLeftPressed(context),
-                    color: Color.fromARGB(80, 18, 68, 64),
-                    splashColor: AppColors.splashButtonColor,
+                    onPressed: () => this.onArrowLeftPressed(context),
+                    color: AppColors.acikMor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -52,8 +52,8 @@ class SifremiUnuttumWidget extends StatelessWidget {
                           "Geri",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: AppColors.primaryText,
-                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
                             fontSize: 14,
                           ),
                         ),
@@ -65,10 +65,9 @@ class SifremiUnuttumWidget extends StatelessWidget {
             ),
             Container(
                 height: 500,
-                width: 400,
                 margin: EdgeInsets.all(30),
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(80, 18, 68, 64),
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: Column(
@@ -86,7 +85,7 @@ class SifremiUnuttumWidget extends StatelessWidget {
                       "Şifremi Unuttum",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.acikMor,
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'OpenSans',
@@ -104,15 +103,23 @@ class SifremiUnuttumWidget extends StatelessWidget {
                         keyboardType: TextInputType.emailAddress,
                         onChanged: (String str) => _email = str,
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.acikMor,
+                          fontWeight: FontWeight.bold,
                           fontFamily: 'OpenSans',
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 5.0, left: 15.0),
-
+                          contentPadding: EdgeInsets.only(top: 14.0, left: 15.0),
+                          prefixIcon: Icon(
+                            Icons.mail,
+                            color: AppColors.acikMor.withOpacity(0.4),
+                          ),
                           hintText: 'E-postanı Gir',
-                          hintStyle: kHintTextStyle,
+                          hintStyle: TextStyle(
+                            color: AppColors.acikMor.withOpacity(0.4),
+                            fontFamily: 'OpenSans',
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -127,8 +134,7 @@ class SifremiUnuttumWidget extends StatelessWidget {
                     margin: EdgeInsets.only(top: 20, right: 20),
                     child: FlatButton(
                       onPressed: () => _resPassword(context),
-                      color: Color.fromARGB(80, 18, 68, 64),
-                      splashColor: AppColors.splashButtonColor,
+                      color: AppColors.acikMor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                       ),
@@ -147,8 +153,8 @@ class SifremiUnuttumWidget extends StatelessWidget {
                             "İleri",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: AppColors.primaryText,
-                              fontWeight: FontWeight.w400,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                               fontSize: 14,
                             ),
                           ),
@@ -164,13 +170,13 @@ class SifremiUnuttumWidget extends StatelessWidget {
   }
 }
 
-void _resPassword (BuildContext context) async{
+void _resPassword(BuildContext context) async {
   final _userModel = Provider.of<UserModel>(context, listen: false);
   bool value = await _userModel.resetPassword(_email);
-  if(value){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => MailGonderildiWidget()));
-  } else{
+  if (value) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => MailGonderildiWidget()));
+  } else {
     //EMAIL IS NOT VALID!!!
   }
-
 }

@@ -3,6 +3,8 @@ import 'package:agucareer/values/values.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../values/colors.dart';
+
 
 class HosgeldinWidget extends StatelessWidget {
   void onButtonTwoPressed(BuildContext context) => Navigator.push(
@@ -19,10 +21,11 @@ class HosgeldinWidget extends StatelessWidget {
             image: DecorationImage(
                 image: AssetImage("assets/images/background.png"),
                 fit: BoxFit.cover),
-            color: AppColors.mainBackground),
+            ),
         child: Stack(
           alignment: Alignment.center,
           children: [
+
             Positioned(
               left: 13,
               top: 79,
@@ -38,9 +41,10 @@ class HosgeldinWidget extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'OpenSans',
-                        color: Color.fromARGB(255, 255, 255, 255),
-                        fontWeight: FontWeight.w800,
-                        fontSize: 36,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                        letterSpacing: 3
                       ),
                     ),
                   ),
@@ -55,8 +59,7 @@ class HosgeldinWidget extends StatelessWidget {
                         Container(
                           height: 52,
                           child: RaisedButton(
-                            color: AppColors.mainSecondaryBackground,
-                            splashColor: AppColors.splashButtonColor,
+                            color: AppColors.acikMor,
                             onPressed: () => this.onButtonTwoPressed(context),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),

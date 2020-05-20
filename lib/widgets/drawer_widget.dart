@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:agucareer/pages/all_chats_page.dart';
+import 'package:agucareer/pages/home_page.dart';
 import 'package:agucareer/pages/profil_duzenle_widget.dart';
 import 'package:agucareer/pages/profil_page.dart';
 import 'package:flutter/material.dart';
@@ -23,31 +24,29 @@ class DrawerWidget {
           UserAccountsDrawerHeader(
             onDetailsPressed: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => ProfilePage())),
-            accountName: Text(
-              "    " + "Raşit Aydın",
+            accountName: Text("    " + "Raşit Aydın",
               style: TextStyle(
-                color: Colors.red,
                 fontSize: 18,
               ),
             ),
             accountEmail: Text(
-              "     " + "kprathap23@gmail.com",
-              style: TextStyle(
-                color: Colors.red,
-              ),
+                "     " + "kprathap23@gmail.com"
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(60),
-                  topRight: Radius.circular(90)),
+                  topRight: Radius.circular(90)
+              ),
               image: DecorationImage(
                 image: AssetImage('assets/images/header_background.png'),
                 fit: BoxFit.cover,
-                colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.8), BlendMode.dstATop),
+                colorFilter:
+                ColorFilter.mode(Colors.black.withOpacity(0.8),
+                    BlendMode.dstATop),
               ),
             ),
             currentAccountPicture: CircleAvatar(
+
                 backgroundImage: NetworkImage(
                     "https://randomuser.me/api/portraits/men/46.jpg")),
           ),
@@ -56,7 +55,8 @@ class DrawerWidget {
               leading: Icon(Icons.home),
               title: Text("Ana Sayfa"),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
               }),
           ListTile(
               contentPadding: EdgeInsets.only(left: 30),

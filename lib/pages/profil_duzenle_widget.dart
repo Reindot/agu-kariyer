@@ -5,6 +5,8 @@ import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../values/colors.dart';
+
 String _isim = "";
 String _meslek = "";
 String _hakkinda = "";
@@ -35,24 +37,31 @@ class ProfilDuzenleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.mainBackground,
+      backgroundColor: Colors.white,
       body: Container(
           constraints: BoxConstraints.expand(),
           margin: EdgeInsets.only(top: 30, bottom: 30, right: 20, left: 20),
           child: ListView(
             children: <Widget>[
-              Text(
-                "Profili Düzenle",
-                textAlign: TextAlign.center,
-                style: TextStyle(
+              Container(
+                margin: EdgeInsets.only(left: 60, right: 60),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: AppColors.acikMor,
+                    borderRadius: BorderRadius.circular(50)
+                ),
+                child: Text(
+                  '      Profili Düzenle       ',
+                  style: TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
                     fontFamily: 'OpenSans',
-                    fontSize: 30),
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               SizedBox(
-                height: 70,
+                height: 50,
               ),
               _degistirIsim(),
               SizedBox(
@@ -80,8 +89,7 @@ class ProfilDuzenleWidget extends StatelessWidget {
                         margin: EdgeInsets.only(top: 20),
                         child: FlatButton(
                           onPressed: () => _updateUserData(context),
-                          color: Color.fromARGB(80, 18, 68, 64),
-                          splashColor: AppColors.splashButtonColor,
+                          color: AppColors.acikMor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                           ),
@@ -100,8 +108,8 @@ class ProfilDuzenleWidget extends StatelessWidget {
                                 "Atla",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: AppColors.primaryText,
-                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
                                   fontSize: 14,
                                 ),
                               ),
@@ -114,8 +122,7 @@ class ProfilDuzenleWidget extends StatelessWidget {
                         margin: EdgeInsets.only(top: 20),
                         child: FlatButton(
                           onPressed: () => _updateUserData(context),
-                          color: Color.fromARGB(80, 18, 68, 64),
-                          splashColor: AppColors.splashButtonColor,
+                          color: AppColors.acikMor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                           ),
@@ -134,15 +141,16 @@ class ProfilDuzenleWidget extends StatelessWidget {
                                 "Kaydet",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  color: AppColors.primaryText,
-                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
                                   fontSize: 14,
                                 ),
                               ),
                             ],
                           ),
                         ))
-                  ])
+                  ]
+              )
             ],
           )),
     );
@@ -153,8 +161,13 @@ class ProfilDuzenleWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'İsim',
-          style: whiteTextStyle,
+          'İsim:',
+          style: TextStyle(
+              color: AppColors.acikMor,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+              fontSize: 16
+          ),
         ),
         SizedBox(height: 10.0),
         Container(
@@ -165,18 +178,22 @@ class ProfilDuzenleWidget extends StatelessWidget {
             keyboardType: TextInputType.text,
             onChanged: (String str) => _isim = str,
             style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
+              color: AppColors.acikMor,
+              fontWeight: FontWeight.bold,
             ),
             decoration: InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.person,
-                color: Colors.white,
+                color: AppColors.acikMor.withOpacity(0.4),
               ),
               hintText: 'İsmini Gir',
-              hintStyle: kHintTextStyle,
+              hintStyle: TextStyle(
+                color: AppColors.acikMor.withOpacity(0.4),
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
+              ),
             ),
           ),
         ),
@@ -189,8 +206,13 @@ class ProfilDuzenleWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Meslek / Bölüm',
-          style: whiteTextStyle,
+          'Meslek / Bölüm:',
+          style: TextStyle(
+              color: AppColors.acikMor,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+              fontSize: 16
+          ),
         ),
         SizedBox(height: 10.0),
         Container(
@@ -201,7 +223,8 @@ class ProfilDuzenleWidget extends StatelessWidget {
             keyboardType: TextInputType.text,
             onChanged: (String str) => _meslek = str,
             style: TextStyle(
-              color: Colors.white,
+              color: AppColors.acikMor,
+              fontWeight: FontWeight.bold,
               fontFamily: 'OpenSans',
             ),
             decoration: InputDecoration(
@@ -209,10 +232,14 @@ class ProfilDuzenleWidget extends StatelessWidget {
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.work,
-                color: Colors.white,
+                color: AppColors.acikMor.withOpacity(0.4),
               ),
               hintText: 'Mesleğini/Bölümünü Gir',
-              hintStyle: kHintTextStyle,
+              hintStyle: TextStyle(
+                color: AppColors.acikMor.withOpacity(0.4),
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
+              ),
             ),
           ),
         ),
@@ -225,8 +252,13 @@ class ProfilDuzenleWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Hakkımda',
-          style: whiteTextStyle,
+          'Hakkımda:',
+          style: TextStyle(
+              color: AppColors.acikMor,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+              fontSize: 16
+          ),
         ),
         SizedBox(height: 10.0),
         Container(
@@ -237,7 +269,8 @@ class ProfilDuzenleWidget extends StatelessWidget {
             keyboardType: TextInputType.text,
             onChanged: (String str) => _hakkinda = str,
             style: TextStyle(
-              color: Colors.white,
+              color: AppColors.acikMor,
+              fontWeight: FontWeight.bold,
               fontFamily: 'OpenSans',
             ),
             decoration: InputDecoration(
@@ -245,10 +278,14 @@ class ProfilDuzenleWidget extends StatelessWidget {
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.add,
-                color: Colors.white,
+                color: AppColors.acikMor.withOpacity(0.4),
               ),
               hintText: 'Hakkında Anlatmak İstediklerini Gir',
-              hintStyle: kHintTextStyle,
+              hintStyle: TextStyle(
+                color: AppColors.acikMor.withOpacity(0.4),
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
+              ),
             ),
           ),
         ),
@@ -261,8 +298,13 @@ class ProfilDuzenleWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Çalışma Yeri',
-          style: whiteTextStyle,
+          'Çalışma Yeri:',
+          style: TextStyle(
+              color: AppColors.acikMor,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+              fontSize: 16
+          ),
         ),
         SizedBox(height: 10.0),
         Container(
@@ -273,7 +315,8 @@ class ProfilDuzenleWidget extends StatelessWidget {
             keyboardType: TextInputType.text,
             onChanged: (String str) => _calismaYeri = str,
             style: TextStyle(
-              color: Colors.white,
+              color: AppColors.acikMor,
+              fontWeight: FontWeight.bold,
               fontFamily: 'OpenSans',
             ),
             decoration: InputDecoration(
@@ -281,10 +324,14 @@ class ProfilDuzenleWidget extends StatelessWidget {
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
                 Icons.place,
-                color: Colors.white,
+                color: AppColors.acikMor.withOpacity(0.4),
               ),
               hintText: 'Çalıştığın Yeri Gir',
-              hintStyle: kHintTextStyle,
+              hintStyle: TextStyle(
+                color: AppColors.acikMor.withOpacity(0.4),
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
+              ),
             ),
           ),
         ),

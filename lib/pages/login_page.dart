@@ -1,12 +1,12 @@
 import 'package:agucareer/pages/home_page.dart';
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/pages/sifremi_unuttum_widget.dart';
-import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../values/colors.dart';
 import '../values/constants.dart';
 
 class LoginPage extends StatefulWidget {
@@ -22,154 +22,6 @@ class _LoginPageState extends State<LoginPage> {
   void onSifremiUnuttumPressed(BuildContext context) => Navigator.push(
       context, MaterialPageRoute(builder: (context) => SifremiUnuttumWidget()));
 
-  Widget _buildEmailTF() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'E-posta',
-          style: whiteTextStyle,
-        ),
-        SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: secondBoxDecorationStyle,
-          height: 60.0,
-          child: TextField(
-            keyboardType: TextInputType.emailAddress,
-            onChanged: (String str) {
-              _mail = str;
-            },
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.email,
-                color: Colors.white,
-              ),
-              hintText: 'E-postanı Gir',
-              hintStyle: kHintTextStyle,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPasswordTF() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'Şifre',
-          style: whiteTextStyle,
-        ),
-        SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: secondBoxDecorationStyle,
-          height: 60.0,
-          child: TextField(
-            onChanged: (String str) {
-              _pass = str;
-            },
-            obscureText: true,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: Colors.white,
-              ),
-              hintText: 'Şifreni Gir',
-              hintStyle: kHintTextStyle,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildForgotPasswordBtn() {
-    return Container(
-      alignment: Alignment.center,
-      child: FlatButton(
-        onPressed: () => this.onSifremiUnuttumPressed(context),
-        child: Text(
-          'Şifremi Unuttum',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-            fontSize: 15,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRememberMeCheckbox() {
-    return Container(
-      height: 20.0,
-      child: Row(
-        children: <Widget>[
-          Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.white),
-            child: Checkbox(
-              value: _rememberMe,
-              checkColor: AppColors.secondaryElement,
-              activeColor: Colors.white,
-              onChanged: (value) {
-                setState(() {
-                  _rememberMe = value;
-                });
-              },
-            ),
-          ),
-          Text(
-            'Beni Hatırla',
-            style: whiteTextStyle,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLoginBtn(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
-      width: double.infinity,
-      child: RaisedButton(
-        padding: EdgeInsets.all(15.0),
-        color: AppColors.mainSecondaryBackground,
-        onLongPress: () => onLogInLongPressed(_mail, _pass, context),
-        onPressed: () => onLogInPressed(_mail, _pass, context),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        child: Text(
-          'GİRİŞ',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.white,
-            letterSpacing: 1.5,
-            fontSize: 15.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -182,7 +34,9 @@ class _LoginPageState extends State<LoginPage> {
               Container(
                 height: double.infinity,
                 width: double.infinity,
-                decoration: BoxDecoration(color: AppColors.mainBackground),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
               ),
               Container(
                 height: double.infinity,
@@ -195,18 +49,26 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        'Kullanıcı Girişi',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
+                      Container(
+                        decoration: BoxDecoration(
+                            color: AppColors.acikMor,
+                            borderRadius: BorderRadius.circular(50)
+                        ),
+                        padding: EdgeInsets.only(top: 5, bottom: 5),
+                        child: Text(
+                          '      Kullanıcı Girişi       ',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'OpenSans',
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
+
                       SizedBox(height: 50.0),
                       _buildEmailTF(),
-                      SizedBox(height: 30.0),
+                      SizedBox(height: 10.0),
                       _buildPasswordTF(),
                       SizedBox(
                         height: 20.0,
@@ -222,6 +84,157 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               )
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEmailTF() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(height: 20.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: secondBoxDecorationStyle,
+          height: 50.0,
+          child: TextField(
+            keyboardType: TextInputType.emailAddress,
+            onChanged: (String str) {
+              _mail = str;
+            },
+            style: TextStyle(
+              color: AppColors.acikMor,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.email,
+                color: AppColors.acikMor.withOpacity(0.4),
+              ),
+              hintText: 'E-postanı Gir',
+              hintStyle: TextStyle(
+                color: AppColors.acikMor.withOpacity(0.4),
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPasswordTF() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(height: 25.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: secondBoxDecorationStyle,
+          height: 50.0,
+          child: TextField(
+            onChanged: (String str){
+              _pass = str;
+            },
+            obscureText: true,
+            style: TextStyle(
+              color: AppColors.acikMor,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.lock,
+                color: AppColors.acikMor.withOpacity(0.4),
+              ),
+              hintText: 'Şifreni Gir',
+              hintStyle: TextStyle(
+                color: AppColors.acikMor.withOpacity(0.4),
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+
+  Widget _buildForgotPasswordBtn() {
+    return Container(
+      alignment: Alignment.center,
+      child: FlatButton(
+        onPressed: () => this.onSifremiUnuttumPressed(context),
+        child: Text(
+          'Şifremi Unuttum',
+          style: TextStyle(
+            color: AppColors.acikMor,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'OpenSans',
+            fontSize: 15,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRememberMeCheckbox() {
+    return Container(
+      height: 20.0,
+      child: Row(
+        children: <Widget>[
+          Theme(
+            data: ThemeData(unselectedWidgetColor: AppColors.acikMor),
+            child: Checkbox(
+              value: _rememberMe,
+              activeColor: AppColors.acikMor,
+              checkColor: Colors.white,
+              onChanged: (value) {
+                setState(() {
+                  _rememberMe = value;
+                });
+              },
+            ),
+          ),
+          Text(
+            'Beni Hatırla',
+            style: purpleTextStyle,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLoginBtn(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 25.0),
+      width: double.infinity,
+      child: RaisedButton(
+        padding: EdgeInsets.all(15.0),
+        color: AppColors.acikMor,
+        onLongPress: () => onLogInLongPressed(_mail, _pass, context),
+        onPressed: () => onLogInPressed(_mail, _pass, context),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        child: Text(
+          'GİRİŞ',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white,
+            letterSpacing: 1.5,
+            fontSize: 15.0,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'OpenSans',
           ),
         ),
       ),

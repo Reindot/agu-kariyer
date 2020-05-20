@@ -4,6 +4,8 @@ import 'package:agucareer/values/values.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../values/colors.dart';
+
 class MailGonderildiWidget extends StatelessWidget {
   void onArrowLeftPressed(BuildContext context) => Navigator.push(
       context, MaterialPageRoute(builder: (context) => SifremiUnuttumWidget()));
@@ -15,7 +17,7 @@ class MailGonderildiWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.mainBackground,
+      backgroundColor: Color.fromARGB(255, 238, 230, 243),
       body: Container(
         constraints: BoxConstraints.expand(),
         margin: EdgeInsets.only(top: 10, bottom: 30),
@@ -30,8 +32,7 @@ class MailGonderildiWidget extends StatelessWidget {
                   margin: EdgeInsets.only(top: 20, left: 20),
                   child: FlatButton(
                     onPressed: () => this.onArrowLeftPressed(context),
-                    color: Color.fromARGB(80, 18, 68, 64),
-                    splashColor: AppColors.splashButtonColor,
+                    color: AppColors.acikMor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
@@ -50,8 +51,8 @@ class MailGonderildiWidget extends StatelessWidget {
                           "Geri",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: AppColors.primaryText,
-                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
                             fontSize: 14,
                           ),
                         ),
@@ -62,33 +63,39 @@ class MailGonderildiWidget extends StatelessWidget {
               ],
             ),
             Container(
-              height: 500,
-              width: 400,
+              height: 450,
               margin: EdgeInsets.all(30),
               decoration: BoxDecoration(
-
-                color: Color.fromARGB(80, 18, 68, 64),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Image.asset(
-                    "assets/images/sentmail-icon.png",
-                  ),
                   SizedBox(
                     height: 10,
+                  ),
+                  Image.asset(
+                    "assets/images/sentmail-icon.png",
+                    fit: BoxFit.cover,
+                  ),
+                  SizedBox(
+                    height: 0,
                   ),
                   Text(
                     "Şifre Sıfırlama Bilgileriniz E-posta Adresinize Gönderildi.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: AppColors.acikMor,
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'OpenSans',
                     ),
-                  )
+                  ),
+                  SizedBox(
+                    height: 0,
+                  ),
                 ],
               ),
             ),
@@ -101,8 +108,7 @@ class MailGonderildiWidget extends StatelessWidget {
                     margin: EdgeInsets.only(top: 20, right: 20),
                     child: FlatButton(
                       onPressed: () => this.onArrowRightPressed(context),
-                      color: Color.fromARGB(80, 18, 68, 64),
-                      splashColor: AppColors.splashButtonColor,
+                      color: AppColors.acikMor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                       ),
@@ -121,8 +127,8 @@ class MailGonderildiWidget extends StatelessWidget {
                             "İleri",
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: AppColors.primaryText,
-                              fontWeight: FontWeight.w400,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                               fontSize: 14,
                             ),
                           ),
