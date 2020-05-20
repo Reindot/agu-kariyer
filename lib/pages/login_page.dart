@@ -249,7 +249,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => HomePage()));
     } catch (e) {
-      debugPrint("ERROR login_page ${e.toString()}");
+      debugPrint(">>> login_page >>> onLogInPressed >>> ${e.toString()}");
     }
   }
 
@@ -258,7 +258,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       await _userModel.createUser(_mail, _pass);
     } catch (e) {
-      debugPrint("ERROR login_page ${e.toString()}");
+      debugPrint(">>> login_page >>> onLogInLongPressed >>> ${e.toString()}");
     }
   }
 }
