@@ -1,13 +1,18 @@
+import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
 import 'package:agucareer/widgets/connections_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //bug fix
 
 class HomePage extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
+    UserModel _userModel = Provider.of<UserModel>(context);
     return Scaffold(
       appBar: _getCustomAppBar(),
       body: Column(
@@ -23,7 +28,7 @@ class HomePage extends StatelessWidget {
           ),
           Expanded(
             child:
-                Container(padding: EdgeInsets.all(5), child: ConnectionsWidget()),
+                Container(padding: EdgeInsets.all(5), child: ConnectionsWidget().cWidget(_userModel)),
           ),
           Text(
             "Kişi Detayları",
