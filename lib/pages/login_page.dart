@@ -5,7 +5,9 @@ import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../values/colors.dart';
 import '../values/constants.dart';
 
@@ -18,6 +20,9 @@ class _LoginPageState extends State<LoginPage> {
   String _mail = "";
   String _pass = "";
   bool _rememberMe = true;
+
+  final storage = new FlutterSecureStorage();
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   void onSifremiUnuttumPressed(BuildContext context) => Navigator.push(
       context, MaterialPageRoute(builder: (context) => SifremiUnuttumWidget()));
@@ -52,8 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                       Container(
                         decoration: BoxDecoration(
                             color: AppColors.acikMor,
-                            borderRadius: BorderRadius.circular(50)
-                        ),
+                            borderRadius: BorderRadius.circular(50)),
                         padding: EdgeInsets.only(top: 5, bottom: 5),
                         child: Text(
                           '      Kullanıcı Girişi       ',
@@ -65,7 +69,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-
                       SizedBox(height: 50.0),
                       _buildEmailTF(),
                       SizedBox(height: 10.0),
@@ -99,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
           alignment: Alignment.centerLeft,
           decoration: secondBoxDecorationStyle,
           height: 50.0,
-          child: TextField(
+          child: TextFormField(
             keyboardType: TextInputType.emailAddress,
             onChanged: (String str) {
               _mail = str;
@@ -138,8 +141,8 @@ class _LoginPageState extends State<LoginPage> {
           alignment: Alignment.centerLeft,
           decoration: secondBoxDecorationStyle,
           height: 50.0,
-          child: TextField(
-            onChanged: (String str){
+          child: TextFormField(
+            onChanged: (String str) {
               _pass = str;
             },
             obscureText: true,
@@ -167,7 +170,6 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
-
 
   Widget _buildForgotPasswordBtn() {
     return Container(
@@ -242,6 +244,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void onLogInPressed(String mail, String pass, BuildContext context) async {
+    updateLoginData();
     final _userModel = Provider.of<UserModel>(context, listen: false);
     try {
       User user = await _userModel.signIn(_mail, _pass);
@@ -261,4 +264,18 @@ class _LoginPageState extends State<LoginPage> {
       debugPrint(">>> login_page >>> onLogInLongPressed >>> ${e.toString()}");
     }
   }
+
+  void updateLoginData() async {
+    final SharedPreferences prefs = await _prefs;
+    if (_rememberMe) {
+      await prefs.setBool("_rememberMe", true);
+      await storage.write(key: "_mail", value: _mail);
+      await storage.write(key: "_pass", value: _pass);
+    } else {
+      await prefs.setBool("_rememberMe", false);
+      await storage.delete(key: "_mail");
+      await storage.delete(key: "_pass");
+    }
+  }
+
 }
