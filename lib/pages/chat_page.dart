@@ -1,4 +1,5 @@
 import 'package:agucareer/models/message_model.dart';
+import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -49,9 +50,7 @@ class _ChatPageState extends State<ChatPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Sohbet"),
-      ),
+      appBar: _getCustomAppBar(),
       body: Center(
           child: Column(
         children: <Widget>[
@@ -101,7 +100,7 @@ class _ChatPageState extends State<ChatPage> {
                   margin: EdgeInsets.symmetric(horizontal: 4),
                   child: FloatingActionButton(
                     elevation: 0,
-                    backgroundColor: Colors.blue,
+                    backgroundColor: AppColors.koyuMor.withOpacity(1.0),
                     child: Icon(
                       Icons.navigation,
                       size: 35,
@@ -119,8 +118,8 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget _createMessageBox(Message message) {
-    Color _inMessageColor = Colors.blue;
-    Color _outMessageColor = Colors.amber;
+    Color _inMessageColor = AppColors.acikMor.withOpacity(1.0);
+    Color _outMessageColor = AppColors.pembe.withOpacity(1.0);
 
     var _timeValue = _showTimeStamp(message.date ?? Timestamp(1, 1));
 
@@ -142,7 +141,10 @@ class _ChatPageState extends State<ChatPage> {
                     ),
                     padding: EdgeInsets.all(10),
                     margin: EdgeInsets.all(4),
-                    child: Text(message.message),
+                    child: Text(
+                      message.message,
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
                 Text(_timeValue)
@@ -188,5 +190,56 @@ class _ChatPageState extends State<ChatPage> {
   String _showTimeStamp(Timestamp date) {
     var _formatter = DateFormat.Hm();
     return _formatter.format(date.toDate());
+  }
+
+  _getCustomAppBar() {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(100),
+      child: Container(
+        alignment: Alignment.bottomCenter,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(60),
+          ),
+          color: AppColors.koyuMor.withOpacity(1.0),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                IconButton(
+                    padding: EdgeInsets.all(20),
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: 28,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {}),
+                IconButton(
+                    padding: EdgeInsets.all(20),
+                    icon: Icon(
+                      Icons.search,
+                      size: 28,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {}),
+              ],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            Text(
+              "SOHBET",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontSize: 22,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
