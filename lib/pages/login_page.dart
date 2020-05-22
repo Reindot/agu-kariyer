@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../values/colors.dart';
 import '../values/constants.dart';
 
@@ -17,12 +16,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String _mail = "";
-  String _pass = "";
+  String _mail;
+  String _pass;
   bool _rememberMe = true;
 
   final storage = new FlutterSecureStorage();
-  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   void onSifremiUnuttumPressed(BuildContext context) => Navigator.push(
       context, MaterialPageRoute(builder: (context) => SifremiUnuttumWidget()));
@@ -102,30 +100,42 @@ class _LoginPageState extends State<LoginPage> {
           alignment: Alignment.centerLeft,
           decoration: secondBoxDecorationStyle,
           height: 50.0,
-          child: TextFormField(
-            keyboardType: TextInputType.emailAddress,
-            onChanged: (String str) {
-              _mail = str;
+          child: FutureBuilder<String>(
+            future: getSavedEmail(),
+            builder: (context, result) {
+              debugPrint(">>> login_page >>> _buildEmailTF >>> savedMail >>> ${result.data}");
+              if(result.hasData){
+                _mail = result.data;
+                return TextFormField(
+                  initialValue: result.data,
+                  keyboardType: TextInputType.emailAddress,
+                  onChanged: (String str) {
+                    _mail = str;
+                  },
+                  style: TextStyle(
+                    color: AppColors.acikMor,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'OpenSans',
+                  ),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.only(top: 14.0),
+                    prefixIcon: Icon(
+                      Icons.email,
+                      color: AppColors.acikMor.withOpacity(0.4),
+                    ),
+                    hintText: 'E-postanı Gir',
+                    hintStyle: TextStyle(
+                      color: AppColors.acikMor.withOpacity(0.4),
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'OpenSans',
+                    ),
+                  ),
+                );
+              } else{
+                return Center(child: CircularProgressIndicator());
+              }
             },
-            style: TextStyle(
-              color: AppColors.acikMor,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.email,
-                color: AppColors.acikMor.withOpacity(0.4),
-              ),
-              hintText: 'E-postanı Gir',
-              hintStyle: TextStyle(
-                color: AppColors.acikMor.withOpacity(0.4),
-                fontWeight: FontWeight.bold,
-                fontFamily: 'OpenSans',
-              ),
-            ),
           ),
         ),
       ],
@@ -141,30 +151,41 @@ class _LoginPageState extends State<LoginPage> {
           alignment: Alignment.centerLeft,
           decoration: secondBoxDecorationStyle,
           height: 50.0,
-          child: TextFormField(
-            onChanged: (String str) {
-              _pass = str;
+          child: FutureBuilder<String>(
+            future: getSavedPass(),
+            builder: (context, result){
+              if(result.hasData){
+                _pass = result.data;
+                return TextFormField(
+                  initialValue: result.data,
+                  onChanged: (String str) {
+                    _pass = str;
+                  },
+                  obscureText: true,
+                  style: TextStyle(
+                    color: AppColors.acikMor,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'OpenSans',
+                  ),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.only(top: 14.0),
+                    prefixIcon: Icon(
+                      Icons.lock,
+                      color: AppColors.acikMor.withOpacity(0.4),
+                    ),
+                    hintText: 'Şifreni Gir',
+                    hintStyle: TextStyle(
+                      color: AppColors.acikMor.withOpacity(0.4),
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'OpenSans',
+                    ),
+                  ),
+                );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
             },
-            obscureText: true,
-            style: TextStyle(
-              color: AppColors.acikMor,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: AppColors.acikMor.withOpacity(0.4),
-              ),
-              hintText: 'Şifreni Gir',
-              hintStyle: TextStyle(
-                color: AppColors.acikMor.withOpacity(0.4),
-                fontWeight: FontWeight.bold,
-                fontFamily: 'OpenSans',
-              ),
-            ),
           ),
         ),
       ],
@@ -266,16 +287,20 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void updateLoginData() async {
-    final SharedPreferences prefs = await _prefs;
     if (_rememberMe) {
-      await prefs.setBool("_rememberMe", true);
       await storage.write(key: "_mail", value: _mail);
       await storage.write(key: "_pass", value: _pass);
     } else {
-      await prefs.setBool("_rememberMe", false);
-      await storage.delete(key: "_mail");
-      await storage.delete(key: "_pass");
+      await storage.deleteAll();
     }
+  }
+
+  Future<String> getSavedEmail() async {
+    return await storage.read(key: "_mail") ?? "";
+  }
+
+  Future<String> getSavedPass() async {
+    return await storage.read(key: "_pass") ?? "";
   }
 
 }
