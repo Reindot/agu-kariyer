@@ -1,15 +1,15 @@
 import 'dart:ui';
+import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/pages/all_chats_page.dart';
 import 'package:agucareer/pages/home_page.dart';
 import 'package:agucareer/pages/profil_duzenle_widget.dart';
 import 'package:agucareer/pages/profil_page.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
+import 'package:flutter/material.dart';
 
 class DrawerWidget {
-  // ignore: non_constant_identifier_names
-  Widget drawerMenu(BuildContext context) {
+
+  Widget drawerMenu(BuildContext context, UserModel _userModel) {
     return ClipPath(
         child: Container(
       decoration: BoxDecoration(
@@ -24,13 +24,13 @@ class DrawerWidget {
           UserAccountsDrawerHeader(
             onDetailsPressed: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => ProfilePage())),
-            accountName: Text("    " + "Raşit Aydın",
+            accountName: Text("    ${_userModel.user.name}",
               style: TextStyle(
                 fontSize: 18,
               ),
             ),
             accountEmail: Text(
-                "     " + "kprathap23@gmail.com"
+                "     ${_userModel.user.email}"
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -47,8 +47,7 @@ class DrawerWidget {
             ),
             currentAccountPicture: CircleAvatar(
 
-                backgroundImage: NetworkImage(
-                    "https://randomuser.me/api/portraits/men/46.jpg")),
+                backgroundImage: NetworkImage(_userModel.user.profileURL)),
           ),
           ListTile(
               contentPadding: EdgeInsets.only(left: 30),
@@ -132,15 +131,14 @@ class DrawerWidget {
               leading: Icon(Icons.power_settings_new),
               title: Text("Çıkış Yap"),
               onTap: () {
-                signOut(context);
+                signOut(_userModel);
               }),
         ],
       ),
     ));
   }
 
-  Future<bool> signOut(BuildContext context) async {
-    final _userModel = Provider.of<UserModel>(context, listen: false);
+  Future<bool> signOut(UserModel _userModel) async {
     return await _userModel.signOut();
   }
 }

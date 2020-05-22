@@ -148,7 +148,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ],
-      ), drawer: DrawerWidget().drawerMenu(context)
+      ), drawer: DrawerWidget().drawerMenu(context, _userModel)
     );
   }
 
