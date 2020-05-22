@@ -5,9 +5,9 @@ import 'package:agucareer/pages/profil_duzenle_widget.dart';
 import 'package:agucareer/pages/profil_page.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class DrawerWidget {
-
   Widget drawerMenu(BuildContext context, UserModel _userModel) {
     return ClipPath(
         child: Container(
@@ -23,29 +23,25 @@ class DrawerWidget {
           UserAccountsDrawerHeader(
             onDetailsPressed: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => ProfilePage())),
-            accountName: Text("    ${_userModel.user.name}",
+            accountName: Text(
+              "    ${_userModel.user.name}",
               style: TextStyle(
                 fontSize: 18,
               ),
             ),
-            accountEmail: Text(
-                "     ${_userModel.user.email}"
-            ),
+            accountEmail: Text("     ${_userModel.user.email}"),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(60),
-                  topRight: Radius.circular(90)
-              ),
+                  topRight: Radius.circular(90)),
               image: DecorationImage(
                 image: AssetImage('assets/images/header_background.png'),
                 fit: BoxFit.cover,
-                colorFilter:
-                ColorFilter.mode(Colors.black.withOpacity(0.8),
-                    BlendMode.dstATop),
+                colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.8), BlendMode.dstATop),
               ),
             ),
             currentAccountPicture: CircleAvatar(
-
                 backgroundImage: NetworkImage(_userModel.user.profileURL)),
           ),
           ListTile(
@@ -130,14 +126,19 @@ class DrawerWidget {
               leading: Icon(Icons.power_settings_new),
               title: Text("Çıkış Yap"),
               onTap: () {
-                signOut(_userModel);
+                signOut(_userModel, context);
               }),
         ],
       ),
     ));
   }
 
-  Future<bool> signOut(UserModel _userModel) async {
-    return await _userModel.signOut();
+  signOut(UserModel _userModel, BuildContext context) async {
+    var result = await _userModel.signOut();
+    if (result) {
+      Navigator.pop(context);
+      Navigator.pop(context);
+    }
   }
+
 }
