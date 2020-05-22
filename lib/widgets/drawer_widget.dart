@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/pages/all_chats_page.dart';
 import 'package:agucareer/pages/home_page.dart';
 import 'package:agucareer/pages/profil_duzenle_widget.dart';
