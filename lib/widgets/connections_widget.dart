@@ -6,9 +6,9 @@ import 'package:agucareer/models/user_model.dart';
 
 class ConnectionsWidget{
 
-  Widget cWidget(UserModel userModel) {
+  Widget cWidget(UserModel _userModel) {
     return FutureBuilder<List<User>>(
-      future: userModel.getUserList(),
+      future: _userModel.getUserList(),
       builder: (context, result) {
         if (result.hasData) {
           var userList = result.data;
@@ -24,7 +24,7 @@ class ConnectionsWidget{
                         Navigator.of(context, rootNavigator: true).push(
                             MaterialPageRoute(
                                 builder: (context) => ChatPage(
-                                    me: userModel.user.userID,
+                                    me: _userModel.user.userID,
                                     it: userList[index].userID)));
                       },
                       child: Card(
