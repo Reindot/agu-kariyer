@@ -99,12 +99,15 @@ class _ChatPageState extends State<ChatPage> {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 4),
                   child: FloatingActionButton(
-                    elevation: 0,
-                    backgroundColor: AppColors.koyuMor.withOpacity(1.0),
-                    child: Icon(
-                      Icons.navigation,
-                      size: 35,
-                      color: Colors.white,
+                    elevation: 10,
+                    backgroundColor: AppColors.acikMor.withOpacity(1.0),
+                    child: RotationTransition(
+                      turns: new AlwaysStoppedAnimation(45 / 360),
+                      child: Icon(
+                        Icons.navigation,
+                        size: 30,
+                        color: Colors.white,
+                      ),
                     ),
                     onPressed: () => _sendMessage(),
                   ),

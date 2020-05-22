@@ -54,7 +54,13 @@ class DrawerWidget {
               }),
           ListTile(
               contentPadding: EdgeInsets.only(left: 30),
-              leading: Icon(Icons.message),
+              leading: RotationTransition(
+                turns: new AlwaysStoppedAnimation(45 / 360),
+                child: Icon(
+                  Icons.navigation,
+                  size: 26,
+                ),
+              ),
               title: Text("Mesajlar"),
               onTap: () {
                 Navigator.push(context,
@@ -91,7 +97,7 @@ class DrawerWidget {
               }),
           ListTile(
               contentPadding: EdgeInsets.only(left: 30),
-              leading: Icon(Icons.textsms),
+              leading: Icon(Icons.assignment),
               title: Text("Anket Doldur"),
               onTap: () {
                 Navigator.pop(context);

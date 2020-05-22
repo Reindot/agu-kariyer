@@ -56,7 +56,6 @@ class _AllChatsPageState extends State<AllChatsPage> {
       ),
     );
   }
-
   _getCustomAppBar() {
     return PreferredSize(
       preferredSize: Size.fromHeight(100),

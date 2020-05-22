@@ -19,7 +19,7 @@ class HosgeldinWidget extends StatelessWidget {
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/background.png"),
+                image: AssetImage("assets/images/Welcome_Background.png"),
                 fit: BoxFit.cover),
             ),
         child: Stack(
@@ -34,20 +34,6 @@ class HosgeldinWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Opacity(
-                    opacity: 0.9,
-                    child: Text(
-                      "AGÜ\nKARİYER MERKEZİ",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'OpenSans',
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 40,
-                        letterSpacing: 3
-                      ),
-                    ),
-                  ),
                   Spacer(),
                   Container(
                     height: 110,
