@@ -1,4 +1,3 @@
-import 'package:agucareer/pages/home_page.dart';
 import 'package:agucareer/values/constants.dart';
 import 'package:agucareer/values/values.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
@@ -29,9 +28,7 @@ class ProfilDuzenleWidget extends StatelessWidget {
       debugPrint("ERROR profil_duzenle_widget _updateUserData: ${e.toString()}");
     }
     if(value)
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
-
+      Navigator.pop(context);
   }
 
   @override
