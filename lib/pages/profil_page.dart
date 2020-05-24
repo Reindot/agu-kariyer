@@ -103,9 +103,13 @@ class _ProfilePageState extends State<ProfilePage> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
-                                Icon(
-                                  Icons.message,
-                                  color: Colors.white,
+                                RotationTransition(
+                                  turns: new AlwaysStoppedAnimation(45 / 360),
+                                  child: Icon(
+                                    Icons.navigation,
+                                    size: 26,
+                                    color: Colors.white
+                                  ),
                                 ),
                                 Text(
                                   "Mesaj At",
