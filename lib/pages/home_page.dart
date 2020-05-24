@@ -1,5 +1,6 @@
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/pages/chat_page.dart';
+import 'package:agucareer/pages/profil_page.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
@@ -125,35 +126,41 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(80.0)),
                           color: AppColors.koyuMor.withOpacity(1.0),
                           elevation: 0,
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              radius: 30,
-                              backgroundImage: NetworkImage(
-                                  _userModel.connection.profileURL ?? ""),
-                            ),
-                            title: Text(
-                              _userModel.connection.name ?? "",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            subtitle: Text(
-                              _userModel.connection.professional ?? "",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            trailing: RotationTransition(
-                              turns: new AlwaysStoppedAnimation(45 / 360),
-                              child: IconButton(
-                                onPressed: () {
-                                  Navigator.of(context, rootNavigator: true)
-                                      .push(MaterialPageRoute(
-                                          builder: (context) => ChatPage(
-                                              me: _userModel.user.userID,
-                                              it: _userModel
-                                                  .connection.userID)));
-                                },
-                                icon: Icon(
-                                  Icons.navigation,
-                                  size: 28,
-                                  color: Colors.white,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => ProfilePage(_userModel.connection)));
+                            },
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                radius: 30,
+                                backgroundImage: NetworkImage(
+                                    _userModel.connection.profileURL ?? ""),
+                              ),
+                              title: Text(
+                                _userModel.connection.name ?? "",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              subtitle: Text(
+                                _userModel.connection.professional ?? "",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              trailing: RotationTransition(
+                                turns: new AlwaysStoppedAnimation(45 / 360),
+                                child: IconButton(
+                                  onPressed: () {
+                                    Navigator.of(context, rootNavigator: true)
+                                        .push(MaterialPageRoute(
+                                            builder: (context) => ChatPage(
+                                                me: _userModel.user.userID,
+                                                it: _userModel
+                                                    .connection.userID)));
+                                  },
+                                  icon: Icon(
+                                    Icons.navigation,
+                                    size: 28,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
