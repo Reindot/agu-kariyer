@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:agucareer/pages/all_chats_page.dart';
-import 'package:agucareer/pages/home_page.dart';
 import 'package:agucareer/pages/profil_duzenle_widget.dart';
 import 'package:agucareer/pages/profil_page.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
@@ -21,7 +20,7 @@ class DrawerWidget {
         children: <Widget>[
           UserAccountsDrawerHeader(
             onDetailsPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ProfilePage())),
+                MaterialPageRoute(builder: (context) => ProfilePage(_userModel.user))),
             accountName: Text(
               "    ${_userModel.user.name}",
               style: TextStyle(

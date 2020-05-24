@@ -9,6 +9,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
+  final User _user;
+
+  const ProfilePage(this._user);
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -47,7 +51,6 @@ class _ProfilePageState extends State<ProfilePage> {
     final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
     final _userModel = Provider.of<UserModel>(context, listen: false);
-    User _user = _userModel.user;
 
     return Scaffold(
       drawer: DrawerWidget().drawerMenu(context, _userModel),
@@ -79,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   ),
                   SizedBox(height: screenSize.height / 9),
-                  _buildProfileImage(_user),
+                  _buildProfileImage(widget._user),
                   Text("Değiştir", style: TextStyle(color: Colors.grey.shade600)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -92,18 +95,18 @@ class _ProfilePageState extends State<ProfilePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                _user.name,
+                                widget._user.name,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 26),
                                 textAlign: TextAlign.left,
                               ),
                               Text(
-                                _user.type.toString(),
+                                widget._user.type.toString(),
                                 style: TextStyle(color: Colors.grey.shade600),
                                 textAlign: TextAlign.left,
                               ),
                               Text(
-                                _user.company,
+                                widget._user.company,
                                 style: TextStyle(color: Colors.grey.shade600),
                                 textAlign: TextAlign.left,
                               ),
@@ -171,7 +174,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 color: AppColors.pembe.withOpacity(1),
                               ),
                               child: Text(
-                                "    " + _user.professional+ "    ",
+                                "    " + widget._user.professional+ "    ",
                                 style: TextStyle(color: Colors.white),
                               ),
                             )
@@ -197,7 +200,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           height: 10 ,
                         ),
                         Text(
-                          _user.bio,
+                          widget._user.bio,
                           style: TextStyle(color: Colors.white),
                         )
                       ],
