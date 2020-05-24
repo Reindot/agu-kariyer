@@ -5,6 +5,7 @@ import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'pages/hosgeldin_widget.dart';
+import 'package:flutter/services.dart' ;
 
 void main() {
   setupLocator();
@@ -14,6 +15,9 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     return ChangeNotifierProvider(
         create: (context) => UserModel(),
         child: MaterialApp(
