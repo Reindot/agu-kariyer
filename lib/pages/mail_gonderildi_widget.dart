@@ -7,11 +7,9 @@ import 'package:flutter/material.dart';
 import '../values/colors.dart';
 
 class MailGonderildiWidget extends StatelessWidget {
-  void onArrowLeftPressed(BuildContext context) => Navigator.push(
-      context, MaterialPageRoute(builder: (context) => SifremiUnuttumWidget()));
+  void onArrowLeftPressed(BuildContext context) => Navigator.pop(context);
 
-  void onArrowRightPressed(BuildContext context) => Navigator.push(
-      context, MaterialPageRoute(builder: (context) => HosgeldinWidget()));
+  void onArrowRightPressed(BuildContext context) => Navigator.pop(context);
 
   @override
   Widget build(BuildContext context) {
