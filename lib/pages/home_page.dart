@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                     height: 10,
                   ),
                   Container(
-                      height: 120,
+                      height: 100,
                       padding: EdgeInsets.only(right: 5, left: 5),
                       child: FutureBuilder<List<User>>(
                         future: _userModel.getUserList(),
@@ -189,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                           height: 10,
                         ),
                         Text(
-                          "Bir Sonraki Buluşma İçin Son Tarih\n 27 Mayıs 2020",
+                          "Sonraki Buluşma İçin Son Tarih\n 27 Mayıs 2020",
                           style: TextStyle(color: Colors.white, fontSize: 16),
                           textAlign: TextAlign.center,
                         ),
