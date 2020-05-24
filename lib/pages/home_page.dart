@@ -6,16 +6,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-//bug fix
-
 class HomePage extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     UserModel _userModel = Provider.of<UserModel>(context);
     return Scaffold(
+        key: _scaffoldKey,
         appBar: _getCustomAppBar(),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Text(
               "Bağlantılarım",
@@ -26,11 +27,13 @@ class HomePage extends StatelessWidget {
                 color: Colors.grey.shade500,
               ),
             ),
-            Expanded(
-              child: Container(
-                  padding: EdgeInsets.all(5),
-                  child: ConnectionsWidget().cWidget(_userModel)),
+            SizedBox(
+              height: 10,
             ),
+            Container(
+                height: 120,
+                padding: EdgeInsets.only(right: 5, left: 5),
+                child: ConnectionsWidget().cWidget(_userModel)),
             Text(
               "Kişi Detayları",
               textAlign: TextAlign.center,
@@ -42,7 +45,7 @@ class HomePage extends StatelessWidget {
             ),
             Container(
               height: 300,
-              margin: EdgeInsets.all(30),
+              margin: EdgeInsets.all(20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20),
@@ -84,6 +87,15 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Divider(
+                    thickness: 4,
+                    indent: 20,
+                    endIndent: 20,
+                    color: Colors.grey.shade500,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
@@ -99,6 +111,9 @@ class HomePage extends StatelessWidget {
                       )
                     ],
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     "Bir Sonraki Buluşma İçin Son Tarih\n 27 Mayıs 2020",
                     style: TextStyle(color: Colors.white, fontSize: 16),
@@ -106,8 +121,7 @@ class HomePage extends StatelessWidget {
                   ),
                   Expanded(
                     child: Container(
-                        margin: EdgeInsets.fromLTRB(50, 15, 50, 7),
-                        padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
+                        margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(60),
                           color: AppColors.pembe.withOpacity(1.0),
@@ -123,14 +137,13 @@ class HomePage extends StatelessWidget {
                             Text(
                               "Buluşma Ayarla",
                               style: TextStyle(color: Colors.white),
-                            )
+                            ),
                           ],
                         )),
                   ),
                   Expanded(
                     child: Container(
-                        margin: EdgeInsets.fromLTRB(50, 7, 50, 15),
-                        padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
+                        margin: EdgeInsets.fromLTRB(60, 7, 60, 15),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(60),
                           color: AppColors.acikMor.withOpacity(1.0),
@@ -146,7 +159,7 @@ class HomePage extends StatelessWidget {
                             Text(
                               "Anket Doldur",
                               style: TextStyle(color: Colors.white),
-                            )
+                            ),
                           ],
                         )),
                   ),
@@ -182,7 +195,7 @@ class HomePage extends StatelessWidget {
                       size: 28,
                       color: Colors.white,
                     ),
-                    onPressed: () {}),
+                    onPressed: () => _scaffoldKey.currentState.openDrawer()),
                 IconButton(
                     padding: EdgeInsets.all(20),
                     icon: Icon(
