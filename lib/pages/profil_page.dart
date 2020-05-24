@@ -97,7 +97,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(60),
-                              color: AppColors.pembe.withOpacity(0.9),
+                              color: AppColors.acikMor.withOpacity(0.9),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -128,7 +128,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30),
                       ),
-                      color: AppColors.koyuMor.withOpacity(0.8),
+                      color: AppColors.koyuMor.withOpacity(1.0),
                     ),
                     child: ListView(
                       children: <Widget>[
