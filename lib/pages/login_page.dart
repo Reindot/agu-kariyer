@@ -1,4 +1,3 @@
-import 'package:agucareer/pages/home_page.dart';
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/pages/sifremi_unuttum_widget.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
@@ -16,11 +15,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String _mail;
-  String _pass;
   bool _rememberMe = true;
+  TextEditingController mailController;
+  TextEditingController passController;
 
   final storage = new FlutterSecureStorage();
+
+  @override
+  void dispose() {
+    mailController.dispose();
+    passController.dispose();
+    super.dispose();
+  }
 
   void onSifremiUnuttumPressed(BuildContext context) => Navigator.push(
       context, MaterialPageRoute(builder: (context) => SifremiUnuttumWidget()));
@@ -104,14 +110,11 @@ class _LoginPageState extends State<LoginPage> {
             future: getSavedEmail(),
             builder: (context, result) {
               debugPrint(">>> login_page >>> _buildEmailTF >>> savedMail >>> ${result.data}");
+              mailController = TextEditingController(text: result.data);
               if(result.hasData){
-                _mail = result.data;
                 return TextFormField(
-                  initialValue: result.data,
+                  controller: mailController,
                   keyboardType: TextInputType.emailAddress,
-                  onChanged: (String str) {
-                    _mail = str;
-                  },
                   style: TextStyle(
                     color: AppColors.acikMor,
                     fontWeight: FontWeight.bold,
@@ -154,13 +157,10 @@ class _LoginPageState extends State<LoginPage> {
           child: FutureBuilder<String>(
             future: getSavedPass(),
             builder: (context, result){
+              passController = TextEditingController(text: result.data);
               if(result.hasData){
-                _pass = result.data;
                 return TextFormField(
-                  initialValue: result.data,
-                  onChanged: (String str) {
-                    _pass = str;
-                  },
+                  controller: passController,
                   obscureText: true,
                   style: TextStyle(
                     color: AppColors.acikMor,
@@ -244,8 +244,8 @@ class _LoginPageState extends State<LoginPage> {
       child: RaisedButton(
         padding: EdgeInsets.all(15.0),
         color: AppColors.acikMor,
-        onLongPress: () => onLogInLongPressed(_mail, _pass, context),
-        onPressed: () => onLogInPressed(_mail, _pass, context),
+        onLongPress: () => onLogInLongPressed(mailController.text, passController.text, context),
+        onPressed: () => onLogInPressed(mailController.text, passController.text, context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
@@ -268,7 +268,7 @@ class _LoginPageState extends State<LoginPage> {
     updateLoginData();
     final _userModel = Provider.of<UserModel>(context, listen: false);
     try {
-      User user = await _userModel.signIn(_mail, _pass);
+      User user = await _userModel.signIn(mailController.text, passController.text);
       if (user != null)
         Navigator.pushReplacementNamed(context, '/home');
     } catch (e) {
@@ -279,7 +279,7 @@ class _LoginPageState extends State<LoginPage> {
   void onLogInLongPressed(String mail, String pass, BuildContext context) async {
     final _userModel = Provider.of<UserModel>(context, listen: false);
     try {
-      await _userModel.createUser(_mail, _pass);
+      await _userModel.createUser(mailController.text, passController.text);
     } catch (e) {
       debugPrint(">>> login_page >>> onLogInLongPressed >>> ${e.toString()}");
     }
@@ -287,8 +287,8 @@ class _LoginPageState extends State<LoginPage> {
 
   void updateLoginData() async {
     if (_rememberMe) {
-      await storage.write(key: "_mail", value: _mail);
-      await storage.write(key: "_pass", value: _pass);
+      await storage.write(key: "_mail", value: mailController.text);
+      await storage.write(key: "_pass", value: passController.text);
     } else {
       await storage.deleteAll();
     }
