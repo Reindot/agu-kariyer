@@ -6,12 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-//bug fix
-
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    UserModel _userModel = Provider.of<UserModel>(context);
+    final UserModel _userModel = Provider.of<UserModel>(context);
     return Scaffold(
         appBar: _getCustomAppBar(),
         body: Column(
