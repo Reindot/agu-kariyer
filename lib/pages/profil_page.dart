@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
+import 'package:agucareer/widgets/drawer_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -43,10 +44,14 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
     final _userModel = Provider.of<UserModel>(context, listen: false);
     User _user = _userModel.user;
 
     return Scaffold(
+      drawer: DrawerWidget().drawerMenu(context, _userModel),
+      key: _scaffoldKey,
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: _uploadPhoto,
@@ -54,11 +59,26 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Stack(
         children: <Widget>[
           _buildCoverImage(screenSize),
+
           SafeArea(
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: screenSize.height / 6.4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        width: 60,
+                        child: FlatButton(
+                          onPressed: () => _scaffoldKey.currentState.openDrawer(),
+                          textColor: Colors.white,
+                          padding: EdgeInsets.all(0),
+                          child: Icon(Icons.menu),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: screenSize.height / 9),
                   _buildProfileImage(_user),
                   Text("Değiştir", style: TextStyle(color: Colors.grey.shade600)),
                   Row(
@@ -97,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(60),
-                              color: AppColors.acikMor.withOpacity(0.9),
+                              color: AppColors.acikMor.withOpacity(1),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -148,7 +168,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   bottomLeft: Radius.circular(25),
                                   topRight: Radius.circular(25),
                                 ),
-                                color: AppColors.pembe.withOpacity(0.9),
+                                color: AppColors.pembe.withOpacity(1),
                               ),
                               child: Text(
                                 "    " + _user.professional+ "    ",
