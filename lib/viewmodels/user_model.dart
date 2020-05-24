@@ -16,13 +16,19 @@ class UserModel with ChangeNotifier implements AuthService, DBService, StorageSe
   ViewState _state = ViewState.IDLE;
   UserRepository _userRepository = locator<UserRepository>();
   User _user;
+  User _connection;
 
   ViewState get state => _state;
   User get user => _user;
+  User get connection => _connection;
 
   set state(ViewState value) {
     _state = value;
     notifyListeners();
+  }
+
+  set connection(User value) {
+    _connection = value;
   }
 
   UserModel() {
@@ -34,6 +40,7 @@ class UserModel with ChangeNotifier implements AuthService, DBService, StorageSe
     try {
       state = ViewState.BUSY;
       _user = await _userRepository.currentUser();
+      _connection = _user;
       return _user;
     } finally {
       _state = ViewState.IDLE;
