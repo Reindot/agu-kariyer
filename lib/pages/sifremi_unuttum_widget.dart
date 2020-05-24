@@ -1,4 +1,3 @@
-import 'package:agucareer/pages/login_page.dart';
 import 'package:agucareer/pages/mail_gonderildi_widget.dart';
 import 'package:agucareer/values/constants.dart';
 import 'package:agucareer/values/values.dart';

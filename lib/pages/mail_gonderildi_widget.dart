@@ -1,5 +1,3 @@
-import 'package:agucareer/pages/hosgeldin_widget.dart';
-import 'package:agucareer/pages/sifremi_unuttum_widget.dart';
 import 'package:agucareer/values/values.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
