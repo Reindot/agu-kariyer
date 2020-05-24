@@ -140,7 +140,7 @@ class DrawerWidget {
   signOut(UserModel _userModel, BuildContext context) async {
     try {
       var result = await _userModel.signOut();
-      if (result) {
+      if (result != null && result) {
         Navigator.pushReplacementNamed(context, '/');
       }
     } catch (e){
