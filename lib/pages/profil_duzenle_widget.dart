@@ -27,8 +27,11 @@ class ProfilDuzenleWidget extends StatelessWidget {
     } on Exception catch (e) {
       debugPrint("ERROR profil_duzenle_widget _updateUserData: ${e.toString()}");
     }
-    if(value)
+    if(value){
+      await _userModel.currentUser();
       Navigator.pop(context);
+    }
+
   }
 
   @override
