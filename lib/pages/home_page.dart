@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserModel _userModel = Provider.of<UserModel>(context);
+    final UserModel _userModel = Provider.of<UserModel>(context);
     return Scaffold(
         key: _scaffoldKey,
         appBar: _getCustomAppBar(),

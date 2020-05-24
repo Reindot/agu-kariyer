@@ -1,5 +1,3 @@
-import 'package:agucareer/pages/hosgeldin_widget.dart';
-import 'package:agucareer/pages/sifremi_unuttum_widget.dart';
 import 'package:agucareer/values/values.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,11 +5,9 @@ import 'package:flutter/material.dart';
 import '../values/colors.dart';
 
 class MailGonderildiWidget extends StatelessWidget {
-  void onArrowLeftPressed(BuildContext context) => Navigator.push(
-      context, MaterialPageRoute(builder: (context) => SifremiUnuttumWidget()));
+  void onArrowLeftPressed(BuildContext context) => Navigator.pop(context);
 
-  void onArrowRightPressed(BuildContext context) => Navigator.push(
-      context, MaterialPageRoute(builder: (context) => HosgeldinWidget()));
+  void onArrowRightPressed(BuildContext context) => Navigator.pop(context);
 
   @override
   Widget build(BuildContext context) {

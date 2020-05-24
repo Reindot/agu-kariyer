@@ -1,4 +1,3 @@
-import 'package:agucareer/pages/login_page.dart';
 import 'package:agucareer/pages/mail_gonderildi_widget.dart';
 import 'package:agucareer/values/constants.dart';
 import 'package:agucareer/values/values.dart';
@@ -12,8 +11,7 @@ import '../values/colors.dart';
 String _email = "";
 
 class SifremiUnuttumWidget extends StatelessWidget {
-  void onArrowLeftPressed(BuildContext context) => Navigator.push(
-      context, MaterialPageRoute(builder: (context) => LoginPage()));
+  void onArrowLeftPressed(BuildContext context) => Navigator.pop(context);
 
   @override
   Widget build(BuildContext context) {
@@ -174,7 +172,7 @@ void _resPassword(BuildContext context) async {
   final _userModel = Provider.of<UserModel>(context, listen: false);
   bool value = await _userModel.resetPassword(_email);
   if (value) {
-    Navigator.push(context,
+    Navigator.pushReplacement(context,
         MaterialPageRoute(builder: (context) => MailGonderildiWidget()));
   } else {
     //EMAIL IS NOT VALID!!!

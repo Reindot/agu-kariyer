@@ -5,7 +5,6 @@ import 'package:agucareer/pages/profil_duzenle_widget.dart';
 import 'package:agucareer/pages/profil_page.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 class DrawerWidget {
   Widget drawerMenu(BuildContext context, UserModel _userModel) {
@@ -49,8 +48,7 @@ class DrawerWidget {
               leading: Icon(Icons.home),
               title: Text("Ana Sayfa"),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomePage()));
+                Navigator.pop(context);
               }),
           ListTile(
               contentPadding: EdgeInsets.only(left: 30),
@@ -140,10 +138,13 @@ class DrawerWidget {
   }
 
   signOut(UserModel _userModel, BuildContext context) async {
-    var result = await _userModel.signOut();
-    if (result) {
-      Navigator.pop(context);
-      Navigator.pop(context);
+    try {
+      var result = await _userModel.signOut();
+      if (result != null && result) {
+        Navigator.pushReplacementNamed(context, '/');
+      }
+    } catch (e){
+      debugPrint(">>> drawer_widget >>> signOut >>> ErrorCode >>> ${e.toString()}");
     }
   }
 

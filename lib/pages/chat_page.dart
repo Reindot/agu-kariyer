@@ -219,7 +219,7 @@ class _ChatPageState extends State<ChatPage> {
                       size: 28,
                       color: Colors.white,
                     ),
-                    onPressed: () {}),
+                    onPressed: () => Navigator.pop(context)),
                 IconButton(
                     padding: EdgeInsets.all(20),
                     icon: Icon(
