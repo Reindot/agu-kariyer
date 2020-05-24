@@ -6,7 +6,7 @@ abstract class DBService {
   Future<bool> saveUser(User user);
   Future<User> getUser(String userID);
   Future<bool> updateUser(String userID, Map<String, dynamic> map);
-  Future<List<User>> getUserList();
+  Future<List<User>> getConnections(User user);
   Future<List<Chats>> getChats(String userID);
   Stream<List<Message>> getMessages(String fromID, String toID);
   Future<bool> sendMessage(Message message);

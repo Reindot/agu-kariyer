@@ -127,10 +127,10 @@ class UserModel with ChangeNotifier implements AuthService, DBService, StorageSe
   }
 
   @override
-  Future<List<User>> getUserList() async{
+  Future<List<User>> getConnections(User user) async{
     try {
       state = ViewState.BUSY;
-      return await _userRepository.getUserList();
+      return await _userRepository.getConnections(user);
     } finally {
       _state = ViewState.IDLE;
     }

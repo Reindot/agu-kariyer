@@ -3,6 +3,7 @@ import 'package:agucareer/models/message_model.dart';
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/services/db_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
 class FirestoreDBService implements DBService {
   final Firestore _firestore = Firestore.instance;
@@ -33,12 +34,39 @@ class FirestoreDBService implements DBService {
   }
 
   @override
-  Future<List<User>> getUserList() async {
-    QuerySnapshot querySnapshot =
-        await _firestore.collection("users").getDocuments();
-    return querySnapshot.documents
+  Future<List<User>> getConnections(User user) async {
+    debugPrint(">>> firestore_db_service >>> getConnections >>> ${user.toString()}");
+    QuerySnapshot querySnapshot1;
+    QuerySnapshot querySnapshot2;
+    if (user.type == "STUDENT") {
+      querySnapshot1 = await _firestore
+          .collection("users")
+          .where("userID", isEqualTo: user.modID)
+          .getDocuments();
+      querySnapshot2 = await _firestore
+          .collection("users")
+          .where("userID", isEqualTo: user.mentorID)
+          .getDocuments();
+    } else if (user.type == "MENTOR") {
+      querySnapshot1 = await _firestore
+          .collection("users")
+          .where("mentorID", isEqualTo: user.userID)
+          .getDocuments();
+      querySnapshot2 = await _firestore
+          .collection("users")
+          .where("userID", isEqualTo: user.modID)
+          .getDocuments();
+    } else {
+      return List<User>();
+    }
+
+    List<User> list1 = querySnapshot1.documents
         .map((user) => User.fromMap(user.data))
         .toList();
+    List<User> list2 = querySnapshot2.documents
+        .map((user) => User.fromMap(user.data))
+        .toList();
+    return list1 + list2;
   }
 
   @override
@@ -104,9 +132,10 @@ class FirestoreDBService implements DBService {
 
   @override
   Future<DateTime> getTime(String userID) async {
-    await _firestore.collection("server").document(userID).setData({
-      "time" : FieldValue.serverTimestamp()
-    });
+    await _firestore
+        .collection("server")
+        .document(userID)
+        .setData({"time": FieldValue.serverTimestamp()});
     var map = await _firestore.collection("server").document(userID).get();
     Timestamp time = map.data["time"];
     return time.toDate();

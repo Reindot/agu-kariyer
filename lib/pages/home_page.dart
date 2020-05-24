@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final UserModel _userModel = Provider.of<UserModel>(context);
     return FutureBuilder(
-      future: _userModel.getUserList(),
+      future: _userModel.getConnections(_userModel.user),
       builder: (context, result) {
         if (result.hasData) {
           return Scaffold(
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                       height: 100,
                       padding: EdgeInsets.only(right: 5, left: 5),
                       child: FutureBuilder<List<User>>(
-                        future: _userModel.getUserList(),
+                        future: _userModel.getConnections(_userModel.user),
                         builder: (context, result) {
                           if (result.hasData) {
                             var userList = result.data;

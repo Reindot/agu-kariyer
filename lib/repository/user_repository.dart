@@ -13,38 +13,67 @@ import 'package:agucareer/services/local_db_service.dart';
 import 'package:agucareer/services/storage_service.dart';
 import 'package:flutter/cupertino.dart';
 
-enum AuthMode { FIREBASE }
-enum DBMode { FIRESTORE }
+enum AuthMode { FIREBASE, LOCAL }
+enum DBMode { FIRESTORE, LOCAL }
 enum StorageMode { FIREBASE }
+enum AppMode { BUILD, RELEASE}
 
 class UserRepository implements AuthService, DBService, StorageService {
   FirebaseAuthService _firebaseAuthService = locator<FirebaseAuthService>();
   FirestoreDBService _firestoreDBService = locator<FirestoreDBService>();
-  LocalDBService _localeDBService = locator<LocalDBService>();
+  LocalDBService _localDBService = locator<LocalDBService>();
   FirebaseStorageService _firebaseStorageService =
       locator<FirebaseStorageService>();
 
   AuthMode _authMode = AuthMode.FIREBASE;
   DBMode _dbMode = DBMode.FIRESTORE;
   StorageMode _storageMode = StorageMode.FIREBASE;
+  AppMode _appMode = AppMode.BUILD;
 
   List<User> userList = [];
 
   @override
   Future<User> currentUser() async {
-    if (_authMode == AuthMode.FIREBASE) {
-      User _user = await _firebaseAuthService.currentUser();
-      debugPrint("Current User: >>>>>>>>>>> ${_user.toString()}");
-      if (_user != null) return await _firestoreDBService.getUser(_user.userID);
+    if(_appMode == AppMode.RELEASE){
+      User _user = await _localDBService.getUser("local");
+      if(_user != null)
+        return _user;
     }
+
+    if(_appMode == AppMode.BUILD){
+      if(_authMode == AuthMode.LOCAL){
+        User _user = await _localDBService.getUser("local");
+        debugPrint("user_repository >>> currentUser >>> ${_user.toString()}");
+        return _user;
+      }
+      if (_authMode == AuthMode.FIREBASE) {
+        User _user = await _firebaseAuthService.currentUser();
+        debugPrint("user_repository >>> currentUser >>> ${_user.toString()}");
+        if (_user != null) {
+          return await _firestoreDBService.getUser(_user.userID);
+        }
+      }
+    }
+
     return null;
   }
 
   @override
   Future<User> signIn(String email, String password) async {
-    if (_authMode == AuthMode.FIREBASE) {
+    if(_appMode == AppMode.RELEASE){
       User _user = await _firebaseAuthService.signIn(email, password);
-      return await _firestoreDBService.getUser(_user.userID);
+      User _saveToDb = await _firestoreDBService.getUser(_user.userID);
+      var value = await _localDBService.saveUser(_saveToDb);
+      return _saveToDb;
+    }
+
+    if(_appMode == AppMode.BUILD){
+      if(_authMode == AuthMode.LOCAL)
+        return _localDBService.getUser("local");
+      if (_authMode == AuthMode.FIREBASE) {
+        User _user = await _firebaseAuthService.signIn(email, password);
+        return await _firestoreDBService.getUser(_user.userID);
+      }
     }
 
     return null;
@@ -52,8 +81,18 @@ class UserRepository implements AuthService, DBService, StorageService {
 
   @override
   Future<bool> signOut() async {
-    if (_authMode == AuthMode.FIREBASE)
-      return await _firebaseAuthService.signOut();
+    if(_appMode == AppMode.RELEASE){
+      await _firebaseAuthService.signOut();
+      return await _localDBService.signOut();
+    }
+
+    if(_appMode == AppMode.BUILD){
+      if(_authMode == AuthMode.LOCAL)
+        await _localDBService.signOut();
+      if (_authMode == AuthMode.FIREBASE)
+        return await _firebaseAuthService.signOut();
+    }
+
     return false;
   }
 
@@ -109,9 +148,9 @@ class UserRepository implements AuthService, DBService, StorageService {
   }
 
   @override
-  Future<List<User>> getUserList() async {
+  Future<List<User>> getConnections(User user) async {
     if (_dbMode == DBMode.FIRESTORE) {
-      userList = await _firestoreDBService.getUserList();
+      userList = await _firestoreDBService.getConnections(user);
       return userList;
     }
     return null;
@@ -119,13 +158,21 @@ class UserRepository implements AuthService, DBService, StorageService {
 
   @override
   Stream<List<Message>> getMessages(String fromID, String toID) {
+    /*
+    if(_dbMode == DBMode.LOCAL)
+      return _localeDBService.getMessages(fromID, toID);
+     */
+
     if (_dbMode == DBMode.FIRESTORE)
       return _firestoreDBService.getMessages(fromID, toID);
     return null;
+
   }
 
   @override
   Future<bool> sendMessage(Message message) async {
+    if(_dbMode == DBMode.LOCAL)
+        return _localDBService.sendMessage(message);
     if (_dbMode == DBMode.FIRESTORE)
       return await _firestoreDBService.sendMessage(message);
     return null;
@@ -146,7 +193,7 @@ class UserRepository implements AuthService, DBService, StorageService {
           chat.profileURL = infoFromDB.profileURL;
         }
       }
-      debugPrint("---------------------size: ${chatList.length}");
+      debugPrint(">>> user_repository >>> getChats >>> ${chatList.length}");
       return chatList;
     }
     return null;
