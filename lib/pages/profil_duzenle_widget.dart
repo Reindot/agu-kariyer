@@ -1,25 +1,25 @@
-import 'package:agucareer/values/constants.dart';
 import 'package:agucareer/values/values.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
+import 'package:agucareer/widgets/input_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../values/colors.dart';
 
-String _isim = "";
-String _meslek = "";
-String _hakkinda = "";
-String _calismaYeri = "";
+final _nameController = TextEditingController();
+final _workController = TextEditingController();
+final _bioController = TextEditingController();
+final _professionalController = TextEditingController();
 
 class ProfilDuzenleWidget extends StatelessWidget {
 
   void _updateUserData(BuildContext context) async {
     UserModel _userModel = Provider.of<UserModel>(context, listen: false);
     Map<String, dynamic> map = {
-      'name': _isim,
-      'bio': _hakkinda,
-      'professional': _meslek,
-      'company': _calismaYeri
+      'name': _nameController.text,
+      'bio': _bioController.text,
+      'professional': _professionalController.text,
+      'company': _workController.text
     };
     bool value = false;
     try {
@@ -60,19 +60,19 @@ class ProfilDuzenleWidget extends StatelessWidget {
               SizedBox(
                 height: 50,
               ),
-              _degistirIsim(),
+              InputField.standart(_nameController, "İsmini Gir", "İsim:", Icons.person),
               SizedBox(
                 height: 20,
               ),
-              _degistirMeslek(),
+              InputField.standart(_professionalController, "Mesleğini/Bölümünü Gir", "Meslek / Bölüm:", Icons.work),
               SizedBox(
                 height: 20,
               ),
-              _degistirHakkimda(),
+              InputField.standart(_bioController, "Hakkında Anlatmak İstediklerini Gir", "Hakkımda:", Icons.add),
               SizedBox(
                 height: 20,
               ),
-              _degistirCalismaYeri(),
+              InputField.standart(_workController, "Çalışıtığın Yeri Gir", "Çalışma Yeri:", Icons.place),
               SizedBox(
                 height: 30,
               ),
@@ -153,186 +153,4 @@ class ProfilDuzenleWidget extends StatelessWidget {
     );
   }
 
-  Widget _degistirIsim() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'İsim:',
-          style: TextStyle(
-              color: AppColors.acikMor,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OpenSans',
-              fontSize: 16
-          ),
-        ),
-        SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: secondBoxDecorationStyle,
-          height: 60.0,
-          child: TextField(
-            keyboardType: TextInputType.text,
-            onChanged: (String str) => _isim = str,
-            style: TextStyle(
-              color: AppColors.acikMor,
-              fontWeight: FontWeight.bold,
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.person,
-                color: AppColors.acikMor.withOpacity(0.4),
-              ),
-              hintText: 'İsmini Gir',
-              hintStyle: TextStyle(
-                color: AppColors.acikMor.withOpacity(0.4),
-                fontWeight: FontWeight.bold,
-                fontFamily: 'OpenSans',
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _degistirMeslek() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'Meslek / Bölüm:',
-          style: TextStyle(
-              color: AppColors.acikMor,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OpenSans',
-              fontSize: 16
-          ),
-        ),
-        SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: secondBoxDecorationStyle,
-          height: 60.0,
-          child: TextField(
-            keyboardType: TextInputType.text,
-            onChanged: (String str) => _meslek = str,
-            style: TextStyle(
-              color: AppColors.acikMor,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.work,
-                color: AppColors.acikMor.withOpacity(0.4),
-              ),
-              hintText: 'Mesleğini/Bölümünü Gir',
-              hintStyle: TextStyle(
-                color: AppColors.acikMor.withOpacity(0.4),
-                fontWeight: FontWeight.bold,
-                fontFamily: 'OpenSans',
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _degistirHakkimda() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'Hakkımda:',
-          style: TextStyle(
-              color: AppColors.acikMor,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OpenSans',
-              fontSize: 16
-          ),
-        ),
-        SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: secondBoxDecorationStyle,
-          height: 60.0,
-          child: TextField(
-            keyboardType: TextInputType.text,
-            onChanged: (String str) => _hakkinda = str,
-            style: TextStyle(
-              color: AppColors.acikMor,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.add,
-                color: AppColors.acikMor.withOpacity(0.4),
-              ),
-              hintText: 'Hakkında Anlatmak İstediklerini Gir',
-              hintStyle: TextStyle(
-                color: AppColors.acikMor.withOpacity(0.4),
-                fontWeight: FontWeight.bold,
-                fontFamily: 'OpenSans',
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _degistirCalismaYeri() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          'Çalışma Yeri:',
-          style: TextStyle(
-              color: AppColors.acikMor,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OpenSans',
-              fontSize: 16
-          ),
-        ),
-        SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: secondBoxDecorationStyle,
-          height: 60.0,
-          child: TextField(
-            keyboardType: TextInputType.text,
-            onChanged: (String str) => _calismaYeri = str,
-            style: TextStyle(
-              color: AppColors.acikMor,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.place,
-                color: AppColors.acikMor.withOpacity(0.4),
-              ),
-              hintText: 'Çalıştığın Yeri Gir',
-              hintStyle: TextStyle(
-                color: AppColors.acikMor.withOpacity(0.4),
-                fontWeight: FontWeight.bold,
-                fontFamily: 'OpenSans',
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 }
