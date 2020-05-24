@@ -270,8 +270,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       User user = await _userModel.signIn(_mail, _pass);
       if (user != null)
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.pushReplacementNamed(context, '/home');
     } catch (e) {
       debugPrint(">>> login_page >>> onLogInPressed >>> ${e.toString()}");
     }

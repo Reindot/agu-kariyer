@@ -1,4 +1,6 @@
 import 'package:agucareer/locator.dart';
+import 'package:agucareer/pages/home_page.dart';
+import 'package:agucareer/pages/login_page.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +18,11 @@ class MyApp extends StatelessWidget {
         create: (context) => UserModel(),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: HosgeldinWidget(),
+          routes: {
+            '/'               : (context) => HosgeldinWidget(),
+            '/login'          : (context) => LoginPage(),
+            '/home'           : (context) => HomePage(),
+          },
         ));
   }
 }

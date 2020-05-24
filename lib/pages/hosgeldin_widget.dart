@@ -1,4 +1,3 @@
-import 'package:agucareer/pages/login_page.dart';
 import 'package:agucareer/values/values.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +6,7 @@ import '../values/colors.dart';
 
 
 class HosgeldinWidget extends StatelessWidget {
-  void onButtonTwoPressed(BuildContext context) => Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => LoginPage()));
+  void onButtonTwoPressed(BuildContext context) => Navigator.pushReplacementNamed(context, "/login");
 
   @override
   Widget build(BuildContext context) {
