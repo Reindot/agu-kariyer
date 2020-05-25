@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:agucareer/pages/all_chats_page.dart';
+import 'package:agucareer/pages/arrange_meeting.dart';
 import 'package:agucareer/pages/profil_duzenle_widget.dart';
 import 'package:agucareer/pages/profil_page.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
@@ -19,8 +20,10 @@ class DrawerWidget {
         padding: EdgeInsets.only(top: 0),
         children: <Widget>[
           UserAccountsDrawerHeader(
-            onDetailsPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ProfilePage(_userModel.user))),
+            onDetailsPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ProfilePage(_userModel.user))),
             accountName: Text(
               "    ${_userModel.user.name}",
               style: TextStyle(
@@ -81,7 +84,10 @@ class DrawerWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ArrangeMeeting()));
                   }),
             ),
           ),
@@ -142,9 +148,9 @@ class DrawerWidget {
       if (result != null && result) {
         Navigator.pushReplacementNamed(context, '/');
       }
-    } catch (e){
-      debugPrint(">>> drawer_widget >>> signOut >>> ErrorCode >>> ${e.toString()}");
+    } catch (e) {
+      debugPrint(
+          ">>> drawer_widget >>> signOut >>> ErrorCode >>> ${e.toString()}");
     }
   }
-
 }
