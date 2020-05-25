@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:agucareer/models/user_model.dart';
+import 'package:agucareer/pages/profil_duzenle_widget.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'chat_page.dart';
 
 class ProfilePage extends StatefulWidget {
   final User _user;
@@ -48,7 +50,8 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> _scaffoldKey =
+        new GlobalKey<ScaffoldState>();
 
     final _userModel = Provider.of<UserModel>(context, listen: false);
 
@@ -62,7 +65,6 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Stack(
         children: <Widget>[
           _buildCoverImage(screenSize),
-
           SafeArea(
             child: SingleChildScrollView(
               child: Column(
@@ -73,7 +75,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       SizedBox(
                         width: 60,
                         child: FlatButton(
-                          onPressed: () => _scaffoldKey.currentState.openDrawer(),
+                          onPressed: () =>
+                              _scaffoldKey.currentState.openDrawer(),
                           textColor: Colors.white,
                           padding: EdgeInsets.all(0),
                           child: Icon(Icons.menu),
@@ -83,7 +86,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   SizedBox(height: screenSize.height / 9),
                   _buildProfileImage(widget._user),
-                  Text("Değiştir", style: TextStyle(color: Colors.grey.shade600)),
+                  Text("Değiştir",
+                      style: TextStyle(color: Colors.grey.shade600)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
@@ -114,37 +118,69 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Container(
-                            margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                            padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(60),
+                      Expanded(child: Builder(builder: (context) {
+                        if (_userModel.user.userID == widget._user.userID) {
+                          return RaisedButton(
+                              padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
                               color: AppColors.acikMor.withOpacity(1),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                RotationTransition(
-                                  turns: new AlwaysStoppedAnimation(45 / 360),
-                                  child: Icon(
-                                    Icons.navigation,
-                                    size: 26,
-                                    color: Colors.white
+                              onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ProfilDuzenleWidget())),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(60),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Icon(Icons.edit,
+                                      size: 26, color: Colors.white),
+                                  Text(
+                                    "Profili Düzenle",
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                ],
+                              ));
+                        } else {
+                          return RaisedButton(
+                              padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
+                              //    if (_userModel.user.userID == widget._user.userID)(
+                              color: AppColors.acikMor.withOpacity(1),
+                              onPressed: () {
+                                Navigator.of(context, rootNavigator: true).push(
+                                    MaterialPageRoute(
+                                        builder: (context) => ChatPage(
+                                            me: _userModel.user.userID,
+                                            it: _userModel.connection.userID)));
+                              },
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(60),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  RotationTransition(
+                                    turns: new AlwaysStoppedAnimation(45 / 360),
+                                    child: Icon(Icons.navigation,
+                                        size: 26, color: Colors.white),
                                   ),
-                                ),
-                                Text(
-                                  "Mesaj At",
-                                  style: TextStyle(color: Colors.white),
-                                )
-                              ],
-                            )),
-                      ),
+                                  Text(
+                                    "Mesaj At",
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                ],
+                              ));
+                        }
+                      }))
                     ],
                   ),
                   Container(
-                    height: screenSize.height/2.3,
+                    height: screenSize.height / 2.3,
                     width: double.infinity,
                     padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
                     margin: EdgeInsets.all(20),
@@ -174,12 +210,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                 color: AppColors.pembe.withOpacity(1),
                               ),
                               child: Text(
-                                "    " + widget._user.professional+ "    ",
+                                "    " + widget._user.professional + "    ",
                                 style: TextStyle(color: Colors.white),
                               ),
                             )
                           ],
-
                         ),
                         SizedBox(
                           height: 15,
@@ -197,7 +232,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ],
                         ),
                         SizedBox(
-                          height: 10 ,
+                          height: 10,
                         ),
                         Text(
                           widget._user.bio,
@@ -217,15 +252,15 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildCoverImage(Size screenSize) {
     return Opacity(
-      opacity: 0.9,
-      child: Container(
-      height: screenSize.height / 3.5,
-      decoration: BoxDecoration(
-          image: DecorationImage(
-        image: AssetImage('assets/images/profile_background.png'),
-        fit: BoxFit.cover,
-      )),
-    ));
+        opacity: 0.9,
+        child: Container(
+          height: screenSize.height / 3.5,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('assets/images/profile_background.png'),
+            fit: BoxFit.cover,
+          )),
+        ));
   }
 
   Widget _buildProfileImage(User _user) {
@@ -242,42 +277,41 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       child: Column(
         children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (context) {
-                        return Container(
-                          height: 120,
-                          child: Column(
-                            children: <Widget>[
-                              ListTile(
-                                leading: Icon(Icons.camera),
-                                title: Text("Kameradan Çek"),
-                                onTap: () {
-                                  _pictureFromCamera();
-                                },
-                              ),
-                              ListTile(
-                                leading: Icon(Icons.image),
-                                title: Text("Galeriden Seç"),
-                                onTap: () {
-                                  _pictureFromGallery();
-                                },
-                              )
-                            ],
+          GestureDetector(
+            onTap: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Container(
+                      height: 120,
+                      child: Column(
+                        children: <Widget>[
+                          ListTile(
+                            leading: Icon(Icons.camera),
+                            title: Text("Kameradan Çek"),
+                            onTap: () {
+                              _pictureFromCamera();
+                            },
                           ),
-                        );
-                      });
-                },
-                child: CircleAvatar(
-                  radius:65,
-                  backgroundImage: _profilePhoto == null
-                      ? NetworkImage(_user.profileURL)
-                      : FileImage(_profilePhoto),
-                ),
-              ),
-
+                          ListTile(
+                            leading: Icon(Icons.image),
+                            title: Text("Galeriden Seç"),
+                            onTap: () {
+                              _pictureFromGallery();
+                            },
+                          )
+                        ],
+                      ),
+                    );
+                  });
+            },
+            child: CircleAvatar(
+              radius: 65,
+              backgroundImage: _profilePhoto == null
+                  ? NetworkImage(_user.profileURL)
+                  : FileImage(_profilePhoto),
+            ),
+          ),
         ],
       ),
     );
