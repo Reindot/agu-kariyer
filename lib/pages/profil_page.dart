@@ -27,6 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       _profilePhoto = _newPhoto;
       Navigator.of(context).pop();
+      _uploadPhoto();
     });
   }
 
@@ -35,6 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       _profilePhoto = _newPhoto;
       Navigator.of(context).pop();
+      _uploadPhoto();
     });
   }
 
@@ -59,9 +61,6 @@ class _ProfilePageState extends State<ProfilePage> {
       drawer: DrawerWidget().drawerMenu(context, _userModel),
       key: _scaffoldKey,
       backgroundColor: Colors.white,
-      floatingActionButton: FloatingActionButton(
-        onPressed: _uploadPhoto,
-      ),
       body: Stack(
         children: <Widget>[
           _buildCoverImage(screenSize),
@@ -85,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   ),
                   SizedBox(height: screenSize.height / 9),
-                  _buildProfileImage(widget._user),
+                  _buildProfileImage(widget._user, _userModel),
                   Text("Değiştir",
                       style: TextStyle(color: Colors.grey.shade600)),
                   Row(
@@ -263,7 +262,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ));
   }
 
-  Widget _buildProfileImage(User _user) {
+  Widget _buildProfileImage(User _user, UserModel _userModel) {
     return Container(
       //  color: Colors.white,
       width: 140.0,
@@ -279,31 +278,33 @@ class _ProfilePageState extends State<ProfilePage> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return Container(
-                      height: 120,
-                      child: Column(
-                        children: <Widget>[
-                          ListTile(
-                            leading: Icon(Icons.camera),
-                            title: Text("Kameradan Çek"),
-                            onTap: () {
-                              _pictureFromCamera();
-                            },
-                          ),
-                          ListTile(
-                            leading: Icon(Icons.image),
-                            title: Text("Galeriden Seç"),
-                            onTap: () {
-                              _pictureFromGallery();
-                            },
-                          )
-                        ],
-                      ),
-                    );
-                  });
+              if(_userModel.user.userID == widget._user.userID){
+                showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Container(
+                        height: 120,
+                        child: Column(
+                          children: <Widget>[
+                            ListTile(
+                              leading: Icon(Icons.camera),
+                              title: Text("Kameradan Çek"),
+                              onTap: () {
+                                _pictureFromCamera();
+                              },
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.image),
+                              title: Text("Galeriden Seç"),
+                              onTap: () {
+                                _pictureFromGallery();
+                              },
+                            )
+                          ],
+                        ),
+                      );
+                    });
+              }
             },
             child: CircleAvatar(
               radius: 65,
