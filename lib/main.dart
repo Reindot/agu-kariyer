@@ -11,7 +11,6 @@ void main() {
   setupLocator();
   runApp(MyApp());
 }
-// rasit aydin
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

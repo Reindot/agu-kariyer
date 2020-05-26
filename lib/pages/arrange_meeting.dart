@@ -91,11 +91,11 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                 Spacer(flex: 1),
                               ],
                             ),
-
-                            ],
                           ),
-                        ),  ),
                         )
+                      ],
+                    ),
+                  ),
                   Spacer(flex: 1),
                   Expanded(
                     flex: 3,
