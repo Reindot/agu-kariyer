@@ -4,17 +4,34 @@ import 'package:agucareer/pages/profil_page.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+//a
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  void initState(){
+    super.initState();
+    _firebaseMessaging.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage tetik: $message");
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch tetik: $message");
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume tetik: $message");
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,36 +74,36 @@ class _HomePageState extends State<HomePage> {
                                   itemCount: userList.length,
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) => Column(
-                                        children: <Widget>[
-                                          GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                _userModel.connection =
-                                                    userList[index];
-                                              });
-                                            },
-                                            child: Card(
-                                                margin:
-                                                    EdgeInsets.only(left: 40),
-                                                elevation: 0,
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: <Widget>[
-                                                    CircleAvatar(
-                                                      radius: 30,
-                                                      backgroundImage:
-                                                          NetworkImage(
-                                                              userList[index]
-                                                                  .profileURL),
-                                                    ),
-                                                    Text(userList[index].name),
-                                                  ],
-                                                )),
-                                          ),
-                                        ],
-                                      ));
+                                    children: <Widget>[
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _userModel.connection =
+                                            userList[index];
+                                          });
+                                        },
+                                        child: Card(
+                                            margin:
+                                            EdgeInsets.only(left: 40),
+                                            elevation: 0,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceEvenly,
+                                              children: <Widget>[
+                                                CircleAvatar(
+                                                  radius: 30,
+                                                  backgroundImage:
+                                                  NetworkImage(
+                                                      userList[index]
+                                                          .profileURL),
+                                                ),
+                                                Text(userList[index].name),
+                                              ],
+                                            )),
+                                      ),
+                                    ],
+                                  ));
                             } else {
                               return Center(
                                 child: Text("Veri Yok!"),
@@ -151,10 +168,10 @@ class _HomePageState extends State<HomePage> {
                                   onPressed: () {
                                     Navigator.of(context, rootNavigator: true)
                                         .push(MaterialPageRoute(
-                                            builder: (context) => ChatPage(
-                                                me: _userModel.user.userID,
-                                                it: _userModel
-                                                    .connection.userID)));
+                                        builder: (context) => ChatPage(
+                                            me: _userModel.user.userID,
+                                            it: _userModel
+                                                .connection.userID)));
                                   },
                                   icon: Icon(
                                     Icons.navigation,
@@ -181,13 +198,13 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               "Kalan Buluşmalarım\n3",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 16),
+                              TextStyle(color: Colors.white, fontSize: 16),
                               textAlign: TextAlign.center,
                             ),
                             Text(
                               "Kalan Anketlerim\n2",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 16),
+                              TextStyle(color: Colors.white, fontSize: 16),
                               textAlign: TextAlign.center,
                             )
                           ],
@@ -210,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Icon(
                                     Icons.date_range,
@@ -233,7 +250,7 @@ class _HomePageState extends State<HomePage> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Icon(
                                     Icons.assignment,
