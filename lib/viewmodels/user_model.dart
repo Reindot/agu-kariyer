@@ -95,13 +95,11 @@ class UserModel with ChangeNotifier implements AuthService, DBService, StorageSe
 
   @override
   Future<User> getUser(String userID) {
-    // TODO: implement getUser
     return null;
   }
 
   @override
   Future<bool> saveUser(User user) {
-    // TODO: implement saveUser
     return null;
   }
 
