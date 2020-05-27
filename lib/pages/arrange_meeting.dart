@@ -1,7 +1,5 @@
 import 'dart:async';
-
-import 'package:agucareer/pages/service_enes_duzenler_bunu.dart';
-import 'package:agucareer/pages/users_enes_duzenler_bunu.dart';
+import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
@@ -17,20 +15,8 @@ class ArrangeMeeting extends StatefulWidget {
 class _ArrangeMeetingState extends State<ArrangeMeeting> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int _selectedPart = 0;
-  List<User> users = List();
   List<User> filteredUsers = List();
   final _debouncer = Debouncer(milliseconds: 500);
-
-  @override
-  void initState() {
-    super.initState();
-    Services.getUsers().then((usersFromServer) {
-      setState(() {
-        users = usersFromServer;
-        filteredUsers = users;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -287,7 +273,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
             flex: 4,
             child: Builder(builder: (context) {
               if (_selectedPart == 0) {
-                return _buildLoginBtn(context);
+                return _buildLoginBtn(context, _userModel);
               } else if (_selectedPart == 1) {
                 return Container(
                   alignment: Alignment.center,
@@ -323,99 +309,108 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
     );
   }
 
-  Widget _buildLoginBtn(BuildContext context) {
+  Widget _buildLoginBtn(BuildContext context, UserModel _userModel) {
     Size screenSize = MediaQuery.of(context).size;
-    return Container(
-        alignment: Alignment.center,
-        color: AppColors.koyuMor.withOpacity(1),
-        padding: EdgeInsets.only(top: 15),
-        child: Column(
-          children: <Widget>[
-            Text("Birisini Seç",
-                style: TextStyle(
-                    color: Colors.white,
-                    letterSpacing: 1.5,
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'OpenSans')),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(
-                  width: screenSize.width / 1.7,
-                  child: TextField(
-                    style: TextStyle(
-                      color: Colors.white,
+    return FutureBuilder<List<User>>(
+        future: _userModel.getConnections(_userModel.user),
+        builder: (context, data) {
+          if (data.hasData) {
+            filteredUsers = data.data;
+            return Container(
+                alignment: Alignment.center,
+                color: AppColors.koyuMor.withOpacity(1),
+                padding: EdgeInsets.only(top: 15),
+                child: Column(
+                  children: <Widget>[
+                    Text("Birisini Seç",
+                        style: TextStyle(
+                            color: Colors.white,
+                            letterSpacing: 1.5,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans')),
+                    SizedBox(
+                      height: 10,
                     ),
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                        hoverColor: Colors.white,
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.white.withOpacity(0.5),
-                        ),
-                        hintText: 'Seçmek istediğin ismin gir.',
-                        hintStyle: TextStyle(
-                          color: Colors.white.withOpacity(0.5),
-                        )),
-                    onChanged: (string) {
-                      _debouncer.run(() {
-                        setState(() {
-                          filteredUsers = users
-                              .where((u) => (u.name
-                                      .toLowerCase()
-                                      .contains(string.toLowerCase()) ||
-                                  u.email
-                                      .toLowerCase()
-                                      .contains(string.toLowerCase())))
-                              .toList();
-                        });
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-            Expanded(
-              child: ListView.builder(
-                padding: EdgeInsets.all(10.0),
-                itemCount: filteredUsers.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Card(
-                      margin: EdgeInsets.only(
-                          top: 10, bottom: 10, right: 15, left: 15),
-                      color: Colors.white.withOpacity(0.2),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(60.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 10, bottom: 10),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage:
-                                NetworkImage('https://via.placeholder.com/150'
-                                    // TODO: enes çek baba buraya profilleri)
-                                    ),
-                          ),
-                          title: Text(
-                            filteredUsers[index].name,
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                          width: screenSize.width / 1.7,
+                          child: TextField(
                             style: TextStyle(
-                                fontSize: 24.0,
-                                color: Colors.white,
-                                fontFamily: 'OpenSans',
-                                fontWeight: FontWeight.bold),
+                              color: Colors.white,
+                            ),
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration(
+                                hoverColor: Colors.white,
+                                prefixIcon: Icon(
+                                  Icons.search,
+                                  color: Colors.white.withOpacity(0.5),
+                                ),
+                                hintText: 'Seçmek istediğin ismin gir.',
+                                hintStyle: TextStyle(
+                                  color: Colors.white.withOpacity(0.5),
+                                )),
+                            onChanged: (string) {
+                              _debouncer.run(() {
+                                setState(() {
+                                  filteredUsers = data.data
+                                      .where((u) => (u.name
+                                              .toLowerCase()
+                                              .contains(string.toLowerCase()) ||
+                                          u.email
+                                              .toLowerCase()
+                                              .contains(string.toLowerCase())))
+                                      .toList();
+                                });
+                              });
+                            },
                           ),
                         ),
-                      ));
-                },
-              ),
-            ),
-          ],
-        ));
+                      ],
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        padding: EdgeInsets.all(10.0),
+                        itemCount: filteredUsers.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Card(
+                              margin: EdgeInsets.only(
+                                  top: 10, bottom: 10, right: 15, left: 15),
+                              color: Colors.white.withOpacity(0.2),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(60.0),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 10, bottom: 10),
+                                child: ListTile(
+                                  leading: CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                        data.data[index].profileURL),
+                                  ),
+                                  title: Text(
+                                    filteredUsers[index].name,
+                                    style: TextStyle(
+                                        fontSize: 24.0,
+                                        color: Colors.white,
+                                        fontFamily: 'OpenSans',
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ));
+                        },
+                      ),
+                    ),
+                  ],
+                ));
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        });
   }
 
   _getCustomAppBar() {
