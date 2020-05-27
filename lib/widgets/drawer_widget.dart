@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:agucareer/pages/all_chats_page.dart';
 import 'package:agucareer/pages/arrange_meeting.dart';
+import 'package:agucareer/pages/home_page.dart';
 import 'package:agucareer/pages/profil_duzenle_widget.dart';
 import 'package:agucareer/pages/profil_page.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
@@ -50,7 +51,8 @@ class DrawerWidget {
               leading: Icon(Icons.home),
               title: Text("Ana Sayfa"),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
               }),
           ListTile(
               contentPadding: EdgeInsets.only(left: 30),
