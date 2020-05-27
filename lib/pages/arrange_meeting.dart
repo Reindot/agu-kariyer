@@ -68,7 +68,11 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                     Radius.circular(60), 1),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                _selectedPart = 0;
+                              });
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
@@ -96,7 +100,11 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                               bottomRight: Radius.lerp(
                                   Radius.circular(-60), Radius.circular(60), 1),
                             )),
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                _selectedPart = 1;
+                              });
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
@@ -132,7 +140,11 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                               bottomLeft: Radius.lerp(
                                   Radius.circular(-60), Radius.circular(60), 1),
                             )),
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                _selectedPart = 2;
+                              });
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
@@ -160,7 +172,11 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                               bottomRight: Radius.lerp(
                                   Radius.circular(-60), Radius.circular(60), 1),
                             )),
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                _selectedPart = 3;
+                              });
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
@@ -388,11 +404,10 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                           title: Text(
                             filteredUsers[index].name,
                             style: TextStyle(
-                              fontSize: 24.0,
-                              color: Colors.white,
-                              fontFamily: 'OpenSans',
-                              fontWeight: FontWeight.bold
-                            ),
+                                fontSize: 24.0,
+                                color: Colors.white,
+                                fontFamily: 'OpenSans',
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ));
