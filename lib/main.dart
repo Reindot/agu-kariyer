@@ -20,6 +20,11 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
         create: (context) => UserModel(),
         child: MaterialApp(
+          theme: ThemeData(
+            primarySwatch: Colors.grey,
+            //this is what you want
+            accentColor: Colors.grey,
+          ),
           debugShowCheckedModeBanner: false,
           routes: {
             '/'               : (context) => HosgeldinWidget(),

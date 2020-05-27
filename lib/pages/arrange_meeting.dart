@@ -15,6 +15,10 @@ class ArrangeMeeting extends StatefulWidget {
 class _ArrangeMeetingState extends State<ArrangeMeeting> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int _selectedPart = 0;
+  String _selectedName = "Kişi Seçiniz";
+  String _selectedPlace = "Yer Seçiniz";
+  String _selectedDate = "Tarih Seçiniz";
+  String _selectedTime = "Saat Seçiniz";
   List<User> filteredUsers = List();
   final _debouncer = Debouncer(milliseconds: 500);
 
@@ -50,8 +54,8 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             color: AppColors.acikMor.withOpacity(1),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.lerp(Radius.circular(-60),
-                                    Radius.circular(60), 1),
+                                bottomLeft: Radius.lerp(Radius.circular(-45),
+                                    Radius.circular(45), 1),
                               ),
                             ),
                             onPressed: () {
@@ -66,7 +70,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                 Icon(Icons.person, color: Colors.white),
                                 Spacer(flex: 2),
                                 Text(
-                                  "Ediz Kurt",
+                                  _selectedName,
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 Spacer(flex: 1),
@@ -84,7 +88,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
                               bottomRight: Radius.lerp(
-                                  Radius.circular(-60), Radius.circular(60), 1),
+                                  Radius.circular(-45), Radius.circular(45), 1),
                             )),
                             onPressed: () {
                               setState(() {
@@ -96,7 +100,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                               children: <Widget>[
                                 Spacer(flex: 1),
                                 Text(
-                                  'Kayseri Forum',
+                                  _selectedPlace,
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 Spacer(flex: 2),
@@ -124,7 +128,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
                               bottomLeft: Radius.lerp(
-                                  Radius.circular(-60), Radius.circular(60), 1),
+                                  Radius.circular(-45), Radius.circular(45), 1),
                             )),
                             onPressed: () {
                               setState(() {
@@ -138,7 +142,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                 Icon(Icons.date_range, color: Colors.white),
                                 Spacer(flex: 2),
                                 Text(
-                                  "5 Haziran Cuma",
+                                  _selectedDate,
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 Spacer(flex: 1),
@@ -156,7 +160,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
                               bottomRight: Radius.lerp(
-                                  Radius.circular(-60), Radius.circular(60), 1),
+                                  Radius.circular(-45), Radius.circular(45), 1),
                             )),
                             onPressed: () {
                               setState(() {
@@ -168,7 +172,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                               children: <Widget>[
                                 Spacer(flex: 1),
                                 Text(
-                                  "16.00",
+                                  _selectedTime,
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 Spacer(flex: 2),
@@ -339,6 +343,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                         SizedBox(
                           width: screenSize.width / 1.7,
                           child: TextField(
+                            cursorColor: Colors.grey,
                             style: TextStyle(
                               color: Colors.white,
                             ),
@@ -398,6 +403,18 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                         fontFamily: 'OpenSans',
                                         fontWeight: FontWeight.bold),
                                   ),
+                                  onTap: () {
+                                    setState(() {
+                                      _selectedName = filteredUsers[index].name;
+                                    });
+
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          _buildDialogName(
+                                              context, _selectedName),
+                                    );
+                                  },
                                 ),
                               ));
                         },
@@ -411,6 +428,29 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
             );
           }
         });
+  }
+
+  Widget _buildDialogName(BuildContext context, String _selectedName) {
+    return AlertDialog(
+      content: Text(
+        " ' " + _selectedName + " '   Kişisi Buluşma Ayarlanması İçin Seçildi.",
+        style: TextStyle(color: AppColors.koyuMor.withOpacity(1), fontFamily: 'OpenSans')
+      ),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30))),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          color: AppColors.koyuMor.withOpacity(1),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(30))),
+          textColor: Colors.white,
+          child: Text('Tamam'),
+        ),
+      ],
+    );
   }
 
   _getCustomAppBar() {
