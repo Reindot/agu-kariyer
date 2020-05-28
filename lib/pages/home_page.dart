@@ -8,7 +8,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-//a
+import '../notification_handler.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -20,17 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   void initState(){
     super.initState();
-    _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        print("onMessage tetik: $message");
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        print("onLaunch tetik: $message");
-      },
-      onResume: (Map<String, dynamic> message) async {
-        print("onResume tetik: $message");
-      },
-    );
+    NotificationHandler().initializeFCMNotification(context);
   }
 
   @override
