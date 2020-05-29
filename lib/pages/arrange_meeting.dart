@@ -429,7 +429,8 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                             color:
                                                 Colors.white.withOpacity(0.4),
                                           ),
-                                          hintText: 'Örneğin: Abdullah Gül Üniversitesi',
+                                          hintText:
+                                              'Örneğin: Abdullah Gül Üniversitesi',
                                           hintStyle: TextStyle(
                                             color:
                                                 Colors.white.withOpacity(0.4),
@@ -490,7 +491,8 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                             color:
                                                 Colors.white.withOpacity(0.4),
                                           ),
-                                          hintText: 'Adresi kendi cümleleriniz ile tarif ediniz.',
+                                          hintText:
+                                              'Adresi kendi cümleleriniz ile tarif ediniz.',
                                           hintStyle: TextStyle(
                                             color:
                                                 Colors.white.withOpacity(0.4),
@@ -522,20 +524,20 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                               onPressed: () {
                                 if (_titleAddress.text == "") {
                                   showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          content: Text(
-                                              "Adres Başlığı Kısmını Boş Bırakmayınız.",
-                                              style: TextStyle(
-                                                  color: AppColors.koyuMor
-                                                      .withOpacity(1),
-                                                  fontFamily: 'OpenSans')),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(30))),
-                                        );
-                                      }
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        content: Text(
+                                            "Adres Başlığı Kısmını Boş Bırakmayınız.",
+                                            style: TextStyle(
+                                                color: AppColors.koyuMor
+                                                    .withOpacity(1),
+                                                fontFamily: 'OpenSans')),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(30))),
+                                      );
+                                    },
                                   );
                                 } else {
                                   setState(() {
@@ -554,7 +556,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 15,
                         )
                       ],
                     ));
@@ -645,92 +647,92 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 15,
                         )
                       ],
                     ));
               } else {
                 return Container(
-                    width: screenSize.width,
-                    color: AppColors.koyuMor.withOpacity(1),
-                    child: Column(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 8,
-                          child: CupertinoTheme(
-                            data: CupertinoThemeData(
-                              textTheme: CupertinoTextThemeData(
-                                pickerTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 24),
-                              ),
-                            ),
-                            child: CupertinoTimerPicker(
-                              alignment: Alignment.center,
-                              backgroundColor: AppColors.koyuMor.withOpacity(1),
-                              mode: CupertinoTimerPickerMode.hm,
-                              onTimerDurationChanged: (time) {
-                                if (time == null) {
-                                  return;
-                                }
-                                _currentTime = time;
-                              },
+                  width: screenSize.width,
+                  color: AppColors.koyuMor.withOpacity(1),
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 8,
+                        child: CupertinoTheme(
+                          data: CupertinoThemeData(
+                            textTheme: CupertinoTextThemeData(
+                              pickerTextStyle:
+                                  TextStyle(color: Colors.white, fontSize: 24),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: SizedBox(
-                            width: screenSize.width / 1.7,
-                            child: RaisedButton(
-                              color: AppColors.pembe.withOpacity(1),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30))),
-                              child: Text(
-                                "SAATİ ONAYLA",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              onPressed: () {
-                                String _currentHour = "0";
-                                String _currentMinute = "0";
-                                _selectedTime = _currentTime;
-
-                                if (_selectedTime.inHours < 10) {
-                                  _currentHour =
-                                      "0" + _selectedTime.inHours.toString();
-                                } else {
-                                  _currentHour =
-                                      _selectedTime.inHours.toString();
-                                }
-                                if (_selectedTime.inMinutes % 60 < 10) {
-                                  _currentMinute = "0" +
-                                      (_selectedTime.inMinutes % 60).toString();
-                                } else {
-                                  _currentMinute =
-                                      (_selectedTime.inMinutes % 60).toString();
-                                }
-
-                                setState(() {
-                                  _selectedTimeFormat =
-                                      "$_currentHour : $_currentMinute";
-                                });
-
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      _buildDialogTime(
-                                          context, _selectedTimeFormat),
-                                );
-                              },
-                              elevation: 0,
-                            ),
+                          child: CupertinoTimerPicker(
+                            alignment: Alignment.center,
+                            backgroundColor: AppColors.koyuMor.withOpacity(1),
+                            mode: CupertinoTimerPickerMode.hm,
+                            onTimerDurationChanged: (time) {
+                              if (time == null) {
+                                return;
+                              }
+                              _currentTime = time;
+                            },
                           ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        )
-                      ],
-                    ));
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: SizedBox(
+                          width: screenSize.width / 1.7,
+                          child: RaisedButton(
+                            color: AppColors.pembe.withOpacity(1),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            child: Text(
+                              "SAATİ ONAYLA",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            onPressed: () {
+                              String _currentHour = "0";
+                              String _currentMinute = "0";
+                              _selectedTime = _currentTime;
+
+                              if (_selectedTime.inHours < 10) {
+                                _currentHour =
+                                    "0" + _selectedTime.inHours.toString();
+                              } else {
+                                _currentHour = _selectedTime.inHours.toString();
+                              }
+                              if (_selectedTime.inMinutes % 60 < 10) {
+                                _currentMinute = "0" +
+                                    (_selectedTime.inMinutes % 60).toString();
+                              } else {
+                                _currentMinute =
+                                    (_selectedTime.inMinutes % 60).toString();
+                              }
+
+                              setState(() {
+                                _selectedTimeFormat =
+                                    "$_currentHour : $_currentMinute";
+                              });
+
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    _buildDialogTime(
+                                        context, _selectedTimeFormat),
+                              );
+                            },
+                            elevation: 0,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      )
+                    ],
+                  ),
+                );
               }
             }),
           ),
