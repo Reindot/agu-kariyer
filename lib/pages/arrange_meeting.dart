@@ -215,7 +215,13 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(40))),
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                _buildDialogSetMeeting(context),
+                          );
+                        },
                         child: Text("AYARLA",
                             style: TextStyle(color: Colors.white)),
                       ),
@@ -301,561 +307,555 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
           ),
           Expanded(
             flex: 4,
-            child: Builder(builder: (context) {
-              if (_selectedPart == 0) {
-                return _buildLoginBtn(context, _userModel);
-              } else if (_selectedPart == 1) {
-                return Container(
-                    width: screenSize.width,
-                    color: AppColors.koyuMor.withOpacity(1),
-                    child: Column(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 8,
-                          child: Container(
-                            margin: EdgeInsets.all(25),
-                            child: ListView(
-                              children: <Widget>[
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    SizedBox(height: 10.0),
-                                    Text(
-                                      "Adres Başlığı:",
-                                      style: TextStyle(
-                                          color: Colors.white.withOpacity(0.75),
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'OpenSans'),
-                                    ),
-                                    SizedBox(height: 10.0),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white.withOpacity(0.18),
-                                        borderRadius:
-                                            BorderRadius.circular(25.0),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black12,
-                                            blurRadius: 6.0,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child: TextFormField(
-                                        controller: _titleAddress,
-                                        cursorColor: Colors.white,
-                                        keyboardType: TextInputType.text,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'OpenSans',
-                                        ),
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Colors.white,
-                                                  width: 12.0),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(30))),
-                                          contentPadding:
-                                              EdgeInsets.only(top: 14.0),
-                                          prefixIcon: Icon(
-                                            Icons.subtitles,
-                                            color:
-                                                Colors.white.withOpacity(0.4),
-                                          ),
-                                          hintText: 'Örneğin: House Cafe',
-                                          hintStyle: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.4),
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'OpenSans',
-                                          ),
-                                        ),
-                                        inputFormatters: [
-                                          LengthLimitingTextInputFormatter(42),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    SizedBox(height: 20.0),
-                                    Text(
-                                      "Adres Konumu:",
-                                      style: TextStyle(
-                                          color: Colors.white.withOpacity(0.75),
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'OpenSans'),
-                                    ),
-                                    SizedBox(height: 10.0),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white.withOpacity(0.18),
-                                        borderRadius:
-                                            BorderRadius.circular(25.0),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black12,
-                                            blurRadius: 6.0,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child: TextFormField(
-                                        controller: _locationAddress,
-                                        cursorColor: Colors.white,
-                                        keyboardType: TextInputType.text,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'OpenSans',
-                                        ),
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Colors.white,
-                                                  width: 12.0),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(30))),
-                                          contentPadding:
-                                              EdgeInsets.only(top: 14.0),
-                                          prefixIcon: Icon(
-                                            Icons.location_on,
-                                            color:
-                                                Colors.white.withOpacity(0.4),
-                                          ),
-                                          hintText:
-                                              'Örneğin: Abdullah Gül Üniversitesi',
-                                          hintStyle: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.4),
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'OpenSans',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    SizedBox(height: 20.0),
-                                    Text(
-                                      "Adres Tarifi:",
-                                      style: TextStyle(
-                                          color: Colors.white.withOpacity(0.75),
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'OpenSans'),
-                                    ),
-                                    SizedBox(height: 10.0),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white.withOpacity(0.18),
-                                        borderRadius:
-                                            BorderRadius.circular(25.0),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black12,
-                                            blurRadius: 6.0,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child: TextFormField(
-                                        controller: _detailedAddress,
-                                        cursorColor: Colors.white,
-                                        keyboardType: TextInputType.text,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'OpenSans',
-                                        ),
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: Colors.white,
-                                                  width: 12.0),
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(30))),
-                                          contentPadding:
-                                              EdgeInsets.only(top: 14.0),
-                                          prefixIcon: Icon(
-                                            Icons.more,
-                                            color:
-                                                Colors.white.withOpacity(0.4),
-                                          ),
-                                          hintText:
-                                              'Adresi kendi cümleleriniz ile tarif ediniz.',
-                                          hintStyle: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.4),
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'OpenSans',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: SizedBox(
-                            width: screenSize.width / 1.7,
-                            child: RaisedButton(
-                              color: AppColors.pembe.withOpacity(1),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30))),
-                              child: Text(
-                                "MEKANI ONAYLA",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              onPressed: () {
-                                if (_titleAddress.text == "") {
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        content: Text(
-                                            "Adres Başlığı Kısmını Boş Bırakmayınız.",
-                                            style: TextStyle(
-                                                color: AppColors.koyuMor
-                                                    .withOpacity(1),
-                                                fontFamily: 'OpenSans')),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(30))),
-                                      );
-                                    },
-                                  );
-                                } else {
-                                  setState(() {
-                                    _selectedPlace = _titleAddress.text;
-                                  });
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) =>
-                                        _buildDialogPlace(
-                                            context, _selectedPlace),
-                                  );
-                                }
-                              },
-                              elevation: 0,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        )
-                      ],
-                    ));
-              } else if (_selectedPart == 2) {
-                return Container(
-                    width: screenSize.width,
-                    color: AppColors.koyuMor.withOpacity(1),
-                    child: Column(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 8,
-                          child: CupertinoTheme(
-                            data: CupertinoThemeData(
-                              textTheme: CupertinoTextThemeData(
-                                dateTimePickerTextStyle: TextStyle(
-                                    color: Colors.white, fontSize: 24),
-                              ),
-                            ),
-                            child: CupertinoDatePicker(
-                              minimumDate: DateTime.now(),
-                              maximumDate: DateTime(2021, 6, 30),
-                              backgroundColor: AppColors.koyuMor.withOpacity(1),
-                              mode: CupertinoDatePickerMode.date,
-                              onDateTimeChanged: (date) {
-                                if (date == null) {
-                                  return;
-                                }
-                                newDateTime = date;
-                              },
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: SizedBox(
-                            width: screenSize.width / 1.7,
-                            child: RaisedButton(
-                              color: AppColors.pembe.withOpacity(1),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(30))),
-                              child: Text(
-                                "TARİHİ ONAYLA",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              onPressed: () {
-                                String _selectedMonth = "";
-                                _selectedDate = newDateTime;
-                                if (_selectedDate.month == 1) {
-                                  _selectedMonth = "Ocak";
-                                } else if (_selectedDate.month == 2) {
-                                  _selectedMonth = "Şubat";
-                                } else if (_selectedDate.month == 3) {
-                                  _selectedMonth = "Mart";
-                                } else if (_selectedDate.month == 4) {
-                                  _selectedMonth = "Nisan";
-                                } else if (_selectedDate.month == 5) {
-                                  _selectedMonth = "Mayıs";
-                                } else if (_selectedDate.month == 6) {
-                                  _selectedMonth = "Haziran";
-                                } else if (_selectedDate.month == 7) {
-                                  _selectedMonth = "Temmuz";
-                                } else if (_selectedDate.month == 8) {
-                                  _selectedMonth = "Ağustos";
-                                } else if (_selectedDate.month == 9) {
-                                  _selectedMonth = "Eylül";
-                                } else if (_selectedDate.month == 10) {
-                                  _selectedMonth = "Ekim";
-                                } else if (_selectedDate.month == 11) {
-                                  _selectedMonth = "Kasım";
-                                } else {
-                                  _selectedMonth = "Aralık";
-                                }
-                                setState(() {
-                                  _selectedDateFormat =
-                                      "${_selectedDate.day} $_selectedMonth ${_selectedDate.year}";
-                                });
-
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      _buildDialogDate(
-                                          context, _selectedDateFormat),
-                                );
-                              },
-                              elevation: 0,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        )
-                      ],
-                    ));
-              } else {
-                return Container(
-                  width: screenSize.width,
-                  color: AppColors.koyuMor.withOpacity(1),
-                  child: Column(
-                    children: <Widget>[
-                      Expanded(
-                        flex: 8,
-                        child: CupertinoTheme(
-                          data: CupertinoThemeData(
-                            textTheme: CupertinoTextThemeData(
-                              pickerTextStyle:
-                                  TextStyle(color: Colors.white, fontSize: 24),
-                            ),
-                          ),
-                          child: CupertinoTimerPicker(
-                            alignment: Alignment.center,
-                            backgroundColor: AppColors.koyuMor.withOpacity(1),
-                            mode: CupertinoTimerPickerMode.hm,
-                            onTimerDurationChanged: (time) {
-                              if (time == null) {
-                                return;
-                              }
-                              _currentTime = time;
-                            },
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: SizedBox(
-                          width: screenSize.width / 1.7,
-                          child: RaisedButton(
-                            color: AppColors.pembe.withOpacity(1),
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
-                            child: Text(
-                              "SAATİ ONAYLA",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            onPressed: () {
-                              String _currentHour = "0";
-                              String _currentMinute = "0";
-                              _selectedTime = _currentTime;
-
-                              if (_selectedTime.inHours < 10) {
-                                _currentHour =
-                                    "0" + _selectedTime.inHours.toString();
-                              } else {
-                                _currentHour = _selectedTime.inHours.toString();
-                              }
-                              if (_selectedTime.inMinutes % 60 < 10) {
-                                _currentMinute = "0" +
-                                    (_selectedTime.inMinutes % 60).toString();
-                              } else {
-                                _currentMinute =
-                                    (_selectedTime.inMinutes % 60).toString();
-                              }
-
-                              setState(() {
-                                _selectedTimeFormat =
-                                    "$_currentHour : $_currentMinute";
-                              });
-
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    _buildDialogTime(
-                                        context, _selectedTimeFormat),
-                              );
-                            },
-                            elevation: 0,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      )
-                    ],
-                  ),
-                );
-              }
-            }),
+            child: Builder(
+              builder: (context) {
+                if (_selectedPart == 0) {
+                  return _buildPersonPart(context, _userModel);
+                } else if (_selectedPart == 1) {
+                  return _buildPlacePart(context);
+                } else if (_selectedPart == 2) {
+                  return _buildDatePart(context);
+                } else {
+                  return _buildTimePart(context);
+                }
+              },
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildLoginBtn(BuildContext context, UserModel _userModel) {
+  Widget _buildPersonPart(BuildContext context, UserModel _userModel) {
     Size screenSize = MediaQuery.of(context).size;
     return FutureBuilder<List<User>>(
-        future: _userModel.getConnections(_userModel.user),
-        builder: (context, data) {
-          if (data.hasData) {
-            filteredUsers = data.data;
-            return Container(
-                alignment: Alignment.center,
-                color: AppColors.koyuMor.withOpacity(1),
-                padding: EdgeInsets.only(top: 15),
-                child: Column(
+      future: _userModel.getConnections(_userModel.user),
+      builder: (context, data) {
+        if (data.hasData) {
+          filteredUsers = data.data;
+          return Container(
+            alignment: Alignment.center,
+            color: AppColors.koyuMor.withOpacity(1),
+            padding: EdgeInsets.only(top: 15),
+            child: Column(
+              children: <Widget>[
+                Text("Birisini Seç",
+                    style: TextStyle(
+                        color: Colors.white,
+                        letterSpacing: 1.5,
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'OpenSans')),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text("Birisini Seç",
-                        style: TextStyle(
-                            color: Colors.white,
-                            letterSpacing: 1.5,
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'OpenSans')),
                     SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                          width: screenSize.width / 1.7,
-                          child: TextField(
-                            cursorColor: Colors.grey,
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                            textAlign: TextAlign.center,
-                            decoration: InputDecoration(
-                                hoverColor: Colors.white,
-                                prefixIcon: Icon(
-                                  Icons.search,
-                                  color: Colors.white.withOpacity(0.5),
-                                ),
-                                hintText: 'Seçmek istediğin ismin gir.',
-                                hintStyle: TextStyle(
-                                  color: Colors.white.withOpacity(0.5),
-                                )),
-                            onChanged: (string) {
-                              _debouncer.run(() {
-                                setState(() {
-                                  filteredUsers = data.data
-                                      .where((u) => (u.name
-                                              .toLowerCase()
-                                              .contains(string.toLowerCase()) ||
-                                          u.email
-                                              .toLowerCase()
-                                              .contains(string.toLowerCase())))
-                                      .toList();
-                                });
-                              });
-                            },
-                          ),
+                      width: screenSize.width / 1.7,
+                      child: TextField(
+                        cursorColor: Colors.grey,
+                        style: TextStyle(
+                          color: Colors.white,
                         ),
-                      ],
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        padding: EdgeInsets.all(10.0),
-                        itemCount: filteredUsers.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Card(
-                              margin: EdgeInsets.only(
-                                  top: 10, bottom: 10, right: 15, left: 15),
-                              color: Colors.white.withOpacity(0.2),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(60.0),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.only(top: 10, bottom: 10),
-                                child: ListTile(
-                                  leading: CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        data.data[index].profileURL),
-                                  ),
-                                  title: Text(
-                                    filteredUsers[index].name,
-                                    style: TextStyle(
-                                        fontSize: 24.0,
-                                        color: Colors.white,
-                                        fontFamily: 'OpenSans',
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  onTap: () {
-                                    setState(() {
-                                      _selectedName = filteredUsers[index].name;
-                                    });
-
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          _buildDialogName(
-                                              context, _selectedName),
-                                    );
-                                  },
-                                ),
-                              ));
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                            hoverColor: Colors.white,
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: Colors.white.withOpacity(0.5),
+                            ),
+                            hintText: 'Seçmek istediğin ismin gir.',
+                            hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(0.5),
+                            )),
+                        onChanged: (string) {
+                          _debouncer.run(() {
+                            setState(() {
+                              filteredUsers = data.data
+                                  .where((u) => (u.name
+                                          .toLowerCase()
+                                          .contains(string.toLowerCase()) ||
+                                      u.email
+                                          .toLowerCase()
+                                          .contains(string.toLowerCase())))
+                                  .toList();
+                            });
+                          });
                         },
                       ),
                     ),
                   ],
-                ));
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        });
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    padding: EdgeInsets.all(10.0),
+                    itemCount: filteredUsers.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                        margin: EdgeInsets.only(
+                            top: 10, bottom: 10, right: 15, left: 15),
+                        color: Colors.white.withOpacity(0.2),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(60.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(data.data[index].profileURL),
+                            ),
+                            title: Text(
+                              filteredUsers[index].name,
+                              style: TextStyle(
+                                  fontSize: 24.0,
+                                  color: Colors.white,
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedName = filteredUsers[index].name;
+                              });
+
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    _buildDialogName(context, _selectedName),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _buildPlacePart(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    return Container(
+      width: screenSize.width,
+      color: AppColors.koyuMor.withOpacity(1),
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 8,
+            child: Container(
+              margin: EdgeInsets.all(25),
+              child: ListView(
+                children: <Widget>[
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(height: 10.0),
+                      Text(
+                        "Adres Başlığı:",
+                        style: TextStyle(
+                            color: Colors.white.withOpacity(0.75),
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans'),
+                      ),
+                      SizedBox(height: 10.0),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.18),
+                          borderRadius: BorderRadius.circular(25.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 6.0,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: TextFormField(
+                          controller: _titleAddress,
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                          ),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.white, width: 12.0),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            contentPadding: EdgeInsets.only(top: 14.0),
+                            prefixIcon: Icon(
+                              Icons.subtitles,
+                              color: Colors.white.withOpacity(0.4),
+                            ),
+                            hintText: 'Örneğin: House Cafe',
+                            hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(0.4),
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'OpenSans',
+                            ),
+                          ),
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(42),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(height: 20.0),
+                      Text(
+                        "Adres Konumu:",
+                        style: TextStyle(
+                            color: Colors.white.withOpacity(0.75),
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans'),
+                      ),
+                      SizedBox(height: 10.0),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.18),
+                          borderRadius: BorderRadius.circular(25.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 6.0,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: TextFormField(
+                          controller: _locationAddress,
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                          ),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.white, width: 12.0),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            contentPadding: EdgeInsets.only(top: 14.0),
+                            prefixIcon: Icon(
+                              Icons.location_on,
+                              color: Colors.white.withOpacity(0.4),
+                            ),
+                            hintText: 'Örneğin: Abdullah Gül Üniversitesi',
+                            hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(0.4),
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'OpenSans',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(height: 20.0),
+                      Text(
+                        "Adres Tarifi:",
+                        style: TextStyle(
+                            color: Colors.white.withOpacity(0.75),
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans'),
+                      ),
+                      SizedBox(height: 10.0),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.18),
+                          borderRadius: BorderRadius.circular(25.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 6.0,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: TextFormField(
+                          controller: _detailedAddress,
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'OpenSans',
+                          ),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.white, width: 12.0),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30))),
+                            contentPadding: EdgeInsets.only(top: 14.0),
+                            prefixIcon: Icon(
+                              Icons.more,
+                              color: Colors.white.withOpacity(0.4),
+                            ),
+                            hintText:
+                                'Adresi kendi cümleleriniz ile tarif ediniz.',
+                            hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(0.4),
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'OpenSans',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: SizedBox(
+              width: screenSize.width / 1.7,
+              child: RaisedButton(
+                color: AppColors.pembe.withOpacity(1),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                child: Text(
+                  "MEKANI ONAYLA",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  if (_titleAddress.text == "") {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          content: Text(
+                              "Adres Başlığı Kısmını Boş Bırakmayınız.",
+                              style: TextStyle(
+                                  color: AppColors.koyuMor.withOpacity(1),
+                                  fontFamily: 'OpenSans')),
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30))),
+                        );
+                      },
+                    );
+                  } else {
+                    setState(() {
+                      _selectedPlace = _titleAddress.text;
+                    });
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) =>
+                          _buildDialogPlace(context, _selectedPlace),
+                    );
+                  }
+                },
+                elevation: 0,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDatePart(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    return Container(
+      width: screenSize.width,
+      color: AppColors.koyuMor.withOpacity(1),
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 8,
+            child: CupertinoTheme(
+              data: CupertinoThemeData(
+                textTheme: CupertinoTextThemeData(
+                  dateTimePickerTextStyle:
+                      TextStyle(color: Colors.white, fontSize: 24),
+                ),
+              ),
+              child: CupertinoDatePicker(
+                minimumDate: DateTime.now(),
+                maximumDate: DateTime(2021, 6, 30),
+                backgroundColor: AppColors.koyuMor.withOpacity(1),
+                mode: CupertinoDatePickerMode.date,
+                onDateTimeChanged: (date) {
+                  if (date == null) {
+                    return;
+                  }
+                  newDateTime = date;
+                },
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: SizedBox(
+              width: screenSize.width / 1.7,
+              child: RaisedButton(
+                color: AppColors.pembe.withOpacity(1),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                child: Text(
+                  "TARİHİ ONAYLA",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  String _selectedMonth = "";
+                  _selectedDate = newDateTime;
+                  if (_selectedDate.month == 1) {
+                    _selectedMonth = "Ocak";
+                  } else if (_selectedDate.month == 2) {
+                    _selectedMonth = "Şubat";
+                  } else if (_selectedDate.month == 3) {
+                    _selectedMonth = "Mart";
+                  } else if (_selectedDate.month == 4) {
+                    _selectedMonth = "Nisan";
+                  } else if (_selectedDate.month == 5) {
+                    _selectedMonth = "Mayıs";
+                  } else if (_selectedDate.month == 6) {
+                    _selectedMonth = "Haziran";
+                  } else if (_selectedDate.month == 7) {
+                    _selectedMonth = "Temmuz";
+                  } else if (_selectedDate.month == 8) {
+                    _selectedMonth = "Ağustos";
+                  } else if (_selectedDate.month == 9) {
+                    _selectedMonth = "Eylül";
+                  } else if (_selectedDate.month == 10) {
+                    _selectedMonth = "Ekim";
+                  } else if (_selectedDate.month == 11) {
+                    _selectedMonth = "Kasım";
+                  } else {
+                    _selectedMonth = "Aralık";
+                  }
+                  setState(() {
+                    _selectedDateFormat =
+                        "${_selectedDate.day} $_selectedMonth ${_selectedDate.year}";
+                  });
+
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        _buildDialogDate(context, _selectedDateFormat),
+                  );
+                },
+                elevation: 0,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTimePart(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    return Container(
+      width: screenSize.width,
+      color: AppColors.koyuMor.withOpacity(1),
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 8,
+            child: CupertinoTheme(
+              data: CupertinoThemeData(
+                textTheme: CupertinoTextThemeData(
+                  pickerTextStyle: TextStyle(color: Colors.white, fontSize: 24),
+                ),
+              ),
+              child: CupertinoTimerPicker(
+                alignment: Alignment.center,
+                backgroundColor: AppColors.koyuMor.withOpacity(1),
+                mode: CupertinoTimerPickerMode.hm,
+                onTimerDurationChanged: (time) {
+                  if (time == null) {
+                    return;
+                  }
+                  _currentTime = time;
+                },
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: SizedBox(
+              width: screenSize.width / 1.7,
+              child: RaisedButton(
+                color: AppColors.pembe.withOpacity(1),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                child: Text(
+                  "SAATİ ONAYLA",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  String _currentHour = "0";
+                  String _currentMinute = "0";
+                  _selectedTime = _currentTime;
+
+                  if (_selectedTime.inHours < 10) {
+                    _currentHour = "0" + _selectedTime.inHours.toString();
+                  } else {
+                    _currentHour = _selectedTime.inHours.toString();
+                  }
+                  if (_selectedTime.inMinutes % 60 < 10) {
+                    _currentMinute =
+                        "0" + (_selectedTime.inMinutes % 60).toString();
+                  } else {
+                    _currentMinute = (_selectedTime.inMinutes % 60).toString();
+                  }
+
+                  setState(() {
+                    _selectedTimeFormat = "$_currentHour : $_currentMinute";
+                  });
+
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) =>
+                        _buildDialogTime(context, _selectedTimeFormat),
+                  );
+                },
+                elevation: 0,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          )
+        ],
+      ),
+    );
   }
 
   Widget _buildDialogName(BuildContext context, String _selectedName) {
@@ -953,6 +953,46 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
               borderRadius: BorderRadius.all(Radius.circular(30))),
           textColor: Colors.white,
           child: Text('Tamam'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDialogSetMeeting(BuildContext context) {
+    return AlertDialog(
+      title: Text(
+        "Onayla!",
+        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+      ),
+      content: Text(
+        "Az önce bir buluşma ayarladın.\nOnaylıyor musun?",
+        style: TextStyle(
+          color: AppColors.koyuMor.withOpacity(1),
+          fontFamily: 'OpenSans',
+        ),
+      ),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30))),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          color: AppColors.koyuMor.withOpacity(1),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(30))),
+          textColor: Colors.white,
+          child: Text('İptal'),
+        ),
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          color: AppColors.koyuMor.withOpacity(1),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(30))),
+          textColor: Colors.white,
+          child: Text('Onayla'),
         ),
       ],
     );
