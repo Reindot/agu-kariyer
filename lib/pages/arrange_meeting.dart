@@ -6,6 +6,7 @@ import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class ArrangeMeeting extends StatefulWidget {
@@ -17,7 +18,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int _selectedPart = 0;
   String _selectedName = "Kişi Seçiniz";
-  String _selectedPlace = "Yer Seçiniz";
+  String _selectedPlace;
   DateTime _selectedDate;
   DateTime newDateTime = DateTime.now();
   var _selectedDateFormat;
@@ -26,6 +27,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
   var _selectedTimeFormat;
   List<User> filteredUsers = List();
   final _debouncer = Debouncer(milliseconds: 500);
+  final _titleAddress = TextEditingController();
+  final _locationAddress = TextEditingController();
+  final _detailedAddress = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +108,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                               children: <Widget>[
                                 Spacer(flex: 1),
                                 Text(
-                                  _selectedPlace,
+                                  _selectedPlace == null
+                                      ? 'Mekan Seçiniz'
+                                      : _selectedPlace,
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 Spacer(flex: 2),
@@ -240,7 +246,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             child: RaisedButton(
                               color: AppColors.pembe.withOpacity(1),
                               child: Text(
-                                "YER",
+                                "MEKAN",
                                 style: TextStyle(color: Colors.white),
                               ),
                               onPressed: () {
@@ -300,13 +306,258 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                 return _buildLoginBtn(context, _userModel);
               } else if (_selectedPart == 1) {
                 return Container(
-                  alignment: Alignment.center,
-                  color: AppColors.koyuMor.withOpacity(1),
-                  child: Text(
-                    "YER",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                );
+                    width: screenSize.width,
+                    color: AppColors.koyuMor.withOpacity(1),
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 8,
+                          child: Container(
+                            margin: EdgeInsets.all(25),
+                            child: ListView(
+                              children: <Widget>[
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    SizedBox(height: 10.0),
+                                    Text(
+                                      "Adres Başlığı:",
+                                      style: TextStyle(
+                                          color: Colors.white.withOpacity(0.75),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'OpenSans'),
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.18),
+                                        borderRadius:
+                                            BorderRadius.circular(25.0),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black12,
+                                            blurRadius: 6.0,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: TextFormField(
+                                        controller: _titleAddress,
+                                        cursorColor: Colors.white,
+                                        keyboardType: TextInputType.text,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'OpenSans',
+                                        ),
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white,
+                                                  width: 12.0),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(30))),
+                                          contentPadding:
+                                              EdgeInsets.only(top: 14.0),
+                                          prefixIcon: Icon(
+                                            Icons.subtitles,
+                                            color:
+                                                Colors.white.withOpacity(0.4),
+                                          ),
+                                          hintText: 'Örneğin: House Cafe',
+                                          hintStyle: TextStyle(
+                                            color:
+                                                Colors.white.withOpacity(0.4),
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'OpenSans',
+                                          ),
+                                        ),
+                                        inputFormatters: [
+                                          LengthLimitingTextInputFormatter(42),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    SizedBox(height: 20.0),
+                                    Text(
+                                      "Adres Konumu:",
+                                      style: TextStyle(
+                                          color: Colors.white.withOpacity(0.75),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'OpenSans'),
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.18),
+                                        borderRadius:
+                                            BorderRadius.circular(25.0),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black12,
+                                            blurRadius: 6.0,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: TextFormField(
+                                        controller: _locationAddress,
+                                        cursorColor: Colors.white,
+                                        keyboardType: TextInputType.text,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'OpenSans',
+                                        ),
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white,
+                                                  width: 12.0),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(30))),
+                                          contentPadding:
+                                              EdgeInsets.only(top: 14.0),
+                                          prefixIcon: Icon(
+                                            Icons.location_on,
+                                            color:
+                                                Colors.white.withOpacity(0.4),
+                                          ),
+                                          hintText: 'Örneğin: Abdullah Gül Üniversitesi',
+                                          hintStyle: TextStyle(
+                                            color:
+                                                Colors.white.withOpacity(0.4),
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'OpenSans',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    SizedBox(height: 20.0),
+                                    Text(
+                                      "Adres Tarifi:",
+                                      style: TextStyle(
+                                          color: Colors.white.withOpacity(0.75),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'OpenSans'),
+                                    ),
+                                    SizedBox(height: 10.0),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.18),
+                                        borderRadius:
+                                            BorderRadius.circular(25.0),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black12,
+                                            blurRadius: 6.0,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: TextFormField(
+                                        controller: _detailedAddress,
+                                        cursorColor: Colors.white,
+                                        keyboardType: TextInputType.text,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'OpenSans',
+                                        ),
+                                        decoration: InputDecoration(
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide(
+                                                  color: Colors.white,
+                                                  width: 12.0),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(30))),
+                                          contentPadding:
+                                              EdgeInsets.only(top: 14.0),
+                                          prefixIcon: Icon(
+                                            Icons.more,
+                                            color:
+                                                Colors.white.withOpacity(0.4),
+                                          ),
+                                          hintText: 'Adresi bulmayı kolaylaştıracak adres tarifini yazınız.',
+                                          hintStyle: TextStyle(
+                                            color:
+                                                Colors.white.withOpacity(0.4),
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'OpenSans',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: SizedBox(
+                            width: screenSize.width / 1.7,
+                            child: RaisedButton(
+                              color: AppColors.pembe.withOpacity(1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30))),
+                              child: Text(
+                                "MEKANI ONAYLA",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              onPressed: () {
+                                if (_titleAddress.text == "") {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          content: Text(
+                                              "Adres Başlığı Kısmını Boş Bırakmayınız.",
+                                              style: TextStyle(
+                                                  color: AppColors.koyuMor
+                                                      .withOpacity(1),
+                                                  fontFamily: 'OpenSans')),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(30))),
+                                        );
+                                      }
+                                  );
+                                } else {
+                                  setState(() {
+                                    _selectedPlace = _titleAddress.text;
+                                  });
+                                }
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      _buildDialogPlace(
+                                          context, _selectedPlace),
+                                );
+                              },
+                              elevation: 0,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        )
+                      ],
+                    ));
               } else if (_selectedPart == 2) {
                 return Container(
                     width: screenSize.width,
@@ -661,6 +912,31 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
           " ' " +
               _selectedTimeFormat +
               " '   Saati Buluşma Ayarlanması İçin Seçildi.",
+          style: TextStyle(
+              color: AppColors.koyuMor.withOpacity(1), fontFamily: 'OpenSans')),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30))),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          color: AppColors.koyuMor.withOpacity(1),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(30))),
+          textColor: Colors.white,
+          child: Text('Tamam'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDialogPlace(BuildContext context, var _selectedPlace) {
+    return AlertDialog(
+      content: Text(
+          " ' " +
+              _selectedPlace +
+              " '   Mekanı Buluşma Ayarlanması İçin Seçildi.",
           style: TextStyle(
               color: AppColors.koyuMor.withOpacity(1), fontFamily: 'OpenSans')),
       shape: RoundedRectangleBorder(
