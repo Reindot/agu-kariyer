@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
@@ -17,8 +18,12 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
   int _selectedPart = 0;
   String _selectedName = "Kişi Seçiniz";
   String _selectedPlace = "Yer Seçiniz";
-  String _selectedDate = "Tarih Seçiniz";
-  String _selectedTime = "Saat Seçiniz";
+  DateTime _selectedDate;
+  DateTime newDateTime = DateTime.now();
+  var _selectedDateFormat;
+  Duration _selectedTime;
+  Duration _currentTime = Duration.zero;
+  var _selectedTimeFormat;
   List<User> filteredUsers = List();
   final _debouncer = Debouncer(milliseconds: 500);
 
@@ -26,7 +31,6 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     final UserModel _userModel = Provider.of<UserModel>(context);
-
     return Scaffold(
       key: _scaffoldKey,
       drawer: DrawerWidget().drawerMenu(context, _userModel),
@@ -132,6 +136,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             )),
                             onPressed: () {
                               setState(() {
+                                if (_selectedPart != 2) {
+                                  newDateTime = DateTime.now();
+                                }
                                 _selectedPart = 2;
                               });
                             },
@@ -142,7 +149,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                 Icon(Icons.date_range, color: Colors.white),
                                 Spacer(flex: 2),
                                 Text(
-                                  _selectedDate,
+                                  _selectedDate == null
+                                      ? 'Tarih Seçiniz'
+                                      : _selectedDateFormat.toString(),
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 Spacer(flex: 1),
@@ -164,6 +173,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             )),
                             onPressed: () {
                               setState(() {
+                                if (_selectedPart != 3) {
+                                  _currentTime = Duration.zero;
+                                }
                                 _selectedPart = 3;
                               });
                             },
@@ -172,7 +184,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                               children: <Widget>[
                                 Spacer(flex: 1),
                                 Text(
-                                  _selectedTime,
+                                  _selectedTime == null
+                                      ? 'Saat Seçiniz'
+                                      : _selectedTimeFormat,
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 Spacer(flex: 2),
@@ -246,6 +260,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                               ),
                               onPressed: () {
                                 setState(() {
+                                  if (_selectedPart != 2) {
+                                    newDateTime = DateTime.now();
+                                  }
                                   _selectedPart = 2;
                                 });
                               },
@@ -261,6 +278,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                               ),
                               onPressed: () {
                                 setState(() {
+                                  if (_selectedPart != 3) {
+                                    _currentTime = Duration.zero;
+                                  }
                                   _selectedPart = 3;
                                 });
                               },
@@ -289,22 +309,177 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                 );
               } else if (_selectedPart == 2) {
                 return Container(
-                  alignment: Alignment.center,
-                  color: AppColors.koyuMor.withOpacity(1),
-                  child: Text(
-                    "TARİH",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                );
+                    width: screenSize.width,
+                    color: AppColors.koyuMor.withOpacity(1),
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 8,
+                          child: CupertinoTheme(
+                            data: CupertinoThemeData(
+                              textTheme: CupertinoTextThemeData(
+                                dateTimePickerTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 24),
+                              ),
+                            ),
+                            child: CupertinoDatePicker(
+                              minimumDate: DateTime.now(),
+                              maximumDate: DateTime(2021, 6, 30),
+                              backgroundColor: AppColors.koyuMor.withOpacity(1),
+                              mode: CupertinoDatePickerMode.date,
+                              onDateTimeChanged: (date) {
+                                if (date == null) {
+                                  return;
+                                }
+                                newDateTime = date;
+                              },
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: SizedBox(
+                            width: screenSize.width / 1.7,
+                            child: RaisedButton(
+                              color: AppColors.pembe.withOpacity(1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30))),
+                              child: Text(
+                                "TARİHİ ONAYLA",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              onPressed: () {
+                                String _selectedMonth = "";
+                                _selectedDate = newDateTime;
+                                if (_selectedDate.month == 1) {
+                                  _selectedMonth = "Ocak";
+                                } else if (_selectedDate.month == 2) {
+                                  _selectedMonth = "Şubat";
+                                } else if (_selectedDate.month == 3) {
+                                  _selectedMonth = "Mart";
+                                } else if (_selectedDate.month == 4) {
+                                  _selectedMonth = "Nisan";
+                                } else if (_selectedDate.month == 5) {
+                                  _selectedMonth = "Mayıs";
+                                } else if (_selectedDate.month == 6) {
+                                  _selectedMonth = "Haziran";
+                                } else if (_selectedDate.month == 7) {
+                                  _selectedMonth = "Temmuz";
+                                } else if (_selectedDate.month == 8) {
+                                  _selectedMonth = "Ağustos";
+                                } else if (_selectedDate.month == 9) {
+                                  _selectedMonth = "Eylül";
+                                } else if (_selectedDate.month == 10) {
+                                  _selectedMonth = "Ekim";
+                                } else if (_selectedDate.month == 11) {
+                                  _selectedMonth = "Kasım";
+                                } else {
+                                  _selectedMonth = "Aralık";
+                                }
+                                setState(() {
+                                  _selectedDateFormat =
+                                      "${_selectedDate.day} $_selectedMonth ${_selectedDate.year}";
+                                });
+
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      _buildDialogDate(
+                                          context, _selectedDateFormat),
+                                );
+                              },
+                              elevation: 0,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        )
+                      ],
+                    ));
               } else {
                 return Container(
-                  alignment: Alignment.center,
-                  color: AppColors.koyuMor.withOpacity(1),
-                  child: Text(
-                    "SAAT",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                );
+                    width: screenSize.width,
+                    color: AppColors.koyuMor.withOpacity(1),
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          flex: 8,
+                          child: CupertinoTheme(
+                            data: CupertinoThemeData(
+                              textTheme: CupertinoTextThemeData(
+                                pickerTextStyle: TextStyle(
+                                    color: Colors.white, fontSize: 24),
+                              ),
+                            ),
+                            child: CupertinoTimerPicker(
+                              alignment: Alignment.center,
+                              backgroundColor: AppColors.koyuMor.withOpacity(1),
+                              mode: CupertinoTimerPickerMode.hm,
+                              onTimerDurationChanged: (time) {
+                                if (time == null) {
+                                  return;
+                                }
+                                _currentTime = time;
+                              },
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: SizedBox(
+                            width: screenSize.width / 1.7,
+                            child: RaisedButton(
+                              color: AppColors.pembe.withOpacity(1),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(30))),
+                              child: Text(
+                                "SAATİ ONAYLA",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              onPressed: () {
+                                String _currentHour = "0";
+                                String _currentMinute = "0";
+                                _selectedTime = _currentTime;
+
+                                if (_selectedTime.inHours < 10) {
+                                  _currentHour =
+                                      "0" + _selectedTime.inHours.toString();
+                                } else {
+                                  _currentHour =
+                                      _selectedTime.inHours.toString();
+                                }
+                                if (_selectedTime.inMinutes % 60 < 10) {
+                                  _currentMinute = "0" +
+                                      (_selectedTime.inMinutes % 60).toString();
+                                } else {
+                                  _currentMinute =
+                                      (_selectedTime.inMinutes % 60).toString();
+                                }
+
+                                setState(() {
+                                  _selectedTimeFormat =
+                                      "$_currentHour : $_currentMinute";
+                                });
+
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      _buildDialogTime(
+                                          context, _selectedTimeFormat),
+                                );
+                              },
+                              elevation: 0,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        )
+                      ],
+                    ));
               }
             }),
           ),
@@ -433,9 +608,61 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
   Widget _buildDialogName(BuildContext context, String _selectedName) {
     return AlertDialog(
       content: Text(
-        " ' " + _selectedName + " '   Kişisi Buluşma Ayarlanması İçin Seçildi.",
-        style: TextStyle(color: AppColors.koyuMor.withOpacity(1), fontFamily: 'OpenSans')
-      ),
+          " ' " +
+              _selectedName +
+              " '   Kişisi Buluşma Ayarlanması İçin Seçildi.",
+          style: TextStyle(
+              color: AppColors.koyuMor.withOpacity(1), fontFamily: 'OpenSans')),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30))),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          color: AppColors.koyuMor.withOpacity(1),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(30))),
+          textColor: Colors.white,
+          child: Text('Tamam'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDialogDate(BuildContext context, var _selectedDateFormat) {
+    return AlertDialog(
+      content: Text(
+          " ' " +
+              _selectedDateFormat +
+              " '   Tarihi Buluşma Ayarlanması İçin Seçildi.",
+          style: TextStyle(
+              color: AppColors.koyuMor.withOpacity(1), fontFamily: 'OpenSans')),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30))),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          color: AppColors.koyuMor.withOpacity(1),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(30))),
+          textColor: Colors.white,
+          child: Text('Tamam'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDialogTime(BuildContext context, var _selectedTimeFormat) {
+    return AlertDialog(
+      content: Text(
+          " ' " +
+              _selectedTimeFormat +
+              " '   Saati Buluşma Ayarlanması İçin Seçildi.",
+          style: TextStyle(
+              color: AppColors.koyuMor.withOpacity(1), fontFamily: 'OpenSans')),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
       actions: <Widget>[
