@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           theme: ThemeData(
             primarySwatch: Colors.grey,
-            //this is what you want
             accentColor: Colors.grey,
           ),
           debugShowCheckedModeBanner: false,
