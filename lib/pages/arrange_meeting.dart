@@ -490,7 +490,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                             color:
                                                 Colors.white.withOpacity(0.4),
                                           ),
-                                          hintText: 'Adresi bulmayı kolaylaştıracak adres tarifini yazınız.',
+                                          hintText: 'Adresi kendi cümleleriniz ile tarif ediniz.',
                                           hintStyle: TextStyle(
                                             color:
                                                 Colors.white.withOpacity(0.4),
@@ -541,13 +541,13 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                   setState(() {
                                     _selectedPlace = _titleAddress.text;
                                   });
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        _buildDialogPlace(
+                                            context, _selectedPlace),
+                                  );
                                 }
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      _buildDialogPlace(
-                                          context, _selectedPlace),
-                                );
                               },
                               elevation: 0,
                             ),
