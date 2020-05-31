@@ -1,4 +1,5 @@
 import 'package:agucareer/pages/admin_panel/see_meetings_choose.dart';
+import 'package:agucareer/pages/admin_panel/see_meetings_main.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
@@ -53,7 +54,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SeeMeetingChoose()));
+                              builder: (context) => SeeMeetingsChoose()
+                      )
+                      );
                     },
                     child: Container(
                       margin: EdgeInsets.fromLTRB(60, 15, 60, 7),

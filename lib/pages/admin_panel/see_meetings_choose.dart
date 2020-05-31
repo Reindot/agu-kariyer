@@ -1,4 +1,5 @@
 import 'package:agucareer/models/user_model.dart';
+import 'package:agucareer/pages/admin_panel/see_meetings_main.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +7,12 @@ import 'package:provider/provider.dart';
 
 import '../arrange_meeting.dart';
 
-class SeeMeetingChoose extends StatefulWidget{
+class SeeMeetingsChoose extends StatefulWidget{
   @override
-  _SeeMeetingChooseState createState() =>  _SeeMeetingChooseState();
+  _SeeMeetingsChooseState createState() =>  _SeeMeetingsChooseState();
 }
 
-class _SeeMeetingChooseState extends State<SeeMeetingChoose>{
+class _SeeMeetingsChooseState extends State<SeeMeetingsChoose>{
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<User> filteredUsers = List();
   final _debouncer = Debouncer(milliseconds: 500);
@@ -113,28 +114,37 @@ class _SeeMeetingChooseState extends State<SeeMeetingChoose>{
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(60.0),
                         ),
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 10, bottom: 10),
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundImage:
-                              NetworkImage(data.data[index].profileURL),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => SeeMeetingsMain(_userModel.connection)));
+//
+                          },
+                          child:Padding(
+                            padding: EdgeInsets.only(top: 10, bottom: 10),
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundImage:
+                                NetworkImage(data.data[index].profileURL),
+                              ),
+                              title: Text(
+                                filteredUsers[index].name,
+                                style: TextStyle(
+                                    fontSize: 24.0,
+                                    color: Colors.white,
+                                    fontFamily: 'OpenSans',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  _selectedName = filteredUsers[index].name;
+                                });
+                              },
                             ),
-                            title: Text(
-                              filteredUsers[index].name,
-                              style: TextStyle(
-                                  fontSize: 24.0,
-                                  color: Colors.white,
-                                  fontFamily: 'OpenSans',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            onTap: () {
-                              setState(() {
-                                _selectedName = filteredUsers[index].name;
-                              });
-                            },
-                          ),
-                        ),
+                          ) ,
+                        )
+
+
                       );
                     },
                   ),
@@ -174,7 +184,7 @@ class _SeeMeetingChooseState extends State<SeeMeetingChoose>{
                       size: 28,
                       color: Colors.grey.shade500,
                     ),
-                    onPressed: () => _scaffoldKey.currentState.openDrawer()),
+                    ),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
@@ -182,6 +192,7 @@ class _SeeMeetingChooseState extends State<SeeMeetingChoose>{
               "BULUŞMALARI GÖR",
               textAlign: TextAlign.center,
               style: TextStyle(
+                fontWeight: FontWeight.bold,
                 color: Colors.black,
                 fontSize: 22,
               ),
