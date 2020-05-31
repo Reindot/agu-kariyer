@@ -1,4 +1,5 @@
 import 'package:agucareer/locator.dart';
+import 'package:agucareer/pages/admin_panel/admin_home_page.dart';
 import 'package:agucareer/pages/home_page.dart';
 import 'package:agucareer/pages/login_page.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
             '/'               : (context) => HosgeldinWidget(),
             '/login'          : (context) => LoginPage(),
             '/home'           : (context) => HomePage(),
+            '/adminHome'      : (context) => AdminHomePage(),
           },
         ));
   }

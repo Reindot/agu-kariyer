@@ -33,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    UserModel _userModel = Provider.of<UserModel>(context);
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -269,8 +270,10 @@ class _LoginPageState extends State<LoginPage> {
     final _userModel = Provider.of<UserModel>(context, listen: false);
     try {
       User user = await _userModel.signIn(mailController.text, passController.text);
-      if (user != null)
-        Navigator.pushReplacementNamed(context, '/home');
+      if (user != null){
+
+      }
+        Navigator.pushReplacementNamed(context, _userModel.user.type == "MOD" ? '/adminHome' : '/home');
     } catch (e) {
       debugPrint(">>> login_page >>> onLogInPressed >>> ${e.toString()}");
     }
