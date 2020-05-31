@@ -1,6 +1,7 @@
 import 'package:agucareer/pages/admin_panel/create_new_user.dart';
 import 'package:agucareer/pages/admin_panel/see_meetings_choose.dart';
 import 'package:agucareer/pages/admin_panel/see_meetings_main.dart';
+import 'package:agucareer/pages/admin_panel/survey_results_choose_person.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
@@ -80,26 +81,34 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     ),
                   )),
                   Expanded(
-                    child: Container(
-                        margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(60),
-                          color: AppColors.acikMor.withOpacity(1.0),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Icon(
-                              Icons.assignment,
-                              color: Colors.white,
-                            ),
-                            Text(
-                              "Anketleri Gör",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        )),
+                    child: GestureDetector(
+                  onTap: () {
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                  builder: (context) => SurveyResultsChoosePerson()));
+                  },
+                      child: Container(
+                          margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(60),
+                            color: AppColors.acikMor.withOpacity(1.0),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              Icon(
+                                Icons.assignment,
+                                color: Colors.white,
+                              ),
+                              Text(
+                                "Anketleri Gör",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          )),
+                  )
                   ),
                   Expanded(
                       child: GestureDetector(
