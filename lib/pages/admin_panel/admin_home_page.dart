@@ -1,4 +1,5 @@
 import 'package:agucareer/pages/admin_panel/choose_last_date.dart';
+import 'package:agucareer/pages/admin_panel/choose_last_date__choose_meeting.dart';
 import 'package:agucareer/pages/admin_panel/create_announcement.dart';
 import 'package:agucareer/pages/admin_panel/create_new_user.dart';
 import 'package:agucareer/pages/admin_panel/see_meetings_choose.dart';
@@ -11,6 +12,7 @@ import 'package:agucareer/widgets/drawer_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 
 class AdminHomePage extends StatefulWidget {
   @override
@@ -200,7 +202,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  ChooseLastDate()));
+                                  ChooseLastDateChooseMeeting()));
                     },
                     child: Container(
                         margin: EdgeInsets.fromLTRB(60, 15, 60, 7),

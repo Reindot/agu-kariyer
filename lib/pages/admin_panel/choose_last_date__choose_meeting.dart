@@ -1,18 +1,16 @@
-import 'package:agucareer/models/user_model.dart';
-import 'package:agucareer/pages/admin_panel/see_meetings_main.dart';
+
+import 'package:agucareer/pages/admin_panel/choose_last_date.dart';
 import 'package:agucareer/values/colors.dart';
-import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../arrange_meeting.dart';
 
-class SurveyResultsChooseSurvey extends StatefulWidget {
+class ChooseLastDateChooseMeeting extends StatefulWidget {
   @override
-  _SurveyResultsChooseSurvey createState() => _SurveyResultsChooseSurvey();
+  _ChooseLastDateChooseMeeting createState() => _ChooseLastDateChooseMeeting();
 }
 
-class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
+class _ChooseLastDateChooseMeeting extends State<ChooseLastDateChooseMeeting> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final _debouncer = Debouncer(milliseconds: 500);
 
@@ -24,7 +22,7 @@ class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
         appBar: _getCustomAppBar(),
         body: Column(
           children: <Widget>[
-            Text("Anket Seç",
+            Text("Buluşma Seç",
                 style: TextStyle(
                     color: Colors.white,
                     letterSpacing: 1.5,
@@ -46,13 +44,17 @@ class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          debugPrint("ankete basildi");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ChooseLastDate()));
                         },
                         child: Padding(
                           padding: EdgeInsets.only(top: 10, bottom: 10),
                           child: ListTile(
                             title: Text(
-                              "1. Görüşme Anketi",
+                              "1. Buluşma",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 20.0,
@@ -60,9 +62,6 @@ class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
                                   fontFamily: 'OpenSans',
                                   fontWeight: FontWeight.bold),
                             ),
-                            onTap: () {
-                              debugPrint("ankete basildi");
-                            },
                           ),
                         ),
                       )),
@@ -75,13 +74,17 @@ class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          debugPrint("ankete basildi");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ChooseLastDate()));
                         },
                         child: Padding(
                           padding: EdgeInsets.only(top: 10, bottom: 10),
                           child: ListTile(
                             title: Text(
-                              "2. Görüşme Anketi",
+                              "2. Buluşma",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 20.0,
@@ -89,9 +92,6 @@ class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
                                   fontFamily: 'OpenSans',
                                   fontWeight: FontWeight.bold),
                             ),
-                            onTap: () {
-                              debugPrint("ankete basildi");
-                            },
                           ),
                         ),
                       )),
@@ -104,13 +104,17 @@ class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          debugPrint("ankete basildi");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ChooseLastDate()));
                         },
                         child: Padding(
                           padding: EdgeInsets.only(top: 10, bottom: 10),
                           child: ListTile(
                             title: Text(
-                              "3. Görüşme Anketi",
+                              "3. Buluşma",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 20.0,
@@ -118,9 +122,6 @@ class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
                                   fontFamily: 'OpenSans',
                                   fontWeight: FontWeight.bold),
                             ),
-                            onTap: () {
-                              debugPrint("ankete basildi");
-                            },
                           ),
                         ),
                       )),
@@ -133,13 +134,17 @@ class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          debugPrint("ankete basildi");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ChooseLastDate()));
                         },
                         child: Padding(
                           padding: EdgeInsets.only(top: 10, bottom: 10),
                           child: ListTile(
                             title: Text(
-                              "4. Görüşme Anketi",
+                              "4. Buluşma",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 20.0,
@@ -147,9 +152,6 @@ class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
                                   fontFamily: 'OpenSans',
                                   fontWeight: FontWeight.bold),
                             ),
-                            onTap: () {
-                              debugPrint("ankete basildi");
-                            },
                           ),
                         ),
                       )),
@@ -162,13 +164,17 @@ class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          debugPrint("ankete basildi");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ChooseLastDate()));
                         },
                         child: Padding(
                           padding: EdgeInsets.only(top: 10, bottom: 10),
                           child: ListTile(
                             title: Text(
-                              "5. Görüşme Anketi",
+                              "5. Buluşma",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 20.0,
@@ -176,9 +182,6 @@ class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
                                   fontFamily: 'OpenSans',
                                   fontWeight: FontWeight.bold),
                             ),
-                            onTap: () {
-                              debugPrint("ankete basildi");
-                            },
                           ),
                         ),
                       )),
@@ -218,7 +221,7 @@ class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
             Text(
-              "Anketleri Gör",
+              "Son Tarih Belirle",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
