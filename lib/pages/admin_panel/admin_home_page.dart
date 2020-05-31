@@ -1,3 +1,4 @@
+import 'package:agucareer/pages/admin_panel/choose_last_date.dart';
 import 'package:agucareer/pages/admin_panel/create_announcement.dart';
 import 'package:agucareer/pages/admin_panel/create_new_user.dart';
 import 'package:agucareer/pages/admin_panel/see_meetings_choose.dart';
@@ -193,6 +194,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         )),
                   ),
                   Expanded(
+                      child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ChooseLastDate()));
+                    },
                     child: Container(
                         margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
                         decoration: BoxDecoration(
@@ -213,7 +222,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             ),
                           ],
                         )),
-                  ),
+                  )),
                   Expanded(
                     child: Container(
                         margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
