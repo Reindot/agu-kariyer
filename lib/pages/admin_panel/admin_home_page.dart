@@ -1,3 +1,4 @@
+import 'package:agucareer/pages/admin_panel/create_new_user.dart';
 import 'package:agucareer/pages/admin_panel/see_meetings_choose.dart';
 import 'package:agucareer/pages/admin_panel/see_meetings_main.dart';
 import 'package:agucareer/values/colors.dart';
@@ -54,9 +55,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SeeMeetingsChoose()
-                      )
-                      );
+                              builder: (context) => SeeMeetingsChoose()));
                     },
                     child: Container(
                       margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
@@ -103,6 +102,13 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         )),
                   ),
                   Expanded(
+                      child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreateNewUser()));
+                    },
                     child: Container(
                         margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
                         decoration: BoxDecoration(
@@ -123,7 +129,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             ),
                           ],
                         )),
-                  ),
+                  )),
                   Expanded(
                     child: Container(
                         margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
