@@ -88,7 +88,8 @@ class _SeeMeetingsMain extends State<SeeMeetingsMain> {
                 },
               )),
           Container(
-            height: screenSize.height / 2.3,
+            height: 250,
+//            height: screenSize.height / 2.3,
             width: double.infinity,
             padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
             margin: EdgeInsets.all(20),

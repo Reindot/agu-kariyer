@@ -1,5 +1,12 @@
+import 'package:agucareer/pages/admin_panel/choose_last_date.dart';
+import 'package:agucareer/pages/admin_panel/choose_last_date__choose_meeting.dart';
+import 'package:agucareer/pages/admin_panel/create_announcement.dart';
+import 'package:agucareer/pages/admin_panel/create_new_user.dart';
+import 'package:agucareer/pages/admin_panel/match_users_person1.dart';
 import 'package:agucareer/pages/admin_panel/see_meetings_choose.dart';
 import 'package:agucareer/pages/admin_panel/see_meetings_main.dart';
+import 'package:agucareer/pages/admin_panel/survey_result_choose_survey.dart';
+import 'package:agucareer/pages/admin_panel/survey_results_choose_person.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
@@ -54,9 +61,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SeeMeetingsChoose()
-                      )
-                      );
+                              builder: (context) => SeeMeetingsChoose()));
                     },
                     child: Container(
                       margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
@@ -81,6 +86,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     ),
                   )),
                   Expanded(
+                      child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  SurveyResultsChoosePerson()));
+                    },
                     child: Container(
                         margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
                         decoration: BoxDecoration(
@@ -101,8 +114,15 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             ),
                           ],
                         )),
-                  ),
+                  )),
                   Expanded(
+                      child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreateNewUser()));
+                    },
                     child: Container(
                         margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
                         decoration: BoxDecoration(
@@ -123,8 +143,15 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             ),
                           ],
                         )),
-                  ),
+                  )),
                   Expanded(
+                      child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreateAnnouncement()));
+                    },
                     child: Container(
                         margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
                         decoration: BoxDecoration(
@@ -145,7 +172,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             ),
                           ],
                         )),
-                  ),
+                  )),
                   Expanded(
                     child: Container(
                         margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
@@ -169,6 +196,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         )),
                   ),
                   Expanded(
+                      child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ChooseLastDateChooseMeeting()));
+                    },
                     child: Container(
                         margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
                         decoration: BoxDecoration(
@@ -189,8 +224,15 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             ),
                           ],
                         )),
-                  ),
+                  )),
                   Expanded(
+                      child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MatchUserPerson1()));
+                    },
                     child: Container(
                         margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
                         decoration: BoxDecoration(
@@ -211,7 +253,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                             ),
                           ],
                         )),
-                  ),
+                  )),
                 ],
               ),
             )

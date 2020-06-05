@@ -7,12 +7,12 @@ import 'package:provider/provider.dart';
 
 import '../arrange_meeting.dart';
 
-class SeeMeetingsChoose extends StatefulWidget{
+class MatchUserPerson2 extends StatefulWidget{
   @override
-  _SeeMeetingsChooseState createState() =>  _SeeMeetingsChooseState();
+  _MatchUserPerson2 createState() =>  _MatchUserPerson2();
 }
 
-class _SeeMeetingsChooseState extends State<SeeMeetingsChoose>{
+class _MatchUserPerson2 extends State<MatchUserPerson2>{
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<User> filteredUsers = List();
   final _debouncer = Debouncer(milliseconds: 500);
@@ -52,7 +52,7 @@ class _SeeMeetingsChooseState extends State<SeeMeetingsChoose>{
             padding: EdgeInsets.only(top: 15),
             child: Column(
               children: <Widget>[
-                Text("Birisini Seç",
+                Text("2. Kişiyi Seç",
                     style: TextStyle(
                         color: Colors.white,
                         letterSpacing: 1.5,
@@ -108,41 +108,41 @@ class _SeeMeetingsChooseState extends State<SeeMeetingsChoose>{
                     itemCount: filteredUsers.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Card(
-                        margin: EdgeInsets.only(
-                            top: 10, bottom: 10, right: 15, left: 15),
-                        color: Colors.white.withOpacity(0.2),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(60.0),
-                        ),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => SeeMeetingsMain(_userModel.connection)));
+                          margin: EdgeInsets.only(
+                              top: 10, bottom: 10, right: 15, left: 15),
+                          color: Colors.white.withOpacity(0.2),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(60.0),
+                          ),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) => SeeMeetingsMain(_userModel.connection)));
 //
-                          },
-                          child:Padding(
-                            padding: EdgeInsets.only(top: 10, bottom: 10),
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage:
-                                NetworkImage(data.data[index].profileURL),
+                            },
+                            child:Padding(
+                              padding: EdgeInsets.only(top: 10, bottom: 10),
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage:
+                                  NetworkImage(data.data[index].profileURL),
+                                ),
+                                title: Text(
+                                  filteredUsers[index].name,
+                                  style: TextStyle(
+                                      fontSize: 24.0,
+                                      color: Colors.white,
+                                      fontFamily: 'OpenSans',
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    _selectedName = filteredUsers[index].name;
+                                  });
+                                },
                               ),
-                              title: Text(
-                                filteredUsers[index].name,
-                                style: TextStyle(
-                                    fontSize: 24.0,
-                                    color: Colors.white,
-                                    fontFamily: 'OpenSans',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              onTap: () {
-                                setState(() {
-                                  _selectedName = filteredUsers[index].name;
-                                });
-                              },
-                            ),
-                          ) ,
-                        )
+                            ) ,
+                          )
 
 
                       );
@@ -178,18 +178,18 @@ class _SeeMeetingsChooseState extends State<SeeMeetingsChoose>{
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 IconButton(
-                    padding: EdgeInsets.all(20),
-                    icon: Icon(
-                      Icons.arrow_back,
-                      size: 28,
-                      color: Colors.grey.shade500,
-                    ),
-                    ),
+                  padding: EdgeInsets.all(20),
+                  icon: Icon(
+                    Icons.arrow_back,
+                    size: 28,
+                    color: Colors.grey.shade500,
+                  ),
+                ),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
             Text(
-              "Buluşmaları Gör",
+              "Kişi Eşleştir",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
