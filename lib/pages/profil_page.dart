@@ -122,11 +122,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           return RaisedButton(
                               padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
                               color: AppColors.acikMor.withOpacity(1),
-                              onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          ProfilDuzenleWidget())),
+                              onPressed: () => Navigator.pushReplacementNamed(context, '/editProfile'),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(60),
                               ),

@@ -1,3 +1,4 @@
+import 'package:agucareer/pages/profil_page.dart';
 import 'package:agucareer/values/values.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/input_widget.dart';
@@ -5,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../values/colors.dart';
-
-
 
 class ProfilDuzenleWidget extends StatelessWidget {
 
@@ -31,9 +30,8 @@ class ProfilDuzenleWidget extends StatelessWidget {
     }
     if(value){
       await _userModel.currentUser();
-      Navigator.pop(context);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProfilePage(_userModel.user)));
     }
-
   }
 
   @override
@@ -95,7 +93,7 @@ class ProfilDuzenleWidget extends StatelessWidget {
                         height: 53,
                         margin: EdgeInsets.only(top: 20),
                         child: FlatButton(
-                          onPressed: () => _updateUserData(context),
+                          onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProfilePage(_userModel.user))),
                           color: AppColors.acikMor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
