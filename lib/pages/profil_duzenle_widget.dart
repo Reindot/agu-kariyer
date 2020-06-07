@@ -6,12 +6,14 @@ import 'package:provider/provider.dart';
 
 import '../values/colors.dart';
 
-final _nameController = TextEditingController();
-final _workController = TextEditingController();
-final _bioController = TextEditingController();
-final _professionalController = TextEditingController();
+
 
 class ProfilDuzenleWidget extends StatelessWidget {
+
+  var _nameController = TextEditingController();
+  var _workController = TextEditingController();
+  var _bioController = TextEditingController();
+  var _professionalController = TextEditingController();
 
   void _updateUserData(BuildContext context) async {
     UserModel _userModel = Provider.of<UserModel>(context, listen: false);
@@ -36,6 +38,11 @@ class ProfilDuzenleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _userModel = Provider.of<UserModel>(context);
+    _nameController = TextEditingController(text: _userModel.user.name);
+    _workController = TextEditingController(text: _userModel.user.company);
+    _bioController = TextEditingController(text: _userModel.user.bio);
+    _professionalController = TextEditingController(text: _userModel.user.professional);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
