@@ -1,7 +1,11 @@
+import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/values/constants.dart';
+import 'package:agucareer/viewmodels/user_model.dart';
+import 'package:agucareer/widgets/alert_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class CreateNewUser extends StatefulWidget {
   @override
@@ -9,6 +13,10 @@ class CreateNewUser extends StatefulWidget {
 }
 
 class _CreateNewUser extends State<CreateNewUser> {
+  final _mailCont = TextEditingController(text: "");
+  final _nameCont = TextEditingController(text: "");
+  final _typeCont = TextEditingController(text: "");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,8 +47,6 @@ class _CreateNewUser extends State<CreateNewUser> {
                     children: <Widget>[
                       SizedBox(height: 50.0),
                       _buildEmailTF(),
-                      SizedBox(height: 10.0),
-                      _buildPasswordTF(),
                       SizedBox(
                         height: 20.0,
                       ),
@@ -74,6 +80,7 @@ class _CreateNewUser extends State<CreateNewUser> {
             decoration: secondBoxDecorationStyle,
             height: 50.0,
             child: TextFormField(
+              controller: _mailCont,
               keyboardType: TextInputType.emailAddress,
               style: TextStyle(
                 color: AppColors.koyuMor,
@@ -99,40 +106,6 @@ class _CreateNewUser extends State<CreateNewUser> {
         ]);
   }
 
-  Widget _buildPasswordTF() {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          SizedBox(height: 25.0),
-          Container(
-              alignment: Alignment.centerLeft,
-              decoration: secondBoxDecorationStyle,
-              height: 50.0,
-              child: TextFormField(
-                obscureText: true,
-                style: TextStyle(
-                  color: AppColors.koyuMor,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'OpenSans',
-                ),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.only(top: 14.0),
-                  prefixIcon: Icon(
-                    Icons.lock,
-                    color: AppColors.koyuMor.withOpacity(0.4),
-                  ),
-                  hintText: 'Şifre',
-                  hintStyle: TextStyle(
-                    color: AppColors.koyuMor.withOpacity(0.4),
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'OpenSans',
-                  ),
-                ),
-              ))
-        ]);
-  }
-
   Widget _buildNameSurnameTF() {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,6 +116,7 @@ class _CreateNewUser extends State<CreateNewUser> {
             decoration: secondBoxDecorationStyle,
             height: 50.0,
             child: TextFormField(
+              controller: _nameCont,
               keyboardType: TextInputType.text,
               style: TextStyle(
                 color: AppColors.koyuMor,
@@ -178,6 +152,7 @@ class _CreateNewUser extends State<CreateNewUser> {
             decoration: secondBoxDecorationStyle,
             height: 50.0,
             child: TextFormField(
+              controller: _typeCont,
               keyboardType: TextInputType.text,
               style: TextStyle(
                 color: AppColors.koyuMor,
@@ -210,7 +185,7 @@ class _CreateNewUser extends State<CreateNewUser> {
       child: RaisedButton(
         padding: EdgeInsets.all(15.0),
         color: AppColors.koyuMor.withOpacity(1.0),
-        onPressed: () => print("kayit yap basildi"),
+        onPressed: () => saveUser(context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
@@ -271,4 +246,22 @@ class _CreateNewUser extends State<CreateNewUser> {
       ),
     );
   }
+  void saveUser(BuildContext context) async {
+    final _userModel = Provider.of<UserModel>(context, listen: false);
+    try {
+      User user = await _userModel.createUser(_mailCont.text, "39824u2j@054!!+,İ");
+      if(user.email != null){
+        await _userModel.resetPassword(user.email);
+        await _userModel.updateUser(user.userID, {'name' : _nameCont.text, 'type' : _typeCont.text});
+      }
+    } catch (e) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertWidget.standart(
+              context: context, title: "Kullanıcı oluşturulamdı!"),
+          barrierDismissible: false);
+    }
+  }
 }
+
+

@@ -246,7 +246,6 @@ class _LoginPageState extends State<LoginPage> {
       child: RaisedButton(
         padding: EdgeInsets.all(15.0),
         color: AppColors.acikMor,
-        onLongPress: () => onLogInLongPressed(mailController.text, passController.text, context),
         onPressed: () => onLogInPressed(mailController.text, passController.text, context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -281,15 +280,6 @@ class _LoginPageState extends State<LoginPage> {
           builder: (context) => AlertWidget.standart(
               context: context, title: "Kullanıcı adı veya şifre hatalı!"),
           barrierDismissible: false);
-    }
-  }
-
-  void onLogInLongPressed(String mail, String pass, BuildContext context) async {
-    final _userModel = Provider.of<UserModel>(context, listen: false);
-    try {
-      await _userModel.createUser(mailController.text, passController.text);
-    } catch (e) {
-      debugPrint(">>> login_page >>> onLogInLongPressed >>> ${e.toString()}");
     }
   }
 
