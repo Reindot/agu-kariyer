@@ -107,43 +107,42 @@ class _SeeMeetingsChooseState extends State<SeeMeetingsChoose> {
                     itemCount: filteredUsers.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Card(
-                          margin: EdgeInsets.only(
-                              top: 10, bottom: 10, right: 15, left: 15),
-                          color: Colors.white.withOpacity(0.2),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(60.0),
-                          ),
-                          child: GestureDetector(
+                        margin: EdgeInsets.only(
+                            top: 10, bottom: 10, right: 15, left: 15),
+                        color: Colors.white.withOpacity(0.2),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(60.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.white,
+                              child: CircleAvatar(
+                                radius: 26,
+                                backgroundImage:
+                                    NetworkImage(data.data[index].profileURL),
+                              ),
+                            ),
+                            title: Text(
+                              filteredUsers[index].name,
+                              style: TextStyle(
+                                  fontSize: 24.0,
+                                  color: Colors.white,
+                                  fontFamily: 'OpenSans',
+                                  fontWeight: FontWeight.bold),
+                            ),
                             onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => SeeMeetingsMain(
                                           _userModel.connection)));
-//
                             },
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 10, bottom: 10),
-                              child: ListTile(
-                                leading: CircleAvatar(
-                                  backgroundImage:
-                                      NetworkImage(data.data[index].profileURL),
-                                ),
-                                title: Text(
-                                  filteredUsers[index].name,
-                                  style: TextStyle(
-                                      fontSize: 24.0,
-                                      color: Colors.white,
-                                      fontFamily: 'OpenSans',
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                  });
-                                },
-                              ),
-                            ),
-                          ));
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -181,9 +180,11 @@ class _SeeMeetingsChooseState extends State<SeeMeetingsChoose> {
                   icon: Icon(
                     Icons.arrow_back,
                     size: 28,
-                    color: Colors.grey.shade500,
+                    color: Colors.black,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
