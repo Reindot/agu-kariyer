@@ -57,7 +57,7 @@ class _AllChatsPageState extends State<AllChatsPage> {
                       Navigator.of(context, rootNavigator: true).push(
                           MaterialPageRoute(
                               builder: (context) => ChatPage(
-                                  me: chat.sender, it: chat.receiver)));
+                                  me: chat.sender, it: chat.receiver, profileImage: NetworkImage(chat.profileURL),)));
                     },
                     child: Container(
                       margin: EdgeInsets.only(bottom: 2),

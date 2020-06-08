@@ -159,7 +159,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                     MaterialPageRoute(
                                         builder: (context) => ChatPage(
                                             me: _userModel.user.userID,
-                                            it: _userModel.connection.userID)));
+                                            it: _userModel.connection.userID,
+                                        profileImage: NetworkImage(_userModel.connection.profileURL),)));
                               },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(60),

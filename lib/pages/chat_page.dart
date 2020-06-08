@@ -8,13 +8,14 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-var _profileImage;
+
 
 class ChatPage extends StatefulWidget {
   final String me;
   final String it;
+  var profileImage;
 
-  ChatPage({this.me, this.it});
+  ChatPage({this.me, this.it, this.profileImage});
 
   @override
   _ChatPageState createState() => _ChatPageState();
@@ -27,7 +28,6 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     final _userModel = Provider.of<UserModel>(context);
-    _profileImage = NetworkImage(_userModel.connection.profileURL);
     String _from = widget.me;
     String _receiver = widget.it;
 
@@ -167,7 +167,7 @@ class _ChatPageState extends State<ChatPage> {
             Row(
               children: <Widget>[
                 CircleAvatar(
-                  backgroundImage: _profileImage,
+                  backgroundImage: widget.profileImage,
                 ),
                 Flexible(
                   child: Container(
