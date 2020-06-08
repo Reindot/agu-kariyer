@@ -28,6 +28,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     final _userModel = Provider.of<UserModel>(context);
+    _userModel.markAsSeen(widget.me, widget.it);
     String _from = widget.me;
     String _receiver = widget.it;
 
