@@ -53,8 +53,7 @@ class DrawerWidget {
               leading: Icon(Icons.home),
               title: Text("Ana Sayfa"),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomePage()));
+                Navigator.pop(context);
               }
               ),
           ListTile(
