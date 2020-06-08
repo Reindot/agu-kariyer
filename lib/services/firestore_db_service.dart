@@ -146,12 +146,13 @@ class FirestoreDBService implements DBService {
   Future<bool> markAsSeen(String me, String it) async {
     var _meID = me + "." + it;
     var _itID = it + "." + me;
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>< $_itID");
     await _firestore.collection("connections").document(_meID).setData({
       "seen": true,
-    });
+    }, merge: true);
     await _firestore.collection("connections").document(_itID).setData({
       "seen": true,
-    });
+    }, merge: true);
     return true;
   }
 }
