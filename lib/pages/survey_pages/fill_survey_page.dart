@@ -1,6 +1,4 @@
 import 'package:agucareer/models/user_model.dart';
-import 'package:agucareer/pages/admin_panel/see_meetings_main.dart';
-import 'package:agucareer/pages/home_page.dart';
 import 'package:agucareer/pages/survey_pages/select_survey.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
@@ -91,11 +89,11 @@ class _FillSurveyState extends State<FillSurvey> {
                             setState(() {
                               filteredUsers = data.data
                                   .where((u) => (u.name
-                                  .toLowerCase()
-                                  .contains(string.toLowerCase()) ||
-                                  u.email
-                                      .toLowerCase()
-                                      .contains(string.toLowerCase())))
+                                          .toLowerCase()
+                                          .contains(string.toLowerCase()) ||
+                                      u.email
+                                          .toLowerCase()
+                                          .contains(string.toLowerCase())))
                                   .toList();
                             });
                           });
@@ -125,7 +123,7 @@ class _FillSurveyState extends State<FillSurvey> {
                               child: CircleAvatar(
                                 radius: 26,
                                 backgroundImage:
-                                NetworkImage(data.data[index].profileURL),
+                                    NetworkImage(data.data[index].profileURL),
                               ),
                             ),
                             title: Text(

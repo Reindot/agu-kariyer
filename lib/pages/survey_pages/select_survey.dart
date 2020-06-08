@@ -1,12 +1,10 @@
 import 'package:agucareer/models/user_model.dart';
-import 'package:agucareer/pages/admin_panel/see_meetings_main.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../arrange_meeting.dart';
 
 class SelectSurvey extends StatefulWidget {
   @override
@@ -16,7 +14,6 @@ class SelectSurvey extends StatefulWidget {
 class _SelectSurveyState extends State<SelectSurvey> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<User> filteredUsers = List();
-  final _debouncer = Debouncer(milliseconds: 500);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +38,6 @@ class _SelectSurveyState extends State<SelectSurvey> {
   }
 
   Widget _buildSurveyPart(BuildContext context, UserModel _userModel) {
-    Size screenSize = MediaQuery.of(context).size;
     return FutureBuilder<List<User>>(
       future: _userModel.getConnections(_userModel.user),
       builder: (context, data) {
@@ -65,7 +61,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
                 ),
                 Card(
                   margin:
-                  EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
+                      EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
                   color: AppColors.koyuMor.withOpacity(1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(60.0),
@@ -91,7 +87,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
                 ),
                 Card(
                   margin:
-                  EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
+                      EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
                   color: AppColors.koyuMor.withOpacity(1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(60.0),
@@ -117,7 +113,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
                 ),
                 Card(
                   margin:
-                  EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
+                      EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
                   color: AppColors.koyuMor.withOpacity(1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(60.0),
@@ -143,7 +139,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
                 ),
                 Card(
                   margin:
-                  EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
+                      EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
                   color: AppColors.koyuMor.withOpacity(1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(60.0),
@@ -169,7 +165,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
                 ),
                 Card(
                   margin:
-                  EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
+                      EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
                   color: AppColors.koyuMor.withOpacity(1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(60.0),
