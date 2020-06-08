@@ -1,6 +1,7 @@
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/pages/sifremi_unuttum_widget.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
+import 'package:agucareer/widgets/alert_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -275,7 +276,11 @@ class _LoginPageState extends State<LoginPage> {
       }
         Navigator.pushReplacementNamed(context, _userModel.user.type == "MOD" ? '/adminHome' : '/home');
     } catch (e) {
-      debugPrint(">>> login_page >>> onLogInPressed >>> ${e.toString()}");
+      showDialog(
+          context: context,
+          builder: (context) => AlertWidget.standart(
+              context: context, title: "Kullanıcı adı veya şifre hatalı!"),
+          barrierDismissible: false);
     }
   }
 

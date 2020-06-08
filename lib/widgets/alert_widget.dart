@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class AlertWidget {
   static Widget standart({BuildContext context, String title}) {
     return AlertDialog(
-      content: Text("Kayıtlı Kullanıcı Bulunamadı",
+      content: Text(title,
           style: TextStyle(
               color: AppColors.koyuMor.withOpacity(1), fontFamily: 'OpenSans')),
       shape: RoundedRectangleBorder(
