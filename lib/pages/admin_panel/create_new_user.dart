@@ -83,7 +83,7 @@ class _CreateNewUser extends State<CreateNewUser> {
               controller: _mailCont,
               keyboardType: TextInputType.emailAddress,
               style: TextStyle(
-                color: AppColors.koyuMor,
+                color: AppColors.acikMor,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'OpenSans',
               ),
@@ -92,11 +92,11 @@ class _CreateNewUser extends State<CreateNewUser> {
                 contentPadding: EdgeInsets.only(top: 14.0),
                 prefixIcon: Icon(
                   Icons.email,
-                  color: AppColors.koyuMor.withOpacity(0.4),
+                  color: AppColors.acikMor.withOpacity(0.4),
                 ),
                 hintText: 'E-posta',
                 hintStyle: TextStyle(
-                  color: AppColors.koyuMor.withOpacity(0.4),
+                  color: AppColors.acikMor.withOpacity(0.4),
                   fontWeight: FontWeight.bold,
                   fontFamily: 'OpenSans',
                 ),
@@ -119,7 +119,7 @@ class _CreateNewUser extends State<CreateNewUser> {
               controller: _nameCont,
               keyboardType: TextInputType.text,
               style: TextStyle(
-                color: AppColors.koyuMor,
+                color: AppColors.acikMor,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'OpenSans',
               ),
@@ -128,11 +128,11 @@ class _CreateNewUser extends State<CreateNewUser> {
                 contentPadding: EdgeInsets.only(top: 14.0),
                 prefixIcon: Icon(
                   Icons.assignment_ind,
-                  color: AppColors.koyuMor.withOpacity(0.4),
+                  color: AppColors.acikMor.withOpacity(0.4),
                 ),
                 hintText: 'İsim - Soyisim',
                 hintStyle: TextStyle(
-                  color: AppColors.koyuMor.withOpacity(0.4),
+                  color: AppColors.acikMor.withOpacity(0.4),
                   fontWeight: FontWeight.bold,
                   fontFamily: 'OpenSans',
                 ),
@@ -155,7 +155,7 @@ class _CreateNewUser extends State<CreateNewUser> {
               controller: _typeCont,
               keyboardType: TextInputType.text,
               style: TextStyle(
-                color: AppColors.koyuMor,
+                color: AppColors.acikMor,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'OpenSans',
               ),
@@ -164,11 +164,11 @@ class _CreateNewUser extends State<CreateNewUser> {
                 contentPadding: EdgeInsets.only(top: 14.0),
                 prefixIcon: Icon(
                   Icons.contact_mail,
-                  color: AppColors.koyuMor.withOpacity(0.4),
+                  color: AppColors.acikMor.withOpacity(0.4),
                 ),
                 hintText: 'Mentor/Öğrenci',
                 hintStyle: TextStyle(
-                  color: AppColors.koyuMor.withOpacity(0.4),
+                  color: AppColors.acikMor.withOpacity(0.4),
                   fontWeight: FontWeight.bold,
                   fontFamily: 'OpenSans',
                 ),
@@ -184,7 +184,7 @@ class _CreateNewUser extends State<CreateNewUser> {
       width: double.infinity,
       child: RaisedButton(
         padding: EdgeInsets.all(15.0),
-        color: AppColors.koyuMor.withOpacity(1.0),
+        color: AppColors.acikMor.withOpacity(1.0),
         onPressed: () => saveUser(context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
