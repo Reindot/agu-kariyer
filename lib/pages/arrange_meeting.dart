@@ -772,25 +772,30 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
 
   Widget _buildDialogSetMeeting(BuildContext context) {
     return AlertDialog(
+      backgroundColor: AppColors.koyuMor.withOpacity(1.0),
       title: Text(
         "Onayla!",
-        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
       content: Text(
         "Az önce bir buluşma ayarladın.\nOnaylıyor musun?",
         style: TextStyle(
-          color: AppColors.koyuMor.withOpacity(1),
+          color: AppColors.acikMavi.withOpacity(1),
           fontFamily: 'OpenSans',
         ),
       ),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(30))),
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(60),
+            topLeft: Radius.circular(60),
+            bottomLeft: Radius.circular(60)
+          )),
       actions: <Widget>[
         FlatButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          color: AppColors.koyuMor.withOpacity(1),
+          color: AppColors.acikMor.withOpacity(1),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30))),
           textColor: Colors.white,
@@ -800,7 +805,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          color: AppColors.koyuMor.withOpacity(1),
+          color: AppColors.pembe.withOpacity(1),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30))),
           textColor: Colors.white,
