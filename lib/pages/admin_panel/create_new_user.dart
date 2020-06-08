@@ -246,13 +246,20 @@ class _CreateNewUser extends State<CreateNewUser> {
       ),
     );
   }
+
   void saveUser(BuildContext context) async {
     final _userModel = Provider.of<UserModel>(context, listen: false);
     try {
       User user = await _userModel.createUser(_mailCont.text, "123456");
-      if(user.email != null){
+      if (user.email != null) {
         await _userModel.resetPassword(user.email);
-        await _userModel.updateUser(user.userID, {'name' : _nameCont.text, 'type' : _typeCont.text, 'modID' : _userModel.user.userID});
+        await _userModel.updateUser(user.userID, {
+          'name': _nameCont.text,
+          'type': _typeCont.text,
+          'modID': _userModel.user.userID,
+          'profileURL':
+              "https://firebasestorage.googleapis.com/v0/b/agucareer-01.appspot.com/o/profile-photos%2Fdefault.jpg?alt=media&token=7b51d2e6-5e86-45ba-b6a3-885cbff8205e"
+        });
       }
     } catch (e) {
       showDialog(
@@ -263,5 +270,3 @@ class _CreateNewUser extends State<CreateNewUser> {
     }
   }
 }
-
-
