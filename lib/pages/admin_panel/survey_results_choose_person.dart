@@ -1,18 +1,17 @@
 import 'package:agucareer/models/user_model.dart';
-import 'package:agucareer/pages/admin_panel/see_meetings_main.dart';
+import 'package:agucareer/pages/admin_panel/survey_result_choose_survey.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../arrange_meeting.dart';
 
-
-class SurveyResultsChoosePerson extends StatefulWidget{
+class SurveyResultsChoosePerson extends StatefulWidget {
   @override
-  _SurveyResultsChoosePerson createState() =>  _SurveyResultsChoosePerson();
+  _SurveyResultsChoosePerson createState() => _SurveyResultsChoosePerson();
 }
 
-class _SurveyResultsChoosePerson extends State<SurveyResultsChoosePerson>{
+class _SurveyResultsChoosePerson extends State<SurveyResultsChoosePerson> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   List<User> filteredUsers = List();
   final _debouncer = Debouncer(milliseconds: 500);
@@ -29,16 +28,16 @@ class _SurveyResultsChoosePerson extends State<SurveyResultsChoosePerson>{
         children: <Widget>[
           Expanded(
             child: Builder(
-              builder: (context){
+              builder: (context) {
                 return _buildPersonPart(context, _userModel);
               },
             ),
           )
         ],
-
       ),
     );
   }
+
   Widget _buildPersonPart(BuildContext context, UserModel _userModel) {
     Size screenSize = MediaQuery.of(context).size;
     return FutureBuilder<List<User>>(
@@ -89,11 +88,11 @@ class _SurveyResultsChoosePerson extends State<SurveyResultsChoosePerson>{
                             setState(() {
                               filteredUsers = data.data
                                   .where((u) => (u.name
-                                  .toLowerCase()
-                                  .contains(string.toLowerCase()) ||
-                                  u.email
-                                      .toLowerCase()
-                                      .contains(string.toLowerCase())))
+                                          .toLowerCase()
+                                          .contains(string.toLowerCase()) ||
+                                      u.email
+                                          .toLowerCase()
+                                          .contains(string.toLowerCase())))
                                   .toList();
                             });
                           });
@@ -114,38 +113,38 @@ class _SurveyResultsChoosePerson extends State<SurveyResultsChoosePerson>{
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(60.0),
                           ),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => SeeMeetingsMain(_userModel.connection)));
-//
-                            },
-                            child:Padding(
-                              padding: EdgeInsets.only(top: 10, bottom: 10),
-                              child: ListTile(
-                                leading: CircleAvatar(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 10, bottom: 10),
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                radius: 30,
+                                backgroundColor: Colors.white,
+                                child: CircleAvatar(
+                                  radius: 26,
                                   backgroundImage:
-                                  NetworkImage(data.data[index].profileURL),
+                                      NetworkImage(data.data[index].profileURL),
                                 ),
-                                title: Text(
-                                  filteredUsers[index].name,
-                                  style: TextStyle(
-                                      fontSize: 24.0,
-                                      color: Colors.white,
-                                      fontFamily: 'OpenSans',
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    _selectedName = filteredUsers[index].name;
-                                  });
-                                },
                               ),
-                            ) ,
-                          )
-
-
-                      );
+                              title: Text(
+                                filteredUsers[index].name,
+                                style: TextStyle(
+                                    fontSize: 24.0,
+                                    color: Colors.white,
+                                    fontFamily: 'OpenSans',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  _selectedName = filteredUsers[index].name;
+                                });
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SurveyResultsChooseSurvey()));
+                              },
+                            ),
+                          ));
                     },
                   ),
                 ),
@@ -160,6 +159,7 @@ class _SurveyResultsChoosePerson extends State<SurveyResultsChoosePerson>{
       },
     );
   }
+
   _getCustomAppBar() {
     return PreferredSize(
       preferredSize: Size.fromHeight(100),
@@ -182,8 +182,11 @@ class _SurveyResultsChoosePerson extends State<SurveyResultsChoosePerson>{
                   icon: Icon(
                     Icons.arrow_back,
                     size: 28,
-                    color: Colors.grey.shade500,
+                    color: Colors.black,
                   ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
