@@ -36,13 +36,13 @@ class _AllChatsPageState extends State<AllChatsPage> {
             var allChats = chatList.data;
             return Stack(children: [
               Container(
-                height: 124,
+                height: 136,
                 color: allChats[0].seen ? AppColors.pembe.withOpacity(1) : AppColors.acikMor.withOpacity(1),
               ),
               ListView.builder(
                 itemBuilder: (context, index) {
                   return Container(
-                    height: 106,
+                    height: 107,
                     color: allChats[index + 1].seen ? AppColors.pembe.withOpacity(1) : AppColors.acikMor.withOpacity(1),
                   );
                 },
