@@ -17,6 +17,7 @@ class UserModel with ChangeNotifier implements AuthService, DBService, StorageSe
   UserRepository _userRepository = locator<UserRepository>();
   User _user;
   User _connection;
+  List<User> _connectionList;
 
   ViewState get state => _state;
   User get user => _user;
@@ -128,7 +129,8 @@ class UserModel with ChangeNotifier implements AuthService, DBService, StorageSe
   Future<List<User>> getConnections(User user) async{
     try {
       state = ViewState.BUSY;
-      return await _userRepository.getConnections(user);
+      _connectionList = await _userRepository.getConnections(user);
+      return _connectionList;
     } finally {
       _state = ViewState.IDLE;
     }
