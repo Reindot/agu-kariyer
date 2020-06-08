@@ -1,5 +1,6 @@
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/values/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -9,6 +10,9 @@ class CreateAnnouncement extends StatefulWidget {
 }
 
 class _CreateAnnouncement extends State<CreateAnnouncement> {
+  bool _sendToStudent = false;
+  bool _sendToMentor = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +41,10 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      SizedBox(height: 20.0),
+                      _buildAnnouncementTF(),
                       SizedBox(height: 50.0),
-                     _buildAnnouncementTF(),
+                      _buildCheckBoxsTF(),
                       SizedBox(height: 20.0),
                       _buildSendBtn()
                     ],
@@ -51,7 +57,6 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
       ),
     );
   }
-
 
   Widget _buildAnnouncementTF() {
     return Column(
@@ -114,6 +119,55 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
     );
   }
 
+  Widget _buildCheckBoxsTF() {
+    return Container(
+      height: 20.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Spacer(flex: 1),
+          Theme(
+            data: ThemeData(unselectedWidgetColor: AppColors.koyuMor),
+            child: Checkbox(
+              value: _sendToMentor,
+              activeColor: AppColors.koyuMor,
+              checkColor: Colors.white,
+              onChanged: (value) {
+                setState(() {
+                  _sendToMentor = value;
+                });
+              },
+            ),
+          ),
+          Text(
+            'Mentöre Yolla',
+            style: darkPurpleTextStyle,
+          ),
+          Spacer(flex: 3),
+          Theme(
+            data: ThemeData(unselectedWidgetColor: AppColors.koyuMor),
+            child: Checkbox(
+              value: _sendToStudent,
+              activeColor: AppColors.koyuMor,
+              checkColor: Colors.white,
+              onChanged: (value) {
+                setState(() {
+                  _sendToStudent = value;
+                });
+              },
+            ),
+          ),
+          Text(
+            'Öğrenciye Yolla',
+            style: darkPurpleTextStyle,
+          ),
+          Spacer(flex: 1),
+        ],
+      ),
+    );
+  }
+
   _getCustomAppBar() {
     return PreferredSize(
       preferredSize: Size.fromHeight(100),
@@ -138,6 +192,7 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
                     size: 28,
                     color: Colors.white,
                   ),
+                  onPressed: () {},
                 ),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
