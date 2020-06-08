@@ -111,7 +111,7 @@ class FirestoreDBService implements DBService {
       "sender": message.from,
       "reciever": message.receiver,
       "last": message.message,
-      "seen": false,
+      "seen": true,
       "date": FieldValue.serverTimestamp(),
     });
     await _firestore
