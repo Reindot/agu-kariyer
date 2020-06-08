@@ -38,7 +38,7 @@ class _AllChatsPageState extends State<AllChatsPage> {
                 itemBuilder: (context, index) {
                   return Container(
                     height: 106,
-                    color: allChats[index + 1].seen ? AppColors.acikMor.withOpacity(1) : AppColors.pembe.withOpacity(1),
+                    color: allChats[index + 1].seen ? AppColors.pembe.withOpacity(1) : AppColors.acikMor.withOpacity(1),
                   );
                 },
                 itemCount: allChats.length - 1,
@@ -58,7 +58,7 @@ class _AllChatsPageState extends State<AllChatsPage> {
                       margin: EdgeInsets.only(bottom: 2),
                       padding: EdgeInsets.only(top: 22, bottom: 22),
                       decoration: BoxDecoration(
-                        color: chat.seen ? AppColors.acikMor.withOpacity(1) : AppColors.pembe.withOpacity(1),
+                        color: chat.seen ? AppColors.pembe.withOpacity(1) : AppColors.acikMor.withOpacity(1),
                         borderRadius:
                             BorderRadius.only(bottomLeft: Radius.circular(75)),
                         boxShadow: [
