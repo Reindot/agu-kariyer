@@ -37,12 +37,15 @@ class _HomePageState extends State<HomePage> {
               body: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     "Bağlantılarım",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 22,
                       color: Colors.grey.shade500,
                     ),
                   ),
@@ -74,8 +77,7 @@ class _HomePageState extends State<HomePage> {
                                           });
                                         },
                                         child: Card(
-                                            margin:
-                                            EdgeInsets.only(left: 40),
+                                            margin: EdgeInsets.only(right: 25, left: 25),
                                             elevation: 0,
                                             child: Column(
                                               mainAxisAlignment:
@@ -83,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                                                   .spaceEvenly,
                                               children: <Widget>[
                                                 CircleAvatar(
-                                                  radius: 30,
+                                                  radius: 38,
                                                   backgroundImage:
                                                   NetworkImage(
                                                       userList[index]
@@ -105,17 +107,20 @@ class _HomePageState extends State<HomePage> {
                           }
                         },
                       )),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     "Kişi Detayları",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey.shade500,
                     ),
                   ),
                   Container(
-                    height: 300,
+                    height: 360,
                     margin: EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
@@ -181,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.grey.shade500,
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 20,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -201,12 +206,15 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
                         Text(
                           "Sonraki Buluşma İçin Son Tarih\n 27 Mayıs 2020",
                           style: TextStyle(color: Colors.white, fontSize: 16),
                           textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: 20,
                         ),
                         Expanded(
                           child: Container(
@@ -230,6 +238,9 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ],
                               )),
+                        ),
+                        SizedBox(
+                          height: 5,
                         ),
                         Expanded(
                           child: Container(
