@@ -9,6 +9,12 @@ final purpleTextStyle = TextStyle(
   fontFamily: 'OpenSans',
 );
 
+final darkPurpleTextStyle = TextStyle(
+  color: AppColors.koyuMor,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'OpenSans',
+);
+
 
 final secondBoxDecorationStyle = BoxDecoration(
   color: AppColors.acikMor.withOpacity(0.1),

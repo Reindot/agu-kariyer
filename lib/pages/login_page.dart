@@ -1,6 +1,7 @@
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/pages/sifremi_unuttum_widget.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
+import 'package:agucareer/widgets/alert_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,6 +34,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    UserModel _userModel = Provider.of<UserModel>(context);
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -244,7 +246,6 @@ class _LoginPageState extends State<LoginPage> {
       child: RaisedButton(
         padding: EdgeInsets.all(15.0),
         color: AppColors.acikMor,
-        onLongPress: () => onLogInLongPressed(mailController.text, passController.text, context),
         onPressed: () => onLogInPressed(mailController.text, passController.text, context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -269,19 +270,16 @@ class _LoginPageState extends State<LoginPage> {
     final _userModel = Provider.of<UserModel>(context, listen: false);
     try {
       User user = await _userModel.signIn(mailController.text, passController.text);
-      if (user != null)
-        Navigator.pushReplacementNamed(context, '/home');
-    } catch (e) {
-      debugPrint(">>> login_page >>> onLogInPressed >>> ${e.toString()}");
-    }
-  }
+      if (user != null){
 
-  void onLogInLongPressed(String mail, String pass, BuildContext context) async {
-    final _userModel = Provider.of<UserModel>(context, listen: false);
-    try {
-      await _userModel.createUser(mailController.text, passController.text);
+      }
+        Navigator.pushReplacementNamed(context, _userModel.user.type == "MOD" ? '/adminHome' : '/home');
     } catch (e) {
-      debugPrint(">>> login_page >>> onLogInLongPressed >>> ${e.toString()}");
+      showDialog(
+          context: context,
+          builder: (context) => AlertWidget.standart(
+              context: context, title: "Kullanıcı adı veya şifre hatalı!"),
+          barrierDismissible: false);
     }
   }
 

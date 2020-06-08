@@ -130,14 +130,6 @@ class _AllChatsPageState extends State<AllChatsPage> {
                       color: Colors.white,
                     ),
                     onPressed: () => Navigator.pop(context)),
-                IconButton(
-                    padding: EdgeInsets.all(20),
-                    icon: Icon(
-                      Icons.search,
-                      size: 28,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {}),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),

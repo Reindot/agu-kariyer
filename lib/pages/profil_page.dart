@@ -85,8 +85,18 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   SizedBox(height: screenSize.height / 9),
                   _buildProfileImage(widget._user, _userModel),
-                  Text("Değiştir",
-                      style: TextStyle(color: Colors.grey.shade600)),
+                  SizedBox(
+                    child: Builder(
+                      builder: (BuildContext context) {
+                        if (_userModel.user.userID == widget._user.userID) {
+                          return Text("Değiştir",
+                              style: TextStyle(color: Colors.grey.shade600));
+                        } else {
+                          return SizedBox();
+                        }
+                      },
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
@@ -122,11 +132,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           return RaisedButton(
                               padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
                               color: AppColors.acikMor.withOpacity(1),
-                              onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          ProfilDuzenleWidget())),
+                              onPressed: () => Navigator.pushReplacementNamed(
+                                  context, '/editProfile'),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(60),
                               ),
@@ -146,7 +153,6 @@ class _ProfilePageState extends State<ProfilePage> {
                         } else {
                           return RaisedButton(
                               padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
-                              //    if (_userModel.user.userID == widget._user.userID)(
                               color: AppColors.acikMor.withOpacity(1),
                               onPressed: () {
                                 Navigator.of(context, rootNavigator: true).push(
@@ -278,7 +284,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              if(_userModel.user.userID == widget._user.userID){
+              if (_userModel.user.userID == widget._user.userID) {
                 showModalBottomSheet(
                     context: context,
                     builder: (context) {

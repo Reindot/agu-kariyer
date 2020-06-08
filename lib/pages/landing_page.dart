@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 
+import 'admin_panel/admin_home_page.dart';
+
 class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,11 @@ class LandingPage extends StatelessWidget {
       if(_userModel.user == null){
         return HosgeldinWidget();
       } else{
-        return HomePage();
+        if(_userModel.user.type == "MOD"){
+          return AdminHomePage();
+        }else{
+          return HomePage();
+        }
       }
     } else {
       return Scaffold(
