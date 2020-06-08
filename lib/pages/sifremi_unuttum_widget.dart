@@ -2,6 +2,7 @@ import 'package:agucareer/pages/mail_gonderildi_widget.dart';
 import 'package:agucareer/values/constants.dart';
 import 'package:agucareer/values/values.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
+import 'package:agucareer/widgets/alert_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -107,7 +108,8 @@ class SifremiUnuttumWidget extends StatelessWidget {
                         ),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 14.0, left: 15.0),
+                          contentPadding:
+                              EdgeInsets.only(top: 14.0, left: 15.0),
                           prefixIcon: Icon(
                             Icons.mail,
                             color: AppColors.acikMor.withOpacity(0.4),
@@ -170,11 +172,13 @@ class SifremiUnuttumWidget extends StatelessWidget {
 
 void _resPassword(BuildContext context) async {
   final _userModel = Provider.of<UserModel>(context, listen: false);
-  bool value = await _userModel.resetPassword(_email);
-  if (value) {
-    Navigator.pushReplacement(context,
-        MaterialPageRoute(builder: (context) => MailGonderildiWidget()));
-  } else {
-    //EMAIL IS NOT VALID!!!
+  try {
+    await _userModel.resetPassword(_email);
+  } catch (e) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertWidget.standart(
+            context: context, title: "Kayıtlı e-posta adresi bulunamadı!"),
+        barrierDismissible: false);
   }
 }
