@@ -93,9 +93,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             color: AppColors.acikMor.withOpacity(1),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
-                              bottomRight: Radius.lerp(
-                                  Radius.circular(-45), Radius.circular(45), 1),
-                            )),
+                                  bottomRight: Radius.lerp(
+                                      Radius.circular(-45), Radius.circular(45), 1),
+                                )),
                             onPressed: () {
                               setState(() {
                                 _selectedPart = 1;
@@ -135,9 +135,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             color: AppColors.acikMor.withOpacity(1),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.lerp(
-                                  Radius.circular(-45), Radius.circular(45), 1),
-                            )),
+                                  bottomLeft: Radius.lerp(
+                                      Radius.circular(-45), Radius.circular(45), 1),
+                                )),
                             onPressed: () {
                               setState(() {
                                 if (_selectedPart != 2) {
@@ -172,9 +172,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             color: AppColors.acikMor.withOpacity(1),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
-                              bottomRight: Radius.lerp(
-                                  Radius.circular(-45), Radius.circular(45), 1),
-                            )),
+                                  bottomRight: Radius.lerp(
+                                      Radius.circular(-45), Radius.circular(45), 1),
+                                )),
                             onPressed: () {
                               setState(() {
                                 if (_selectedPart != 3) {
@@ -212,7 +212,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                         color: AppColors.acikMor.withOpacity(1),
                         shape: RoundedRectangleBorder(
                             borderRadius:
-                                BorderRadius.all(Radius.circular(40))),
+                            BorderRadius.all(Radius.circular(40))),
                         onPressed: () {
                           showDialog(
                             context: context,
@@ -225,80 +225,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                       ),
                     ),
                   ),
-                  Expanded(
-                      flex: 2,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Expanded(
-                            child: RaisedButton(
-                              color: AppColors.pembe.withOpacity(1),
-                              child: Text(
-                                "KİŞİ",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _selectedPart = 0;
-                                });
-                              },
-                              elevation: 0,
-                            ),
-                          ),
-                          Expanded(
-                            child: RaisedButton(
-                              color: AppColors.pembe.withOpacity(1),
-                              child: Text(
-                                "MEKAN",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _selectedPart = 1;
-                                });
-                              },
-                              elevation: 0,
-                            ),
-                          ),
-                          Expanded(
-                            child: RaisedButton(
-                              color: AppColors.pembe.withOpacity(1),
-                              child: Text(
-                                "TARİH",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (_selectedPart != 2) {
-                                    newDateTime = DateTime.now();
-                                  }
-                                  _selectedPart = 2;
-                                });
-                              },
-                              elevation: 0,
-                            ),
-                          ),
-                          Expanded(
-                            child: RaisedButton(
-                              color: AppColors.pembe.withOpacity(1),
-                              child: Text(
-                                "SAAT",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  if (_selectedPart != 3) {
-                                    _currentTime = Duration.zero;
-                                  }
-                                  _selectedPart = 3;
-                                });
-                              },
-                              elevation: 0,
-                            ),
-                          ),
-                        ],
-                      )),
+                  Spacer(flex: 1),
                 ],
               ),
             ),
@@ -374,11 +301,11 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             setState(() {
                               filteredUsers = data.data
                                   .where((u) => (u.name
-                                          .toLowerCase()
-                                          .contains(string.toLowerCase()) ||
-                                      u.email
-                                          .toLowerCase()
-                                          .contains(string.toLowerCase())))
+                                  .toLowerCase()
+                                  .contains(string.toLowerCase()) ||
+                                  u.email
+                                      .toLowerCase()
+                                      .contains(string.toLowerCase())))
                                   .toList();
                             });
                           });
@@ -404,7 +331,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                           child: ListTile(
                             leading: CircleAvatar(
                               backgroundImage:
-                                  NetworkImage(data.data[index].profileURL),
+                              NetworkImage(data.data[index].profileURL),
                             ),
                             title: Text(
                               filteredUsers[index].name,
@@ -495,7 +422,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                 borderSide: BorderSide(
                                     color: Colors.white, width: 12.0),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
+                                BorderRadius.all(Radius.circular(30))),
                             contentPadding: EdgeInsets.only(top: 14.0),
                             prefixIcon: Icon(
                               Icons.subtitles,
@@ -544,7 +471,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                   fontFamily: 'OpenSans')),
                           shape: RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(30))),
+                              BorderRadius.all(Radius.circular(30))),
                         );
                       },
                     );
@@ -584,7 +511,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
               data: CupertinoThemeData(
                 textTheme: CupertinoTextThemeData(
                   dateTimePickerTextStyle:
-                      TextStyle(color: Colors.white, fontSize: 24),
+                  TextStyle(color: Colors.white, fontSize: 24),
                 ),
               ),
               child: CupertinoDatePicker(
@@ -643,7 +570,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                   }
                   setState(() {
                     _selectedDateFormat =
-                        "${_selectedDate.day} $_selectedMonth ${_selectedDate.year}";
+                    "${_selectedDate.day} $_selectedMonth ${_selectedDate.year}";
                   });
 
                   showDialog(
