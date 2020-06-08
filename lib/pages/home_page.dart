@@ -124,10 +124,10 @@ class _HomePageState extends State<HomePage> {
                     margin: EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                        bottomLeft: Radius.circular(30),
+                        bottomRight: Radius.circular(30),
                       ),
                       color: AppColors.koyuMor.withOpacity(1.0),
                     ),
