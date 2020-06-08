@@ -1,5 +1,6 @@
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/pages/chat_page.dart';
+import 'package:agucareer/pages/notifications.dart';
 import 'package:agucareer/pages/profil_page.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
@@ -311,7 +312,13 @@ class _HomePageState extends State<HomePage> {
                       size: 28,
                       color: Colors.white,
                     ),
-                    onPressed: () {}),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NotificationPage()));
+                    },
+                    ),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),

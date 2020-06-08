@@ -1,5 +1,6 @@
 //import 'dart:js';
 
+import 'package:agucareer/values/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -54,7 +55,6 @@ class NotificationHandler{
     _fcm.configure(
       onMessage: (Map<String, dynamic> message) async {
         print("onMessage tetik: $message");
-        showNotification(message);
       },
       onBackgroundMessage: myBackgroundMessageHandler ,
       onLaunch: (Map<String, dynamic> message) async {
@@ -85,9 +85,11 @@ class NotificationHandler{
       debugPrint('notification payload: ' + payload);
     }
   }
-
+  
 
 
   Future onDidReceiveLocalNotification(int id, String title, String body, String payload) {
   }
+
+
 }

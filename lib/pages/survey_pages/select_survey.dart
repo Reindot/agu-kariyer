@@ -62,7 +62,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
                 Card(
                   margin:
                       EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-                  color: AppColors.koyuMor.withOpacity(1),
+                  color: AppColors.acikMavi.withOpacity(1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(60.0),
                   ),
@@ -88,7 +88,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
                 Card(
                   margin:
                       EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-                  color: AppColors.koyuMor.withOpacity(1),
+                  color: AppColors.acikMavi.withOpacity(1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(60.0),
                   ),
@@ -114,7 +114,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
                 Card(
                   margin:
                       EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-                  color: AppColors.koyuMor.withOpacity(1),
+                  color: AppColors.acikMavi.withOpacity(1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(60.0),
                   ),
@@ -140,7 +140,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
                 Card(
                   margin:
                       EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-                  color: AppColors.koyuMor.withOpacity(1),
+                  color: AppColors.acikMavi.withOpacity(1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(60.0),
                   ),
@@ -166,7 +166,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
                 Card(
                   margin:
                       EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-                  color: AppColors.koyuMor.withOpacity(1),
+                  color: AppColors.acikMavi.withOpacity(1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(60.0),
                   ),
