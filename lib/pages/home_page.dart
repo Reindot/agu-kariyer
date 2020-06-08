@@ -167,7 +167,8 @@ class _HomePageState extends State<HomePage> {
                                         builder: (context) => ChatPage(
                                             me: _userModel.user.userID,
                                             it: _userModel
-                                                .connection.userID)));
+                                                .connection.userID,
+                                        profileImage: NetworkImage(_userModel.connection.profileURL),)));
                                   },
                                   icon: Icon(
                                     Icons.navigation,
