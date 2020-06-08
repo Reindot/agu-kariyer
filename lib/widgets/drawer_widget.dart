@@ -2,9 +2,9 @@ import 'dart:ui';
 import 'package:agucareer/pages/admin_panel/admin_home_page.dart';
 import 'package:agucareer/pages/all_chats_page.dart';
 import 'package:agucareer/pages/arrange_meeting.dart';
-import 'package:agucareer/pages/home_page.dart';
 import 'package:agucareer/pages/profil_duzenle_widget.dart';
 import 'package:agucareer/pages/profil_page.dart';
+import 'package:agucareer/pages/survey_pages/fill_survey_page.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/material.dart';
@@ -29,12 +29,12 @@ class DrawerWidget {
                     builder: (context) => ProfilePage(_userModel.user))),
             accountName: Text(
               "    ${_userModel.user.name}",
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white
-              ),
+              style: TextStyle(fontSize: 18, color: Colors.white),
             ),
-            accountEmail: Text("     ${_userModel.user.email}" , style: TextStyle(color: Colors.white),),
+            accountEmail: Text(
+              "     ${_userModel.user.email}",
+              style: TextStyle(color: Colors.white),
+            ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(60),
@@ -55,8 +55,7 @@ class DrawerWidget {
               title: Text("Ana Sayfa"),
               onTap: () {
                 Navigator.pop(context);
-              }
-              ),
+              }),
           ListTile(
               contentPadding: EdgeInsets.only(left: 30),
               leading: RotationTransition(
@@ -108,7 +107,8 @@ class DrawerWidget {
               leading: Icon(Icons.assignment),
               title: Text("Anket Doldur"),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => FillSurvey()));
               }),
           ListTile(
               contentPadding: EdgeInsets.only(left: 30),
@@ -117,8 +117,7 @@ class DrawerWidget {
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => AdminHomePage()));
-              }
-              ),
+              }),
           ListTile(
               contentPadding: EdgeInsets.only(left: 30),
               leading: Icon(Icons.info),
