@@ -23,10 +23,6 @@ class DrawerWidget {
         padding: EdgeInsets.only(top: 0),
         children: <Widget>[
           UserAccountsDrawerHeader(
-            onDetailsPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ProfilePage(_userModel.user))),
             accountName: Text(
               "    ${_userModel.user.name}",
               style: TextStyle(fontSize: 18, color: Colors.white),
@@ -50,12 +46,24 @@ class DrawerWidget {
                 backgroundImage: NetworkImage(_userModel.user.profileURL)),
           ),
           ListTile(
-              contentPadding: EdgeInsets.only(left: 30),
-              leading: Icon(Icons.home),
-              title: Text("Ana Sayfa"),
-              onTap: () {
-                Navigator.pop(context);
-              }),
+            contentPadding: EdgeInsets.only(left: 30),
+            leading: Icon(Icons.home),
+            title: Text("Ana Sayfa"),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.only(left: 30),
+            leading: Icon(Icons.person),
+            title: Text("Profilim"),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProfilePage(_userModel.user)));
+            },
+          ),
           ListTile(
               contentPadding: EdgeInsets.only(left: 30),
               leading: RotationTransition(
