@@ -22,6 +22,7 @@ class _AllChatsPageState extends State<AllChatsPage> {
     final _userModel = Provider.of<UserModel>(context);
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: AppColors.koyuMor.withOpacity(1),
       appBar: _getCustomAppBar(),
       body: FutureBuilder<List<Chats>>(
@@ -34,6 +35,10 @@ class _AllChatsPageState extends State<AllChatsPage> {
           } else {
             var allChats = chatList.data;
             return Stack(children: [
+              Container(
+                height: 124,
+                color: allChats[0].seen ? AppColors.pembe.withOpacity(1) : AppColors.acikMor.withOpacity(1),
+              ),
               ListView.builder(
                 itemBuilder: (context, index) {
                   return Container(
@@ -100,7 +105,7 @@ class _AllChatsPageState extends State<AllChatsPage> {
                   );
                 },
                 itemCount: allChats.length,
-              )
+              ),
             ]);
           }
         },
