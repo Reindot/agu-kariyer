@@ -4,8 +4,10 @@ import 'package:agucareer/models/chats_model.dart';
 import 'package:agucareer/pages/chat_page.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class AllChatsPage extends StatefulWidget {
@@ -44,6 +46,7 @@ class _AllChatsPageState extends State<AllChatsPage> {
               ListView.builder(
                 itemBuilder: (context, index) {
                   var chat = allChats[index];
+                  var _timeValue = _showTimeStamp(chat.date ?? Timestamp(1, 1));
                   return GestureDetector(
                     onTap: () {
                       Navigator.of(context, rootNavigator: true).push(
@@ -87,6 +90,8 @@ class _AllChatsPageState extends State<AllChatsPage> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
+                              SizedBox(height: 5,),
+                              Text(_timeValue,style: TextStyle(color: Colors.white),)
                             ],
                           ),
                         ],
@@ -101,6 +106,11 @@ class _AllChatsPageState extends State<AllChatsPage> {
         },
       ),
     );
+  }
+
+  String _showTimeStamp(Timestamp date) {
+    var _formatter = DateFormat.Hm();
+    return _formatter.format(date.toDate());
   }
 
   _getCustomAppBar() {
