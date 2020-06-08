@@ -11,5 +11,6 @@ abstract class DBService {
   Stream<List<Message>> getMessages(String fromID, String toID);
   Future<bool> sendMessage(Message message);
   Future<DateTime> getTime(String userID);
+  Future<bool> markAsSeen(String me, String it);
 
 }

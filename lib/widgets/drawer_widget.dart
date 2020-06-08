@@ -5,6 +5,7 @@ import 'package:agucareer/pages/arrange_meeting.dart';
 import 'package:agucareer/pages/home_page.dart';
 import 'package:agucareer/pages/profil_duzenle_widget.dart';
 import 'package:agucareer/pages/profil_page.dart';
+import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/material.dart';
 
@@ -75,7 +76,7 @@ class DrawerWidget {
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: Colors.blue.withOpacity(0.8),
+                  color: AppColors.acikMor,
                   borderRadius: BorderRadius.circular(120)),
               child: ListTile(
                   contentPadding: EdgeInsets.only(left: 20),
