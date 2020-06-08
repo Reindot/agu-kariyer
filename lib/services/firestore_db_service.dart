@@ -35,7 +35,8 @@ class FirestoreDBService implements DBService {
 
   @override
   Future<List<User>> getConnections(User user) async {
-    debugPrint(">>> firestore_db_service >>> getConnections >>> ${user.toString()}");
+    debugPrint(
+        ">>> firestore_db_service >>> getConnections >>> ${user.toString()}");
     QuerySnapshot querySnapshot1;
     QuerySnapshot querySnapshot2;
     if (user.type == "STUDENT") {
@@ -139,5 +140,18 @@ class FirestoreDBService implements DBService {
     var map = await _firestore.collection("server").document(userID).get();
     Timestamp time = map.data["time"];
     return time.toDate();
+  }
+
+  @override
+  Future<bool> markAsSeen(String me, String it) async {
+    var _meID = me + "." + it;
+    var _itID = it + "." + me;
+    await _firestore.collection("connections").document(_meID).setData({
+      "seen": true,
+    });
+    await _firestore.collection("connections").document(_itID).setData({
+      "seen": true,
+    });
+    return true;
   }
 }

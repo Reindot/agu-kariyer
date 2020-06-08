@@ -179,4 +179,14 @@ class UserModel with ChangeNotifier implements AuthService, DBService, StorageSe
     }
   }
 
+  @override
+  Future<bool> markAsSeen(String me, String it) async{
+    try {
+      state = ViewState.BUSY;
+      return await _userRepository.markAsSeen(me, it);
+    } finally {
+      _state = ViewState.IDLE;
+    }
+  }
+
 }

@@ -212,4 +212,11 @@ class UserRepository implements AuthService, DBService, StorageService {
       return await _firestoreDBService.getTime(userID);
     return null;
   }
+
+  @override
+  Future<bool> markAsSeen(String me, String it) async{
+    if (_dbMode == DBMode.FIRESTORE)
+      return await _firestoreDBService.markAsSeen(me, it);
+    return null;
+  }
 }
