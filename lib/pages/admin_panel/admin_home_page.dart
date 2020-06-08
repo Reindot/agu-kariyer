@@ -1,11 +1,9 @@
-import 'package:agucareer/pages/admin_panel/choose_last_date.dart';
+
 import 'package:agucareer/pages/admin_panel/choose_last_date__choose_meeting.dart';
 import 'package:agucareer/pages/admin_panel/create_announcement.dart';
 import 'package:agucareer/pages/admin_panel/create_new_user.dart';
 import 'package:agucareer/pages/admin_panel/match_users_person1.dart';
 import 'package:agucareer/pages/admin_panel/see_meetings_choose.dart';
-import 'package:agucareer/pages/admin_panel/see_meetings_main.dart';
-import 'package:agucareer/pages/admin_panel/survey_result_choose_survey.dart';
 import 'package:agucareer/pages/admin_panel/survey_results_choose_person.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
@@ -32,24 +30,26 @@ class _AdminHomePageState extends State<AdminHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            SizedBox(height: 10),
             Text(
               "Yönet",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 20,
+                fontSize: 22,
                 color: Colors.grey.shade500,
               ),
             ),
             Container(
-              height: 420,
+              height: 430,
               margin: EdgeInsets.all(20),
+              padding: EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
                 ),
                 color: AppColors.koyuMor.withOpacity(1.0),
               ),
@@ -59,9 +59,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       child: GestureDetector(
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SeeMeetingsChoose()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SeeMeetingsChoose(),
+                        ),
+                      );
                     },
                     child: Container(
                       margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
@@ -71,16 +73,19 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
+                          SizedBox(width: 40),
                           Icon(
                             Icons.date_range,
                             color: Colors.white,
                           ),
+                          SizedBox(width: 60),
                           Text(
                             "Buluşmaları Gör",
                             style: TextStyle(color: Colors.white),
                           ),
+                          Spacer(flex: 1),
                         ],
                       ),
                     ),
@@ -102,12 +107,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
+                            SizedBox(width: 40),
                             Icon(
                               Icons.assignment,
                               color: Colors.white,
                             ),
+                            SizedBox(width: 60),
                             Text(
                               "Anketleri Gör",
                               style: TextStyle(color: Colors.white),
@@ -131,12 +138,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
+                            SizedBox(width: 40),
                             Icon(
                               Icons.account_box,
                               color: Colors.white,
                             ),
+                            SizedBox(width: 60),
                             Text(
                               "Yeni Kayıt Oluştur",
                               style: TextStyle(color: Colors.white),
@@ -160,12 +169,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
+                            SizedBox(width: 40),
                             Icon(
                               Icons.notifications,
                               color: Colors.white,
                             ),
+                            SizedBox(width: 60),
                             Text(
                               "Duyuru Yap",
                               style: TextStyle(color: Colors.white),
@@ -182,12 +193,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
+                            SizedBox(width: 40),
                             Icon(
                               Icons.folder,
                               color: Colors.white,
                             ),
+                            SizedBox(width: 60),
                             Text(
                               "Dosya Yükle",
                               style: TextStyle(color: Colors.white),
@@ -212,12 +225,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
+                            SizedBox(width: 40),
                             Icon(
                               Icons.access_time,
                               color: Colors.white,
                             ),
+                            SizedBox(width: 60),
                             Text(
                               "Son Tarih Belirle",
                               style: TextStyle(color: Colors.white),
@@ -241,12 +256,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
+                            SizedBox(width: 40),
                             Icon(
                               Icons.people,
                               color: Colors.white,
                             ),
+                            SizedBox(width: 60),
                             Text(
                               "Kişi Eşleştir",
                               style: TextStyle(color: Colors.white),

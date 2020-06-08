@@ -28,8 +28,6 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
   List<User> filteredUsers = List();
   final _debouncer = Debouncer(milliseconds: 500);
   final _titleAddress = TextEditingController();
-  final _locationAddress = TextEditingController();
-  final _detailedAddress = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -453,7 +451,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
       child: Column(
         children: <Widget>[
           Expanded(
-            flex: 8,
+            flex: 6,
             child: Container(
               margin: EdgeInsets.all(25),
               child: ListView(
@@ -513,119 +511,6 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(42),
                           ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 20.0),
-                      Text(
-                        "Adres Konumu:",
-                        style: TextStyle(
-                            color: Colors.white.withOpacity(0.75),
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'OpenSans'),
-                      ),
-                      SizedBox(height: 10.0),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.18),
-                          borderRadius: BorderRadius.circular(25.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 6.0,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: TextFormField(
-                          controller: _locationAddress,
-                          cursorColor: Colors.white,
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'OpenSans',
-                          ),
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.white, width: 12.0),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
-                            contentPadding: EdgeInsets.only(top: 14.0),
-                            prefixIcon: Icon(
-                              Icons.location_on,
-                              color: Colors.white.withOpacity(0.4),
-                            ),
-                            hintText: 'Örneğin: Abdullah Gül Üniversitesi',
-                            hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.4),
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'OpenSans',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 20.0),
-                      Text(
-                        "Adres Tarifi:",
-                        style: TextStyle(
-                            color: Colors.white.withOpacity(0.75),
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'OpenSans'),
-                      ),
-                      SizedBox(height: 10.0),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.18),
-                          borderRadius: BorderRadius.circular(25.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 6.0,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: TextFormField(
-                          controller: _detailedAddress,
-                          cursorColor: Colors.white,
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'OpenSans',
-                          ),
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.white, width: 12.0),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
-                            contentPadding: EdgeInsets.only(top: 14.0),
-                            prefixIcon: Icon(
-                              Icons.more,
-                              color: Colors.white.withOpacity(0.4),
-                            ),
-                            hintText:
-                                'Adresi kendi cümleleriniz ile tarif ediniz.',
-                            hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.4),
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'OpenSans',
-                            ),
-                          ),
                         ),
                       ),
                     ],
