@@ -249,10 +249,10 @@ class _CreateNewUser extends State<CreateNewUser> {
   void saveUser(BuildContext context) async {
     final _userModel = Provider.of<UserModel>(context, listen: false);
     try {
-      User user = await _userModel.createUser(_mailCont.text, "39824u2j@054!!+,İ");
+      User user = await _userModel.createUser(_mailCont.text, "123456");
       if(user.email != null){
         await _userModel.resetPassword(user.email);
-        await _userModel.updateUser(user.userID, {'name' : _nameCont.text, 'type' : _typeCont.text});
+        await _userModel.updateUser(user.userID, {'name' : _nameCont.text, 'type' : _typeCont.text, 'modID' : _userModel.user.userID});
       }
     } catch (e) {
       showDialog(
