@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../arrange_meeting.dart';
 
 class MatchUserPerson2 extends StatefulWidget{
+  int fix = 1;
   @override
   _MatchUserPerson2 createState() =>  _MatchUserPerson2();
 }
@@ -45,7 +46,9 @@ class _MatchUserPerson2 extends State<MatchUserPerson2>{
       future: _userModel.getConnections(_userModel.user),
       builder: (context, data) {
         if (data.hasData) {
-          filteredUsers = data.data;
+          if(widget.fix == 1);
+            filteredUsers = data.data;
+          widget.fix ++;
           return Container(
             alignment: Alignment.center,
             color: AppColors.koyuMor.withOpacity(1),

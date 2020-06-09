@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../arrange_meeting.dart';
 
 class SurveyResultsChoosePerson extends StatefulWidget {
+  int fix = 1;
   @override
   _SurveyResultsChoosePerson createState() => _SurveyResultsChoosePerson();
 }
@@ -44,7 +45,9 @@ class _SurveyResultsChoosePerson extends State<SurveyResultsChoosePerson> {
       future: _userModel.getConnections(_userModel.user),
       builder: (context, data) {
         if (data.hasData) {
-          filteredUsers = data.data;
+          if(widget.fix == 1)
+            filteredUsers = data.data;
+          widget.fix ++;
           return Container(
             alignment: Alignment.center,
             color: AppColors.koyuMor.withOpacity(1),

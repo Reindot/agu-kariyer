@@ -265,7 +265,7 @@ class _CreateNewUser extends State<CreateNewUser> {
       showDialog(
           context: context,
           builder: (context) => AlertWidget.standart(
-              context: context, title: "Kullanıcı oluşturulamdı!"),
+              context: context, title: "Kullanıcı oluşturulamadı!"),
           barrierDismissible: false);
     }
   }

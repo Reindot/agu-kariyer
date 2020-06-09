@@ -13,8 +13,6 @@ class SelectSurvey extends StatefulWidget {
 
 class _SelectSurveyState extends State<SelectSurvey> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-  List<User> filteredUsers = List();
-
   @override
   Widget build(BuildContext context) {
     final UserModel _userModel = Provider.of<UserModel>(context);
@@ -38,166 +36,154 @@ class _SelectSurveyState extends State<SelectSurvey> {
   }
 
   Widget _buildSurveyPart(BuildContext context, UserModel _userModel) {
-    return FutureBuilder<List<User>>(
-      future: _userModel.getConnections(_userModel.user),
-      builder: (context, data) {
-        if (data.hasData) {
-          filteredUsers = data.data;
-          return Container(
-            alignment: Alignment.center,
-            color: Colors.white,
-            padding: EdgeInsets.only(top: 15),
-            child: Column(
-              children: <Widget>[
-                Text("Anket Seç",
-                    style: TextStyle(
-                        color: AppColors.koyuMor.withOpacity(1),
-                        letterSpacing: 1.5,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'OpenSans')),
-                SizedBox(
-                  height: 10,
-                ),
-                Card(
-                  margin:
-                      EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-                  color: AppColors.acikMavi.withOpacity(1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(60.0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
-                    child: ListTile(
-                      title: Text(
-                        '1. Görüşmeni Değerlendir',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      onTap: () {
-                        setState(() {
-                          //  _selectedName = filteredUsers[index].name;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                Card(
-                  margin:
-                      EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-                  color: AppColors.acikMavi.withOpacity(1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(60.0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
-                    child: ListTile(
-                      title: Text(
-                        '2. Görüşmeni Değerlendir',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      onTap: () {
-                        setState(() {
-                          //  _selectedName = filteredUsers[index].name;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                Card(
-                  margin:
-                      EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-                  color: AppColors.acikMavi.withOpacity(1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(60.0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
-                    child: ListTile(
-                      title: Text(
-                        '3. Görüşmeni Değerlendir',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      onTap: () {
-                        setState(() {
-                          //  _selectedName = filteredUsers[index].name;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                Card(
-                  margin:
-                      EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-                  color: AppColors.acikMavi.withOpacity(1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(60.0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
-                    child: ListTile(
-                      title: Text(
-                        '4. Görüşmeni Değerlendir',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      onTap: () {
-                        setState(() {
-                          //  _selectedName = filteredUsers[index].name;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                Card(
-                  margin:
-                      EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-                  color: AppColors.acikMavi.withOpacity(1),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(60.0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 10),
-                    child: ListTile(
-                      title: Text(
-                        '5. Görüşmeni Değerlendir',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      onTap: () {
-                        setState(() {
-                          //  _selectedName = filteredUsers[index].name;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-              ],
+    return Container(
+      alignment: Alignment.center,
+      color: Colors.white,
+      padding: EdgeInsets.only(top: 15),
+      child: Column(
+        children: <Widget>[
+          Text("Anket Seç",
+              style: TextStyle(
+                  color: AppColors.koyuMor.withOpacity(1),
+                  letterSpacing: 1.5,
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'OpenSans')),
+          SizedBox(
+            height: 10,
+          ),
+          Card(
+            margin:
+            EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
+            color: AppColors.acikMavi.withOpacity(1),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(60.0),
             ),
-          );
-        } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
+            child: Padding(
+              padding: EdgeInsets.only(top: 10, bottom: 10),
+              child: ListTile(
+                title: Text(
+                  '1. Görüşmeni Değerlendir',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                onTap: () {
+                  setState(() {
+                    //  _selectedName = filteredUsers[index].name;
+                  });
+                },
+              ),
+            ),
+          ),
+          Card(
+            margin:
+            EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
+            color: AppColors.acikMavi.withOpacity(1),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(60.0),
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(top: 10, bottom: 10),
+              child: ListTile(
+                title: Text(
+                  '2. Görüşmeni Değerlendir',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                onTap: () {
+                  setState(() {
+                    //  _selectedName = filteredUsers[index].name;
+                  });
+                },
+              ),
+            ),
+          ),
+          Card(
+            margin:
+            EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
+            color: AppColors.acikMavi.withOpacity(1),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(60.0),
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(top: 10, bottom: 10),
+              child: ListTile(
+                title: Text(
+                  '3. Görüşmeni Değerlendir',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                onTap: () {
+                  setState(() {
+                    //  _selectedName = filteredUsers[index].name;
+                  });
+                },
+              ),
+            ),
+          ),
+          Card(
+            margin:
+            EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
+            color: AppColors.acikMavi.withOpacity(1),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(60.0),
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(top: 10, bottom: 10),
+              child: ListTile(
+                title: Text(
+                  '4. Görüşmeni Değerlendir',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                onTap: () {
+                  setState(() {
+                    //  _selectedName = filteredUsers[index].name;
+                  });
+                },
+              ),
+            ),
+          ),
+          Card(
+            margin:
+            EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
+            color: AppColors.acikMavi.withOpacity(1),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(60.0),
+            ),
+            child: Padding(
+              padding: EdgeInsets.only(top: 10, bottom: 10),
+              child: ListTile(
+                title: Text(
+                  '5. Görüşmeni Değerlendir',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                onTap: () {
+                  setState(() {
+                    //  _selectedName = filteredUsers[index].name;
+                  });
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
