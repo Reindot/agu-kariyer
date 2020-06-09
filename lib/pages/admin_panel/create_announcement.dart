@@ -105,7 +105,10 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
       child: RaisedButton(
         padding: EdgeInsets.all(15.0),
         color: AppColors.koyuMor.withOpacity(1.0),
-        onPressed: () => sendIt(context),
+        onPressed: () {
+          sendIt(context);
+          Navigator.pop(context);
+        },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),

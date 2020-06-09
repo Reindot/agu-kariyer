@@ -11,7 +11,6 @@ class SurveyQuestions extends StatefulWidget {
 }
 
 class _SurveyQuestionsState extends State<SurveyQuestions> {
-
   @override
   Widget build(BuildContext context) {
     final UserModel _userModel = Provider.of<UserModel>(context);
@@ -141,7 +140,9 @@ class _SurveyQuestionsState extends State<SurveyQuestions> {
                             height: 60,
                             margin: EdgeInsets.only(right: 20),
                             child: FlatButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
                               color: AppColors.koyuMor.withOpacity(1),
                               shape: RoundedRectangleBorder(
                                 borderRadius:
@@ -210,10 +211,10 @@ class _SurveyQuestionsState extends State<SurveyQuestions> {
                           children: <Widget>[
                             Text(
                               "2. Kariyer Danışmanlığı ilk görüşmesi hakkındaki izlenimleriniz nelerdir? "
-                                  "(Genel olarak görüşme hakkındaki olumlu/olumsuz düşünceleriniz/"
-                                  "değerlendirmeleriniz nelerdir? Görüşmenin faydalı olduğunu düşünüyor musunuz?"
-                                  " Görüşmenizi danışan ile aranızdaki iletişim, danışanın katılımı,"
-                                  " sizin katkılarınız açısından değerlendirebilirsiniz.) ",
+                              "(Genel olarak görüşme hakkındaki olumlu/olumsuz düşünceleriniz/"
+                              "değerlendirmeleriniz nelerdir? Görüşmenin faydalı olduğunu düşünüyor musunuz?"
+                              " Görüşmenizi danışan ile aranızdaki iletişim, danışanın katılımı,"
+                              " sizin katkılarınız açısından değerlendirebilirsiniz.) ",
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
@@ -288,11 +289,13 @@ class _SurveyQuestionsState extends State<SurveyQuestions> {
                             height: 60,
                             margin: EdgeInsets.only(right: 20),
                             child: FlatButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
                               color: AppColors.koyuMor.withOpacity(1),
                               shape: RoundedRectangleBorder(
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(30)),
+                                    BorderRadius.all(Radius.circular(30)),
                               ),
                               textColor: Colors.black,
                               padding: EdgeInsets.all(0),
