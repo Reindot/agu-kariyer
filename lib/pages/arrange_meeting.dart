@@ -270,7 +270,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
               children: <Widget>[
                 Text("Birisini Seç",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.acikMavi.withOpacity(1),
                         letterSpacing: 1.5,
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,
@@ -285,20 +285,20 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                     SizedBox(
                       width: screenSize.width / 1.7,
                       child: TextField(
-                        cursorColor: Colors.grey,
+                        cursorColor: AppColors.acikMavi.withOpacity(0.8),
                         style: TextStyle(
-                          color: Colors.white,
+                          color: AppColors.acikMavi.withOpacity(1),
                         ),
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
-                            hoverColor: Colors.white,
+                            hoverColor: AppColors.acikMavi.withOpacity(1),
                             prefixIcon: Icon(
                               Icons.search,
-                              color: Colors.white.withOpacity(0.5),
+                              color: AppColors.acikMavi.withOpacity(0.8),
                             ),
                             hintText: 'Seçmek istediğin ismin gir.',
                             hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.5),
+                              color: AppColors.acikMavi.withOpacity(0.8),
                             )),
                         onChanged: (string) {
                           _debouncer.run(() {
@@ -323,7 +323,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                       return Card(
                         margin: EdgeInsets.only(
                             top: 10, bottom: 10, right: 15, left: 15),
-                        color: Colors.white.withOpacity(0.2),
+                        color: AppColors.acikMavi.withOpacity(0.8),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(60.0),
                         ),
@@ -331,8 +331,13 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                           padding: EdgeInsets.only(top: 10, bottom: 10),
                           child: ListTile(
                             leading: CircleAvatar(
-                              backgroundImage:
-                              NetworkImage(data.data[index].profileURL),
+                              radius: 30,
+                              backgroundColor: Colors.white,
+                              child: CircleAvatar(
+                                radius: 26,
+                                backgroundImage:
+                                NetworkImage(data.data[index].profileURL),
+                              ),
                             ),
                             title: Text(
                               filteredUsers[index].name,
@@ -392,14 +397,14 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                       Text(
                         "Adres Başlığı:",
                         style: TextStyle(
-                            color: Colors.white.withOpacity(0.75),
+                            color: AppColors.acikMavi.withOpacity(1),
                             fontWeight: FontWeight.bold,
                             fontFamily: 'OpenSans'),
                       ),
                       SizedBox(height: 10.0),
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.18),
+                          color: AppColors.acikMavi.withOpacity(0.9),
                           borderRadius: BorderRadius.circular(25.0),
                           boxShadow: [
                             BoxShadow(
@@ -411,10 +416,10 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                         ),
                         child: TextFormField(
                           controller: _titleAddress,
-                          cursorColor: Colors.white,
+                          cursorColor: Colors.white.withOpacity(0.8),
                           keyboardType: TextInputType.text,
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.white.withOpacity(0.8),
                             fontWeight: FontWeight.bold,
                             fontFamily: 'OpenSans',
                           ),
@@ -427,11 +432,11 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             contentPadding: EdgeInsets.only(top: 14.0),
                             prefixIcon: Icon(
                               Icons.subtitles,
-                              color: Colors.white.withOpacity(0.4),
+                              color: Colors.white.withOpacity(0.6),
                             ),
                             hintText: 'Örneğin: House Cafe',
                             hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.4),
+                              color: Colors.white.withOpacity(0.6),
                               fontWeight: FontWeight.bold,
                               fontFamily: 'OpenSans',
                             ),
@@ -452,7 +457,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
             child: SizedBox(
               width: screenSize.width / 1.7,
               child: RaisedButton(
-                color: AppColors.pembe.withOpacity(1),
+                color: AppColors.acikMor.withOpacity(1),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(30))),
                 child: Text(
@@ -468,7 +473,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                           content: Text(
                               "Adres Başlığı Kısmını Boş Bırakmayınız.",
                               style: TextStyle(
-                                  color: AppColors.koyuMor.withOpacity(1),
+                                  color: AppColors.acikMavi.withOpacity(1),
                                   fontFamily: 'OpenSans')),
                           shape: RoundedRectangleBorder(
                               borderRadius:
@@ -512,7 +517,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
               data: CupertinoThemeData(
                 textTheme: CupertinoTextThemeData(
                   dateTimePickerTextStyle:
-                  TextStyle(color: Colors.white, fontSize: 24),
+                  TextStyle(color: AppColors.acikMavi.withOpacity(1), fontSize: 24),
                 ),
               ),
               child: CupertinoDatePicker(
@@ -534,7 +539,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
             child: SizedBox(
               width: screenSize.width / 1.7,
               child: RaisedButton(
-                color: AppColors.pembe.withOpacity(1),
+                color: AppColors.acikMor.withOpacity(1),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(30))),
                 child: Text(
@@ -604,7 +609,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
             child: CupertinoTheme(
               data: CupertinoThemeData(
                 textTheme: CupertinoTextThemeData(
-                  pickerTextStyle: TextStyle(color: Colors.white, fontSize: 24),
+                  pickerTextStyle: TextStyle(color: AppColors.acikMavi.withOpacity(1), fontSize: 24),
                 ),
               ),
               child: CupertinoTimerPicker(
@@ -625,7 +630,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
             child: SizedBox(
               width: screenSize.width / 1.7,
               child: RaisedButton(
-                color: AppColors.pembe.withOpacity(1),
+                color: AppColors.acikMor.withOpacity(1),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(30))),
                 child: Text(
@@ -678,7 +683,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
               _selectedName +
               " '   Kişisi Buluşma Ayarlanması İçin Seçildi.",
           style: TextStyle(
-              color: AppColors.koyuMor.withOpacity(1), fontFamily: 'OpenSans')),
+              color: AppColors.acikMavi.withOpacity(1), fontFamily: 'OpenSans')),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
       actions: <Widget>[
@@ -686,7 +691,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          color: AppColors.koyuMor.withOpacity(1),
+          color: AppColors.acikMor.withOpacity(1),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30))),
           textColor: Colors.white,
@@ -703,7 +708,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
               _selectedDateFormat +
               " '   Tarihi Buluşma Ayarlanması İçin Seçildi.",
           style: TextStyle(
-              color: AppColors.koyuMor.withOpacity(1), fontFamily: 'OpenSans')),
+              color: AppColors.acikMavi.withOpacity(1), fontFamily: 'OpenSans')),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
       actions: <Widget>[
@@ -711,7 +716,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          color: AppColors.koyuMor.withOpacity(1),
+          color: AppColors.acikMor.withOpacity(1),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30))),
           textColor: Colors.white,
@@ -728,7 +733,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
               _selectedTimeFormat +
               " '   Saati Buluşma Ayarlanması İçin Seçildi.",
           style: TextStyle(
-              color: AppColors.koyuMor.withOpacity(1), fontFamily: 'OpenSans')),
+              color: AppColors.acikMavi.withOpacity(1), fontFamily: 'OpenSans')),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
       actions: <Widget>[
@@ -736,7 +741,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          color: AppColors.koyuMor.withOpacity(1),
+          color: AppColors.acikMor.withOpacity(1),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30))),
           textColor: Colors.white,
@@ -753,7 +758,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
               _selectedPlace +
               " '   Mekanı Buluşma Ayarlanması İçin Seçildi.",
           style: TextStyle(
-              color: AppColors.koyuMor.withOpacity(1), fontFamily: 'OpenSans')),
+              color: AppColors.acikMavi.withOpacity(1), fontFamily: 'OpenSans')),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
       actions: <Widget>[
@@ -761,7 +766,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          color: AppColors.koyuMor.withOpacity(1),
+          color: AppColors.acikMor.withOpacity(1),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30))),
           textColor: Colors.white,
@@ -776,7 +781,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
       backgroundColor: AppColors.koyuMor.withOpacity(1.0),
       title: Text(
         "Onayla!",
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
       ),
       content: Text(
         "Az önce bir buluşma ayarladın.\nOnaylıyor musun?",
@@ -806,7 +811,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          color: AppColors.pembe.withOpacity(1),
+          color: AppColors.acikMavi.withOpacity(1),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30))),
           textColor: Colors.white,
@@ -838,7 +843,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                     icon: Icon(
                       Icons.menu,
                       size: 28,
-                      color: Colors.white,
+                      color: AppColors.acikMavi.withOpacity(1),
                     ),
                     onPressed: () => _scaffoldKey.currentState.openDrawer()),
                 IconButton(
@@ -846,7 +851,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                     icon: Icon(
                       Icons.notifications,
                       size: 28,
-                      color: Colors.white,
+                      color: AppColors.acikMavi.withOpacity(1),
                     ),
                     onPressed: () {}),
               ],
@@ -856,7 +861,8 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
               "BULUŞMA  AYARLA",
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                color: AppColors.acikMavi.withOpacity(1),
                 fontSize: 22,
               ),
             ),
