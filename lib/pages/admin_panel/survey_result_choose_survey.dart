@@ -1,3 +1,4 @@
+import 'package:agucareer/pages/admin_panel/cevap1.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,8 @@ class _SurveyResultsChooseSurvey extends State<SurveyResultsChooseSurvey> {
                                 fontWeight: FontWeight.bold),
                           ),
                           onTap: () {
-                            debugPrint("ankete basildi");
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => Cevap1()));
                           },
                         ),
                       )),
