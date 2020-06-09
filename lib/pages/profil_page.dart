@@ -292,7 +292,7 @@ class _ProfilePageState extends State<ProfilePage> {
           height: screenSize.height / 3.5,
           decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/profile_background.png'),
+                image: AssetImage('assets/images/profile_background.jpeg'),
                 fit: BoxFit.cover,
               )),
         ));

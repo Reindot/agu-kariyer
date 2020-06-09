@@ -24,11 +24,11 @@ class DrawerWidget {
           UserAccountsDrawerHeader(
             accountName: Text(
               "    ${_userModel.user.name}",
-              style: TextStyle(fontSize: 18, color: Colors.white),
+              style: TextStyle(fontSize: 18, color: Colors.black),
             ),
             accountEmail: Text(
               "     ${_userModel.user.email}",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.black),
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -119,18 +119,14 @@ class DrawerWidget {
               leading: Icon(Icons.person),
               title: Text("Bize Ulaş!"),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AdminHomePage()));
+                Navigator.pop(context);
               }),
           ListTile(
               contentPadding: EdgeInsets.only(left: 30),
               leading: Icon(Icons.info),
               title: Text("S.S.S"),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProfilDuzenleWidget()));
+                Navigator.pop(context);
               }),
           Divider(),
           ListTile(

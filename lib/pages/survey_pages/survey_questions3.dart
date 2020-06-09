@@ -33,7 +33,7 @@ class _SurveyQuestions3State extends State<SurveyQuestions3> {
                       SizedBox(height: 50),
                       Container(
                         alignment: Alignment.center,
-                        height: 220,
+                        height: 300,
                         margin: EdgeInsets.only(right: 50, left: 50),
                         child: Column(
                           children: <Widget>[
@@ -58,7 +58,7 @@ class _SurveyQuestions3State extends State<SurveyQuestions3> {
                         ),
                       ),
                       Container(
-                        height: 400,
+                        height: 320,
                         margin: EdgeInsets.only(right: 50, left: 50),
                         child: Column(
                           children: <Widget>[

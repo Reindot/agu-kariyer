@@ -366,7 +366,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     icon: Icon(
                       Icons.arrow_back,
                       size: 28,
-                      color: Colors.white,
+                      color: AppColors.acikMavi.withOpacity(1),
                     ),
                     onPressed: () => Navigator.pop(context)),
               ],
@@ -377,7 +377,7 @@ class _NotificationPageState extends State<NotificationPage> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColors.acikMavi.withOpacity(1),
                 fontSize: 22,
               ),
             ),

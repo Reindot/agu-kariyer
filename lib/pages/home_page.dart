@@ -409,7 +409,7 @@ class _HomePageState extends State<HomePage> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Text(
-                                    "Kalan Buluşmalarım\n3",
+                                    "Kalan Buluşmalarım\n5",
                                     style: TextStyle(
                                         color:
                                             AppColors.acikMavi.withOpacity(1),
@@ -417,7 +417,7 @@ class _HomePageState extends State<HomePage> {
                                     textAlign: TextAlign.center,
                                   ),
                                   Text(
-                                    "Kalan Anketlerim\n2",
+                                    "Kalan Anketlerim\n5",
                                     style: TextStyle(
                                         color:
                                             AppColors.acikMavi.withOpacity(1),
@@ -430,7 +430,7 @@ class _HomePageState extends State<HomePage> {
                                 height: 15,
                               ),
                               Text(
-                                "Sonraki Buluşma İçin Son Tarih\n 27 Mayıs 2020",
+                                "Sonraki Buluşma İçin Son Tarih\n 15 Haziran 2020",
                                 style: TextStyle(
                                     color: AppColors.acikMavi.withOpacity(1),
                                     fontSize: 16),

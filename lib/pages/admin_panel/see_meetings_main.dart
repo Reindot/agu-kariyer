@@ -124,7 +124,7 @@ class _SeeMeetingsMain extends State<SeeMeetingsMain> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        "Belirtilmedi",
+                        "15 Haziran 2020",
                         style: TextStyle(color: Colors.grey.shade400),
                       ),
                       Text(
