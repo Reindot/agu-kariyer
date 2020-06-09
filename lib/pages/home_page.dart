@@ -2,13 +2,16 @@ import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/pages/chat_page.dart';
 import 'package:agucareer/pages/notifications.dart';
 import 'package:agucareer/pages/profil_page.dart';
+import 'package:agucareer/services/call_service.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../locator.dart';
 import '../notification_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,6 +20,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
+  final String number = "05445156413";
 
   void initState() {
     super.initState();
@@ -258,30 +263,34 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(
                                 height: 5,
                               ),
-                              Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.fromLTRB(60, 7, 60, 15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(60),
-                                    color: AppColors.acikMor.withOpacity(1.0),
+                              GestureDetector(
+                                onTap: () => _service.call(number),
+                                child:Expanded(
+                                  child: Container(
+                                    margin: EdgeInsets.fromLTRB(60, 7, 60, 15),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(60),
+                                      color: AppColors.acikMor.withOpacity(1.0),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.phone,
+                                          color: Colors.white,
+                                        ),
+                                        Text(
+                                          "Ara",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.phone,
-                                        color: Colors.white,
-                                      ),
-                                      Text(
-                                        "Ara",
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                ) ,
                               ),
+
                               SizedBox(
                                 height: 5,
                               ),
