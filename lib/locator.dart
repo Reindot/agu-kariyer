@@ -1,4 +1,5 @@
 import 'package:agucareer/repository/user_repository.dart';
+import 'package:agucareer/services/call_service.dart';
 import 'package:agucareer/services/fireabase_storage_service.dart';
 import 'package:agucareer/services/firebase_auth_service.dart';
 import 'package:agucareer/services/firestore_db_service.dart';
@@ -13,4 +14,5 @@ void setupLocator(){
   locator.registerLazySingleton(() => FirebaseStorageService());
   locator.registerLazySingleton(() => LocalDBService());
   locator.registerLazySingleton(() => UserRepository());
+  locator.registerSingleton(CallsAndMessagesService());
 }
