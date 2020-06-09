@@ -9,8 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'notifications.dart';
+
 class ArrangeMeeting extends StatefulWidget {
   int fix = 1;
+
   @override
   _ArrangeMeetingState createState() => _ArrangeMeetingState();
 }
@@ -94,9 +97,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             color: AppColors.acikMor.withOpacity(1),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.lerp(
-                                      Radius.circular(-45), Radius.circular(45), 1),
-                                )),
+                              bottomRight: Radius.lerp(
+                                  Radius.circular(-45), Radius.circular(45), 1),
+                            )),
                             onPressed: () {
                               setState(() {
                                 _selectedPart = 1;
@@ -136,9 +139,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             color: AppColors.acikMor.withOpacity(1),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.lerp(
-                                      Radius.circular(-45), Radius.circular(45), 1),
-                                )),
+                              bottomLeft: Radius.lerp(
+                                  Radius.circular(-45), Radius.circular(45), 1),
+                            )),
                             onPressed: () {
                               setState(() {
                                 if (_selectedPart != 2) {
@@ -173,9 +176,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             color: AppColors.acikMor.withOpacity(1),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.lerp(
-                                      Radius.circular(-45), Radius.circular(45), 1),
-                                )),
+                              bottomRight: Radius.lerp(
+                                  Radius.circular(-45), Radius.circular(45), 1),
+                            )),
                             onPressed: () {
                               setState(() {
                                 if (_selectedPart != 3) {
@@ -213,7 +216,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                         color: AppColors.acikMor.withOpacity(1),
                         shape: RoundedRectangleBorder(
                             borderRadius:
-                            BorderRadius.all(Radius.circular(40))),
+                                BorderRadius.all(Radius.circular(40))),
                         onPressed: () {
                           showDialog(
                             context: context,
@@ -258,10 +261,10 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
       future: _userModel.getConnections(_userModel.user),
       builder: (context, data) {
         if (data.hasData) {
-          if(widget.fix == 1){
+          if (widget.fix == 1) {
             filteredUsers = data.data;
           }
-          widget.fix ++;
+          widget.fix++;
           return Container(
             alignment: Alignment.center,
             color: AppColors.koyuMor.withOpacity(1),
@@ -305,8 +308,8 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             setState(() {
                               filteredUsers = data.data
                                   .where((u) => (u.name
-                                  .toLowerCase()
-                                  .contains(string.toLowerCase())))
+                                      .toLowerCase()
+                                      .contains(string.toLowerCase())))
                                   .toList();
                             });
                           });
@@ -336,7 +339,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                               child: CircleAvatar(
                                 radius: 26,
                                 backgroundImage:
-                                NetworkImage(data.data[index].profileURL),
+                                    NetworkImage(data.data[index].profileURL),
                               ),
                             ),
                             title: Text(
@@ -428,7 +431,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                 borderSide: BorderSide(
                                     color: Colors.white, width: 12.0),
                                 borderRadius:
-                                BorderRadius.all(Radius.circular(30))),
+                                    BorderRadius.all(Radius.circular(30))),
                             contentPadding: EdgeInsets.only(top: 14.0),
                             prefixIcon: Icon(
                               Icons.subtitles,
@@ -477,7 +480,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                   fontFamily: 'OpenSans')),
                           shape: RoundedRectangleBorder(
                               borderRadius:
-                              BorderRadius.all(Radius.circular(30))),
+                                  BorderRadius.all(Radius.circular(30))),
                         );
                       },
                     );
@@ -516,8 +519,8 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
             child: CupertinoTheme(
               data: CupertinoThemeData(
                 textTheme: CupertinoTextThemeData(
-                  dateTimePickerTextStyle:
-                  TextStyle(color: AppColors.acikMavi.withOpacity(1), fontSize: 24),
+                  dateTimePickerTextStyle: TextStyle(
+                      color: AppColors.acikMavi.withOpacity(1), fontSize: 24),
                 ),
               ),
               child: CupertinoDatePicker(
@@ -576,7 +579,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                   }
                   setState(() {
                     _selectedDateFormat =
-                    "${_selectedDate.day} $_selectedMonth ${_selectedDate.year}";
+                        "${_selectedDate.day} $_selectedMonth ${_selectedDate.year}";
                   });
 
                   showDialog(
@@ -609,7 +612,8 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
             child: CupertinoTheme(
               data: CupertinoThemeData(
                 textTheme: CupertinoTextThemeData(
-                  pickerTextStyle: TextStyle(color: AppColors.acikMavi.withOpacity(1), fontSize: 24),
+                  pickerTextStyle: TextStyle(
+                      color: AppColors.acikMavi.withOpacity(1), fontSize: 24),
                 ),
               ),
               child: CupertinoTimerPicker(
@@ -683,7 +687,8 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
               _selectedName +
               " '   Kişisi Buluşma Ayarlanması İçin Seçildi.",
           style: TextStyle(
-              color: AppColors.acikMavi.withOpacity(1), fontFamily: 'OpenSans')),
+              color: AppColors.acikMavi.withOpacity(1),
+              fontFamily: 'OpenSans')),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
       actions: <Widget>[
@@ -708,7 +713,8 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
               _selectedDateFormat +
               " '   Tarihi Buluşma Ayarlanması İçin Seçildi.",
           style: TextStyle(
-              color: AppColors.acikMavi.withOpacity(1), fontFamily: 'OpenSans')),
+              color: AppColors.acikMavi.withOpacity(1),
+              fontFamily: 'OpenSans')),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
       actions: <Widget>[
@@ -733,7 +739,8 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
               _selectedTimeFormat +
               " '   Saati Buluşma Ayarlanması İçin Seçildi.",
           style: TextStyle(
-              color: AppColors.acikMavi.withOpacity(1), fontFamily: 'OpenSans')),
+              color: AppColors.acikMavi.withOpacity(1),
+              fontFamily: 'OpenSans')),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
       actions: <Widget>[
@@ -758,7 +765,8 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
               _selectedPlace +
               " '   Mekanı Buluşma Ayarlanması İçin Seçildi.",
           style: TextStyle(
-              color: AppColors.acikMavi.withOpacity(1), fontFamily: 'OpenSans')),
+              color: AppColors.acikMavi.withOpacity(1),
+              fontFamily: 'OpenSans')),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
       actions: <Widget>[
@@ -792,10 +800,9 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
       ),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            topRight: Radius.circular(60),
-            topLeft: Radius.circular(60),
-            bottomLeft: Radius.circular(60)
-          )),
+              topRight: Radius.circular(60),
+              topLeft: Radius.circular(60),
+              bottomLeft: Radius.circular(60))),
       actions: <Widget>[
         FlatButton(
           onPressed: () {
@@ -853,7 +860,12 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                       size: 28,
                       color: AppColors.acikMavi.withOpacity(1),
                     ),
-                    onPressed: () {}),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NotificationPage()));
+                    }),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
