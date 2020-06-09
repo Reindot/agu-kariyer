@@ -307,7 +307,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     icon: Icon(
                       Icons.menu,
                       size: 28,
-                      color: Colors.white,
+                      color: AppColors.acikMavi.withOpacity(1.0),
                     ),
                     onPressed: () => _scaffoldKey.currentState.openDrawer()),
               ],
@@ -317,7 +317,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
               "ANA  SAYFA",
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                color: AppColors.acikMavi.withOpacity(1.0),
                 fontSize: 22,
               ),
             ),
