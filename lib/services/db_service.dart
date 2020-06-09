@@ -1,4 +1,5 @@
 import 'package:agucareer/models/chats_model.dart';
+import 'package:agucareer/models/file_model.dart';
 import 'package:agucareer/models/message_model.dart';
 import 'package:agucareer/models/user_model.dart';
 
@@ -12,5 +13,6 @@ abstract class DBService {
   Future<bool> sendMessage(Message message);
   Future<DateTime> getTime(String userID);
   Future<bool> markAsSeen(String me, String it);
+  Future<List<Files>> getFileList();
 
 }

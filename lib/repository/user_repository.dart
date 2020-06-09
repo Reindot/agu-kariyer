@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:agucareer/locator.dart';
 import 'package:agucareer/models/chats_model.dart';
+import 'package:agucareer/models/file_model.dart';
 import 'package:agucareer/models/message_model.dart';
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/services/auth_service.dart';
@@ -218,5 +219,23 @@ class UserRepository implements AuthService, DBService, StorageService {
     if (_dbMode == DBMode.FIRESTORE)
       return await _firestoreDBService.markAsSeen(me, it);
     return null;
+  }
+
+  @override
+  Future<String> uploadFile(File file) async{
+    if (_storageMode == StorageMode.FIREBASE) {
+      var url = await _firebaseStorageService.uploadFile(file);
+      Files add = Files(url: url, name: 'Name');
+      await _firestoreDBService.addFileData(add);
+      return url;
+    }
+    return null;
+  }
+
+  @override
+  Future<List<Files>> getFileList() async{
+    if (_storageMode == StorageMode.FIREBASE) {
+      return await _firestoreDBService.getFileList();
+    }
   }
 }

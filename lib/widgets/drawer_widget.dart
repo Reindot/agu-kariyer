@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:agucareer/pages/admin_panel/admin_home_page.dart';
 import 'package:agucareer/pages/all_chats_page.dart';
+import 'package:agucareer/pages/all_files_page.dart';
 import 'package:agucareer/pages/arrange_meeting.dart';
 import 'package:agucareer/pages/profil_duzenle_widget.dart';
 import 'package:agucareer/pages/profil_page.dart';
@@ -108,7 +109,8 @@ class DrawerWidget {
               leading: Icon(Icons.folder),
               title: Text("Dosyalar"),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AllFilesPage()));
               }),
           ListTile(
               contentPadding: EdgeInsets.only(left: 30),

@@ -14,4 +14,12 @@ class FirebaseStorageService implements StorageService {
     var url = await (await uploadTask.onComplete).ref.getDownloadURL();
     return url.toString().replaceFirst(userID, "${userID}_500x500");
   }
+
+  @override
+  Future<String> uploadFile(File file) async{
+    _storageReference = _firebaseStorage.ref().child("files/${file.path}");
+    var uploadTask = _storageReference.putFile(file);
+    var url = await (await uploadTask.onComplete).ref.getDownloadURL();
+    return url;
+  }
 }

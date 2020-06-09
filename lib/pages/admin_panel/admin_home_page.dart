@@ -1,3 +1,4 @@
+import 'dart:io';
 
 import 'package:agucareer/pages/admin_panel/choose_last_date__choose_meeting.dart';
 import 'package:agucareer/pages/admin_panel/create_announcement.dart';
@@ -8,6 +9,7 @@ import 'package:agucareer/pages/admin_panel/survey_results_choose_person.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +21,7 @@ class AdminHomePage extends StatefulWidget {
 
 class _AdminHomePageState extends State<AdminHomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  File _file;
 
   @override
   Widget build(BuildContext context) {
@@ -185,28 +188,31 @@ class _AdminHomePageState extends State<AdminHomePage> {
                         )),
                   )),
                   Expanded(
-                    child: Container(
-                        margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(60),
-                          color: AppColors.acikMor.withOpacity(1.0),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            SizedBox(width: 40),
-                            Icon(
-                              Icons.folder,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: 60),
-                            Text(
-                              "Dosya Yükle",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ],
-                        )),
+                    child: GestureDetector(
+                      onTap: () => uploadFile(context),
+                      child: Container(
+                          margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(60),
+                            color: AppColors.acikMor.withOpacity(1.0),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              SizedBox(width: 40),
+                              Icon(
+                                Icons.folder,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 60),
+                              Text(
+                                "Dosya Yükle",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          )),
+                    ),
                   ),
                   Expanded(
                       child: GestureDetector(
@@ -319,5 +325,15 @@ class _AdminHomePageState extends State<AdminHomePage> {
         ),
       ),
     );
+  }
+
+  Future uploadFile(BuildContext context) async{
+    File file = await FilePicker.getFile();
+    final _userModel = Provider.of<UserModel>(context);
+    _userModel.uploadFile(file);
+    setState(() {
+      _file = file;
+    });
+    print(">>>>>>>>>>>>>>>>>" + file.path);
   }
 }

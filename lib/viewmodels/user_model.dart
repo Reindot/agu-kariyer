@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:agucareer/locator.dart';
 import 'package:agucareer/models/chats_model.dart';
+import 'package:agucareer/models/file_model.dart';
 import 'package:agucareer/models/message_model.dart';
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/repository/user_repository.dart';
@@ -184,6 +185,27 @@ class UserModel with ChangeNotifier implements AuthService, DBService, StorageSe
     try {
       state = ViewState.BUSY;
       return await _userRepository.markAsSeen(me, it);
+    } finally {
+      _state = ViewState.IDLE;
+    }
+  }
+
+  @override
+  Future<String> uploadFile(File file) async{
+    try {
+      state = ViewState.BUSY;
+      return await _userRepository.uploadFile(file);
+    } finally {
+      _state = ViewState.IDLE;
+    }
+    return null;
+  }
+
+  @override
+  Future<List<Files>> getFileList() async{
+    try {
+      state = ViewState.BUSY;
+      return await _userRepository.getFileList();
     } finally {
       _state = ViewState.IDLE;
     }

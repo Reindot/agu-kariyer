@@ -1,4 +1,5 @@
 import 'package:agucareer/models/chats_model.dart';
+import 'package:agucareer/models/file_model.dart';
 import 'package:agucareer/models/message_model.dart';
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/services/db_service.dart';
@@ -30,6 +31,14 @@ class FirestoreDBService implements DBService {
         .collection("users")
         .document(userID)
         .setData(map, merge: true);
+    return true;
+  }
+
+  Future<bool> addFileData(Files file) async {
+    await _firestore
+        .collection("files")
+        .document()
+        .setData(file.toMap());
     return true;
   }
 
@@ -79,6 +88,16 @@ class FirestoreDBService implements DBService {
         .getDocuments();
     return querySnapshot.documents
         .map((chat) => Chats.fromMap(chat.data))
+        .toList();
+  }
+
+  @override
+  Future<List<Files>> getFileList() async {
+    QuerySnapshot querySnapshot = await _firestore
+        .collection("files")
+        .getDocuments();
+    return querySnapshot.documents
+        .map((chat) => Files.fromMap(chat.data))
         .toList();
   }
 
