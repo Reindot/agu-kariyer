@@ -262,16 +262,16 @@ class _ProfilePageState extends State<ProfilePage> {
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                  color: AppColors.acikMavi.withOpacity(1)),
                             ),
                           ],
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
                         Text(
                           widget._user.bio,
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: AppColors.acikMavi.withOpacity(1)),
                         )
                       ],
                     ),
