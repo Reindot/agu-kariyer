@@ -1,6 +1,8 @@
 import 'package:agucareer/models/chats_model.dart';
 import 'package:agucareer/models/file_model.dart';
+import 'package:agucareer/models/meeting_model.dart';
 import 'package:agucareer/models/message_model.dart';
+import 'package:agucareer/models/notification_model.dart';
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/services/db_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -179,6 +181,79 @@ class FirestoreDBService implements DBService {
     await _firestore.collection("connections").document(_itID).setData({
       "seen": true,
     }, merge: true);
+    return true;
+  }
+
+  @override
+  Future<bool> makeAnnouncement(Notifications notification) async{
+    await _firestore
+        .collection("notifications")
+        .document()
+        .setData(notification.toMap());
+    return true;
+  }
+
+  @override
+  Future<List<Notifications>> getNotifications(User user) async{
+    QuerySnapshot querySnapshot1 = await _firestore
+        .collection("notifications")
+        .where("receiver", isEqualTo: user.type)
+        .orderBy("date", descending: true)
+        .getDocuments();
+    QuerySnapshot querySnapshot2 = await _firestore
+        .collection("notifications")
+        .where("receiver", isEqualTo: "ALL")
+        .orderBy("date", descending: true)
+        .getDocuments();
+    QuerySnapshot querySnapshot3 = await _firestore
+        .collection("users")
+        .document(user.userID)
+        .collection("notifications")
+        .orderBy("date", descending: true)
+        .getDocuments();
+    var list1 = querySnapshot1.documents
+        .map((chat) => Notifications.fromMap(chat.data))
+        .toList();
+    var list2 = querySnapshot2.documents
+        .map((chat) => Notifications.fromMap(chat.data))
+        .toList();
+    var list3 = querySnapshot3.documents
+        .map((chat) => Notifications.fromMap(chat.data))
+        .toList();
+    return list1 + list2 + list3;
+  }
+
+  @override
+  Future<bool> createMeeting(Meetings meeting) async{
+    var _meetingID = _firestore.collection("connections").document().documentID;
+    var _meID = meeting.meID + "." + meeting.itID;
+    var _itID = meeting.itID + "." + meeting.meID;
+    var _myData = meeting.toMap();
+    var _itData = meeting.toMap();
+    _itData['bugfix'] = 0;
+    await _firestore
+        .collection("connections")
+        .document(_meID)
+        .collection("meetings")
+        .document(_meetingID)
+        .setData(_myData);
+    await _firestore
+        .collection("connections")
+        .document(_itID)
+        .collection("meetings")
+        .document(_meetingID)
+        .setData(_itData);
+    return true;
+  }
+
+  @override
+  Future<bool> sendPersonalNotification(String userID, Notifications notification) async{
+    await _firestore
+        .collection("users")
+        .document(userID)
+        .collection("notifications")
+        .document()
+        .setData(notification.toMap());
     return true;
   }
 }

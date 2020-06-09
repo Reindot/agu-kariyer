@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:agucareer/locator.dart';
 import 'package:agucareer/models/chats_model.dart';
 import 'package:agucareer/models/file_model.dart';
+import 'package:agucareer/models/meeting_model.dart';
 import 'package:agucareer/models/message_model.dart';
+import 'package:agucareer/models/notification_model.dart';
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/services/auth_service.dart';
 import 'package:agucareer/services/db_service.dart';
@@ -236,6 +238,40 @@ class UserRepository implements AuthService, DBService, StorageService {
   Future<List<Files>> getFileList() async{
     if (_storageMode == StorageMode.FIREBASE) {
       return await _firestoreDBService.getFileList();
+    }
+  }
+
+  @override
+  Future<bool> makeAnnouncement(Notifications notification) async{
+    if (_storageMode == StorageMode.FIREBASE) {
+      return await _firestoreDBService.makeAnnouncement(notification);
+    }
+  }
+
+  @override
+  Future<List<Notifications>> getNotifications(User user) async{
+    if (_storageMode == StorageMode.FIREBASE) {
+      return await _firestoreDBService.getNotifications(user);
+    }
+  }
+
+  @override
+  Future<bool> createMeeting(Meetings meeting) async{
+    if (_storageMode == StorageMode.FIREBASE) {
+      var ret = await _firestoreDBService.createMeeting(meeting);
+      if(ret){
+        var not1 = Notifications(type: "MEETING_CREATED", text: "${meeting.itName} ile görüşmek için talebte bulundun!");
+        var not2 = Notifications(type: "CONFIRM_MEETING", text: "${meeting.meName} seninle bir buluşma talebinde bulundu!");
+        await _firestoreDBService.sendPersonalNotification(meeting.meID, not1);
+        await _firestoreDBService.sendPersonalNotification(meeting.itID, not2);
+      }
+    }
+  }
+
+  @override
+  Future<bool> sendPersonalNotification(String userID, Notifications notification) async{
+    if (_storageMode == StorageMode.FIREBASE) {
+      return await _firestoreDBService.sendPersonalNotification(userID, notification);
     }
   }
 }

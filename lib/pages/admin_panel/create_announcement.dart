@@ -1,8 +1,11 @@
+import 'package:agucareer/models/notification_model.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/values/constants.dart';
+import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class CreateAnnouncement extends StatefulWidget {
   @override
@@ -12,6 +15,7 @@ class CreateAnnouncement extends StatefulWidget {
 class _CreateAnnouncement extends State<CreateAnnouncement> {
   bool _sendToStudent = false;
   bool _sendToMentor = false;
+  var _controller = TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +72,7 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
             decoration: secondBoxDecorationStyle,
             height: 50.0,
             child: TextFormField(
+              controller: _controller,
               keyboardType: TextInputType.text,
               style: TextStyle(
                 color: AppColors.koyuMor,
@@ -100,7 +105,7 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
       child: RaisedButton(
         padding: EdgeInsets.all(15.0),
         color: AppColors.koyuMor.withOpacity(1.0),
-        onPressed: () => print("gönder basildi"),
+        onPressed: () => sendIt(context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
@@ -210,5 +215,18 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
         ),
       ),
     );
+  }
+
+  sendIt(BuildContext context) {
+    String receiver = "";
+    if(_sendToStudent)
+      receiver = "STUDENT";
+    if(_sendToMentor)
+      receiver = "MENTOR";
+    if(_sendToStudent && _sendToMentor)
+      receiver = "ALL";
+
+    final _userModel = Provider.of<UserModel>(context, listen: false);
+    _userModel.makeAnnouncement(Notifications(receiver: receiver, text: _controller.text, type: "ANN"));
   }
 }

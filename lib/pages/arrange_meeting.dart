@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+import 'package:agucareer/models/meeting_model.dart';
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
@@ -344,6 +345,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                             ),
                             onTap: () {
                               setState(() {
+                                _userModel.connection = filteredUsers[index];
                                 _selectedName = filteredUsers[index].name;
                               });
 
@@ -804,6 +806,8 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
         ),
         FlatButton(
           onPressed: () {
+            print("hereeeee");
+            confirmMeeting(context);
             Navigator.of(context).pop();
           },
           color: AppColors.pembe.withOpacity(1),
@@ -864,6 +868,13 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
         ),
       ),
     );
+  }
+
+  void confirmMeeting(BuildContext context) async{
+    final _userModel = Provider.of<UserModel>(context, listen: false);
+    await _userModel.createMeeting(Meetings(meID: _userModel.user.userID,
+    itID: _userModel.connection.userID, itName: _userModel.connection.name, meName: _userModel.user.name,
+    where: _selectedPlace, when: _selectedDateFormat, clock: _selectedTimeFormat, isConfirmed: false, no: 1));
   }
 }
 

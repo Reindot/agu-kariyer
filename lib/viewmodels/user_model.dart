@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:agucareer/locator.dart';
 import 'package:agucareer/models/chats_model.dart';
 import 'package:agucareer/models/file_model.dart';
+import 'package:agucareer/models/meeting_model.dart';
 import 'package:agucareer/models/message_model.dart';
+import 'package:agucareer/models/notification_model.dart';
 import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/repository/user_repository.dart';
 import 'package:agucareer/services/auth_service.dart';
@@ -206,6 +208,46 @@ class UserModel with ChangeNotifier implements AuthService, DBService, StorageSe
     try {
       state = ViewState.BUSY;
       return await _userRepository.getFileList();
+    } finally {
+      _state = ViewState.IDLE;
+    }
+  }
+
+  @override
+  Future<bool> makeAnnouncement(Notifications notification) async{
+    try {
+      state = ViewState.BUSY;
+      return await _userRepository.makeAnnouncement(notification);
+    } finally {
+      _state = ViewState.IDLE;
+    }
+  }
+
+  @override
+  Future<List<Notifications>> getNotifications(User user) async{
+    try {
+      state = ViewState.BUSY;
+      return await _userRepository.getNotifications(user);
+    } finally {
+      _state = ViewState.IDLE;
+    }
+  }
+
+  @override
+  Future<bool> createMeeting(Meetings meeting) async{
+    try {
+      state = ViewState.BUSY;
+      return await _userRepository.createMeeting(meeting);
+    } finally {
+      _state = ViewState.IDLE;
+    }
+  }
+
+  @override
+  Future<bool> sendPersonalNotification(String userID, Notifications notification) async{
+    try {
+      state = ViewState.BUSY;
+      return await _userRepository.sendPersonalNotification(userID, notification);
     } finally {
       _state = ViewState.IDLE;
     }
