@@ -37,7 +37,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: DrawerWidget().drawerMenu(context, _userModel),
-      backgroundColor: AppColors.pembe.withOpacity(1),
+      backgroundColor: AppColors.acikMavi.withOpacity(1),
       appBar: _getCustomAppBar(),
       body: Column(
         children: <Widget>[
