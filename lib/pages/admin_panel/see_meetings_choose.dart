@@ -134,6 +134,7 @@ class _SeeMeetingsChooseState extends State<SeeMeetingsChoose> {
                                   fontWeight: FontWeight.bold),
                             ),
                             onTap: () {
+                              _userModel.connection = filteredUsers[index];
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

@@ -31,7 +31,7 @@ class _SeeMeetingsMain extends State<SeeMeetingsMain> {
         children: <Widget>[
           _buildProfileImage(widget._user, _userModel),
           Text(
-            widget._user.name,
+            _userModel.connection.name,
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -43,7 +43,7 @@ class _SeeMeetingsMain extends State<SeeMeetingsMain> {
             height: 100,
             padding: EdgeInsets.only(right: 5, left: 5),
             child: FutureBuilder<List<User>>(
-              future: _userModel.getConnections(_userModel.user),
+              future: _userModel.getConnections(_userModel.connection),
               builder: (context, result) {
                 if (result.hasData) {
                   var userList = result.data;
