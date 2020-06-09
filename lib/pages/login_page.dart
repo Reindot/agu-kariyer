@@ -34,7 +34,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    UserModel _userModel = Provider.of<UserModel>(context);
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -62,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: <Widget>[
                       Container(
                         decoration: BoxDecoration(
-                            color: AppColors.acikMor,
+                            color: AppColors.acikMor.withOpacity(0.8),
                             borderRadius: BorderRadius.circular(50)),
                         padding: EdgeInsets.only(top: 5, bottom: 5),
                         child: Text(
@@ -115,6 +114,7 @@ class _LoginPageState extends State<LoginPage> {
               mailController = TextEditingController(text: result.data);
               if(result.hasData){
                 return TextFormField(
+                  cursorColor: AppColors.acikMor.withOpacity(0.8),
                   controller: mailController,
                   keyboardType: TextInputType.emailAddress,
                   style: TextStyle(
@@ -162,6 +162,7 @@ class _LoginPageState extends State<LoginPage> {
               passController = TextEditingController(text: result.data);
               if(result.hasData){
                 return TextFormField(
+                  cursorColor: AppColors.acikMor.withOpacity(0.8),
                   controller: passController,
                   obscureText: true,
                   style: TextStyle(
@@ -202,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Text(
           'Şifremi Unuttum',
           style: TextStyle(
-            color: AppColors.acikMor,
+            color: AppColors.acikMor.withOpacity(0.8),
             fontWeight: FontWeight.bold,
             fontFamily: 'OpenSans',
             fontSize: 15,
@@ -245,7 +246,7 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       child: RaisedButton(
         padding: EdgeInsets.all(15.0),
-        color: AppColors.acikMor,
+        color: AppColors.acikMor.withOpacity(0.8),
         onPressed: () => onLogInPressed(mailController.text, passController.text, context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
