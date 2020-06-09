@@ -13,57 +13,17 @@ class MailGonderildiWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color.fromARGB(255, 238, 230, 243),
       body: Container(
         constraints: BoxConstraints.expand(),
         margin: EdgeInsets.only(top: 10, bottom: 30),
         child: ListView(
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  width: 118,
-                  height: 53,
-                  margin: EdgeInsets.only(top: 20, left: 20),
-                  child: FlatButton(
-                    onPressed: () => this.onArrowLeftPressed(context),
-                    color: AppColors.acikMor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    textColor: Colors.white,
-                    padding: EdgeInsets.all(0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          "assets/images/icon-back.png",
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Geri",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
             Container(
-              height: 450,
+              height: 300,
               margin: EdgeInsets.all(30),
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(100),
+                color: AppColors.acikMor.withOpacity(0.08),
+                borderRadius: BorderRadius.circular(45),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -74,6 +34,8 @@ class MailGonderildiWidget extends StatelessWidget {
                   ),
                   Image.asset(
                     "assets/images/sentmail-icon.png",
+                    height: 125,
+                    width: 200,
                     fit: BoxFit.cover,
                   ),
                   SizedBox(
@@ -83,7 +45,7 @@ class MailGonderildiWidget extends StatelessWidget {
                     "Şifre Sıfırlama Bilgileriniz E-posta Adresinize Gönderildi.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppColors.acikMor,
+                      color: AppColors.acikMor.withOpacity(1),
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'OpenSans',
@@ -104,7 +66,7 @@ class MailGonderildiWidget extends StatelessWidget {
                     margin: EdgeInsets.only(top: 20, right: 20),
                     child: FlatButton(
                       onPressed: () => this.onArrowRightPressed(context),
-                      color: AppColors.acikMor,
+                      color: AppColors.acikMor.withOpacity(0.8),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30)),
                       ),
