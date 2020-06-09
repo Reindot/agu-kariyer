@@ -93,10 +93,7 @@ class _MatchUserPerson2 extends State<MatchUserPerson2>{
                               filteredUsers = data.data
                                   .where((u) => (u.name
                                   .toLowerCase()
-                                  .contains(string.toLowerCase()) ||
-                                  u.email
-                                      .toLowerCase()
-                                      .contains(string.toLowerCase())))
+                                  .contains(string.toLowerCase())))
                                   .toList();
                             });
                           });

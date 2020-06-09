@@ -93,9 +93,6 @@ class _FillSurveyState extends State<FillSurvey> {
                               filteredUsers = data.data
                                   .where((u) => (u.name
                                           .toLowerCase()
-                                          .contains(string.toLowerCase()) ||
-                                      u.email
-                                          .toLowerCase()
                                           .contains(string.toLowerCase())))
                                   .toList();
                             });

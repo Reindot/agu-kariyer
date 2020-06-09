@@ -306,10 +306,7 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                               filteredUsers = data.data
                                   .where((u) => (u.name
                                   .toLowerCase()
-                                  .contains(string.toLowerCase()) ||
-                                  u.email
-                                      .toLowerCase()
-                                      .contains(string.toLowerCase())))
+                                  .contains(string.toLowerCase())))
                                   .toList();
                             });
                           });

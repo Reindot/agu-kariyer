@@ -92,9 +92,6 @@ class _SurveyResultsChoosePerson extends State<SurveyResultsChoosePerson> {
                               filteredUsers = data.data
                                   .where((u) => (u.name
                                           .toLowerCase()
-                                          .contains(string.toLowerCase()) ||
-                                      u.email
-                                          .toLowerCase()
                                           .contains(string.toLowerCase())))
                                   .toList();
                             });
