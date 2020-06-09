@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 import '../values/colors.dart';
 
-
 class HosgeldinWidget extends StatelessWidget {
-  void onButtonTwoPressed(BuildContext context) => Navigator.pushReplacementNamed(context, "/login");
+  void onButtonTwoPressed(BuildContext context) =>
+      Navigator.pushReplacementNamed(context, "/login");
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +14,13 @@ class HosgeldinWidget extends StatelessWidget {
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/Welcome_Background.png"),
-                fit: BoxFit.cover),
-            ),
+          image: DecorationImage(
+              image: AssetImage("assets/images/Welcome_Background.png"),
+              fit: BoxFit.cover),
+        ),
         child: Stack(
           alignment: Alignment.center,
           children: [
-
             Positioned(
               left: 13,
               top: 79,
@@ -41,7 +40,7 @@ class HosgeldinWidget extends StatelessWidget {
                         Container(
                           height: 52,
                           child: RaisedButton(
-                            color: AppColors.acikMor,
+                            color: AppColors.acikMor.withOpacity(0.8),
                             onPressed: () => this.onButtonTwoPressed(context),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),

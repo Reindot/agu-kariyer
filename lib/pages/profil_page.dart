@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:agucareer/models/user_model.dart';
-import 'package:agucareer/pages/profil_duzenle_widget.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
@@ -50,10 +49,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
+    Size screenSize = MediaQuery
+        .of(context)
+        .size;
 
     final GlobalKey<ScaffoldState> _scaffoldKey =
-        new GlobalKey<ScaffoldState>();
+    new GlobalKey<ScaffoldState>();
 
     final _userModel = Provider.of<UserModel>(context, listen: false);
 
@@ -113,10 +114,33 @@ class _ProfilePageState extends State<ProfilePage> {
                                     fontWeight: FontWeight.bold, fontSize: 26),
                                 textAlign: TextAlign.left,
                               ),
-                              Text(
-                                widget._user.type.toString(),
-                                style: TextStyle(color: Colors.grey.shade600),
-                                textAlign: TextAlign.left,
+                              SizedBox(
+                                child: Builder(
+                                  builder: (context) {
+                                    if (widget._user.type == "STUDENT") {
+                                      return Text(
+                                        "Öğrenci",
+                                        style: TextStyle(
+                                            color: Colors.grey.shade600),
+                                        textAlign: TextAlign.left,
+                                      );
+                                    } else if (widget._user.type == "MENTOR") {
+                                      return Text(
+                                        "Mentör",
+                                        style: TextStyle(
+                                            color: Colors.grey.shade600),
+                                        textAlign: TextAlign.left,
+                                      );
+                                    } else {
+                                      return Text(
+                                        "Moderatör",
+                                        style: TextStyle(
+                                            color: Colors.grey.shade600),
+                                        textAlign: TextAlign.left,
+                                      );
+                                    }
+                                  },
+                                ),
                               ),
                               Text(
                                 widget._user.company,
@@ -132,15 +156,16 @@ class _ProfilePageState extends State<ProfilePage> {
                           return RaisedButton(
                               padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
                               color: AppColors.acikMor.withOpacity(1),
-                              onPressed: () => Navigator.pushReplacementNamed(
-                                  context, '/editProfile'),
+                              onPressed: () =>
+                                  Navigator.pushReplacementNamed(
+                                      context, '/editProfile'),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(60),
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Icon(Icons.edit,
                                       size: 26, color: Colors.white),
@@ -155,12 +180,16 @@ class _ProfilePageState extends State<ProfilePage> {
                               padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
                               color: AppColors.acikMor.withOpacity(1),
                               onPressed: () {
-                                Navigator.of(context, rootNavigator: true).push(
-                                    MaterialPageRoute(
-                                        builder: (context) => ChatPage(
-                                            me: _userModel.user.userID,
-                                            it: _userModel.connection.userID,
-                                        profileImage: NetworkImage(_userModel.connection.profileURL),)));
+                                Navigator.of(context, rootNavigator: true)
+                                    .push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        ChatPage(
+                                          me: _userModel.user.userID,
+                                          it: _userModel.connection.userID,
+                                          profileImage: NetworkImage(
+                                              _userModel
+                                                  .connection.profileURL),
+                                        )));
                               },
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(60),
@@ -168,7 +197,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   RotationTransition(
                                     turns: new AlwaysStoppedAnimation(45 / 360),
@@ -233,16 +262,16 @@ class _ProfilePageState extends State<ProfilePage> {
                               style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                  color: AppColors.acikMavi.withOpacity(1)),
                             ),
                           ],
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
                         Text(
                           widget._user.bio,
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: AppColors.acikMavi.withOpacity(1)),
                         )
                       ],
                     ),
@@ -263,9 +292,9 @@ class _ProfilePageState extends State<ProfilePage> {
           height: screenSize.height / 3.5,
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: AssetImage('assets/images/profile_background.png'),
-            fit: BoxFit.cover,
-          )),
+                image: AssetImage('assets/images/profile_background.png'),
+                fit: BoxFit.cover,
+              )),
         ));
   }
 

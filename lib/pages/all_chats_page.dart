@@ -140,7 +140,7 @@ class _AllChatsPageState extends State<AllChatsPage> {
                     icon: Icon(
                       Icons.arrow_back,
                       size: 28,
-                      color: Colors.white,
+                      color: AppColors.acikMavi.withOpacity(1),
                     ),
                     onPressed: () => Navigator.pop(context)),
               ],
@@ -151,7 +151,7 @@ class _AllChatsPageState extends State<AllChatsPage> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColors.acikMavi.withOpacity(1),
                 fontSize: 22,
               ),
             ),

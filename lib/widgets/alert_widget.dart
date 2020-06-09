@@ -7,7 +7,7 @@ class AlertWidget {
     return AlertDialog(
       content: Text(title,
           style: TextStyle(
-              color: AppColors.koyuMor.withOpacity(1), fontFamily: 'OpenSans')),
+              color: AppColors.acikMavi.withOpacity(1), fontFamily: 'OpenSans')),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(30))),
       actions: <Widget>[
@@ -15,7 +15,7 @@ class AlertWidget {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          color: AppColors.koyuMor.withOpacity(1),
+          color: AppColors.acikMor.withOpacity(1),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30))),
           textColor: Colors.white,

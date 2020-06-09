@@ -1,8 +1,11 @@
 import 'package:agucareer/locator.dart';
 import 'package:agucareer/pages/admin_panel/admin_home_page.dart';
+import 'package:agucareer/pages/arrange_meeting.dart';
 import 'package:agucareer/pages/home_page.dart';
 import 'package:agucareer/pages/login_page.dart';
+import 'package:agucareer/pages/mail_gonderildi_widget.dart';
 import 'package:agucareer/pages/profil_duzenle_widget.dart';
+import 'package:agucareer/pages/survey_pages/fill_survey_page.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +36,9 @@ class MyApp extends StatelessWidget {
             '/home'           : (context) => HomePage(),
             '/adminHome'      : (context) => AdminHomePage(),
             '/editProfile'    : (context) => ProfilDuzenleWidget(),
+            '/sendMail'       : (context) => MailGonderildiWidget(),
+            '/arrangeMeeting' : (context) => ArrangeMeeting(),
+            '/fillSurvey'     : (context) => FillSurvey(),
           },
         ));
   }

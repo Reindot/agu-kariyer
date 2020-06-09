@@ -9,6 +9,7 @@ import '../arrange_meeting.dart';
 
 class FillSurvey extends StatefulWidget {
   int fix = 1;
+
   @override
   _FillSurveyState createState() => _FillSurveyState();
 }
@@ -46,18 +47,16 @@ class _FillSurveyState extends State<FillSurvey> {
       future: _userModel.getConnections(_userModel.user),
       builder: (context, data) {
         if (data.hasData) {
-          if(widget.fix == 1)
-            filteredUsers = data.data;
-          widget.fix ++;
+          if (widget.fix == 1) filteredUsers = data.data;
+          widget.fix++;
           return Container(
             alignment: Alignment.center,
-            color: Colors.white,
             padding: EdgeInsets.only(top: 15),
             child: Column(
               children: <Widget>[
                 Text("Birisini Seç",
                     style: TextStyle(
-                        color: AppColors.koyuMor.withOpacity(1),
+                        color: AppColors.acikMavi.withOpacity(1),
                         letterSpacing: 1.5,
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,
@@ -72,28 +71,28 @@ class _FillSurveyState extends State<FillSurvey> {
                     SizedBox(
                       width: screenSize.width / 1.7,
                       child: TextField(
-                        cursorColor: AppColors.koyuMor,
+                        cursorColor: AppColors.acikMavi.withOpacity(1),
                         style: TextStyle(
-                          color: AppColors.koyuMor,
+                          color: AppColors.acikMavi.withOpacity(0.8),
                         ),
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
-                            hoverColor: AppColors.koyuMor,
+                            hoverColor: AppColors.acikMavi.withOpacity(0.8),
                             prefixIcon: Icon(
                               Icons.search,
-                              color: AppColors.koyuMor.withOpacity(0.5),
+                              color: AppColors.acikMavi.withOpacity(0.8),
                             ),
                             hintText: 'Seçmek istediğin ismi gir.',
                             hintStyle: TextStyle(
-                              color: AppColors.koyuMor.withOpacity(0.5),
+                              color: AppColors.acikMavi.withOpacity(0.6),
                             )),
                         onChanged: (string) {
                           _debouncer.run(() {
                             setState(() {
                               filteredUsers = data.data
                                   .where((u) => (u.name
-                                          .toLowerCase()
-                                          .contains(string.toLowerCase())))
+                                      .toLowerCase()
+                                      .contains(string.toLowerCase())))
                                   .toList();
                             });
                           });
@@ -119,7 +118,8 @@ class _FillSurveyState extends State<FillSurvey> {
                           child: ListTile(
                             leading: CircleAvatar(
                               radius: 30,
-                              backgroundColor: Colors.white,
+                              backgroundColor:
+                                  AppColors.acikMavi.withOpacity(1),
                               child: CircleAvatar(
                                 radius: 26,
                                 backgroundImage:
@@ -130,7 +130,7 @@ class _FillSurveyState extends State<FillSurvey> {
                               filteredUsers[index].name,
                               style: TextStyle(
                                   fontSize: 24.0,
-                                  color: Colors.white,
+                                  color: AppColors.acikMavi.withOpacity(1),
                                   fontFamily: 'OpenSans',
                                   fontWeight: FontWeight.bold),
                             ),
@@ -180,19 +180,11 @@ class _FillSurveyState extends State<FillSurvey> {
                 IconButton(
                     padding: EdgeInsets.all(20),
                     icon: Icon(
-                      Icons.menu,
+                      Icons.arrow_back,
                       size: 28,
-                      color: Colors.white,
+                      color: AppColors.acikMavi.withOpacity(1),
                     ),
-                    onPressed: () => _scaffoldKey.currentState.openDrawer()),
-                IconButton(
-                    padding: EdgeInsets.all(20),
-                    icon: Icon(
-                      Icons.notifications,
-                      size: 28,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {}),
+                    onPressed: () => Navigator.pop(context)),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
@@ -201,7 +193,7 @@ class _FillSurveyState extends State<FillSurvey> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColors.acikMavi.withOpacity(1),
                 fontSize: 22,
               ),
             ),

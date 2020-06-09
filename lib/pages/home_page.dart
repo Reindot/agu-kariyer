@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../locator.dart';
 import '../notification_handler.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,7 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
-  final String number = "05445156413";
+  final String number = "05334567035";
 
   void initState() {
     super.initState();
@@ -37,6 +36,7 @@ class _HomePageState extends State<HomePage> {
         if (result.hasData) {
           return Scaffold(
               key: _scaffoldKey,
+              backgroundColor: Colors.white.withOpacity(1),
               appBar: _getCustomAppBar(),
               body: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -50,11 +50,11 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 22,
-                      color: Colors.grey.shade500,
+                      color: AppColors.acikMavi.withOpacity(0.8),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
                   Container(
                       height: 100,
@@ -90,11 +90,16 @@ class _HomePageState extends State<HomePage> {
                                                           .spaceEvenly,
                                                   children: <Widget>[
                                                     CircleAvatar(
+                                                      backgroundColor:
+                                                          Colors.black,
                                                       radius: 38,
-                                                      backgroundImage:
-                                                          NetworkImage(
-                                                              userList[index]
-                                                                  .profileURL),
+                                                      child: CircleAvatar(
+                                                        radius: 36,
+                                                        backgroundImage:
+                                                            NetworkImage(
+                                                                userList[index]
+                                                                    .profileURL),
+                                                      ),
                                                     ),
                                                     Text(userList[index].name),
                                                   ],
@@ -121,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey.shade500,
+                      color: AppColors.acikMavi.withOpacity(0.8),
                     ),
                   ),
                   Builder(
@@ -157,46 +162,27 @@ class _HomePageState extends State<HomePage> {
                                   },
                                   child: ListTile(
                                     leading: CircleAvatar(
+                                      backgroundColor:
+                                          AppColors.acikMavi.withOpacity(1),
                                       radius: 30,
-                                      backgroundImage: NetworkImage(
-                                          _userModel.connection.profileURL ??
-                                              ""),
+                                      child: CircleAvatar(
+                                        radius: 26,
+                                        backgroundImage: NetworkImage(
+                                            _userModel.connection.profileURL ??
+                                                ""),
+                                      ),
                                     ),
                                     title: Text(
                                       _userModel.connection.name ?? "",
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(
+                                          color: AppColors.acikMavi
+                                              .withOpacity(1)),
                                     ),
                                     subtitle: Text(
                                       _userModel.connection.professional ?? "",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    trailing: RotationTransition(
-                                      turns:
-                                          new AlwaysStoppedAnimation(45 / 360),
-                                      child: IconButton(
-                                        onPressed: () {
-                                          Navigator.of(context,
-                                                  rootNavigator: true)
-                                              .push(MaterialPageRoute(
-                                                  builder:
-                                                      (context) => ChatPage(
-                                                            me: _userModel
-                                                                .user.userID,
-                                                            it: _userModel
-                                                                .connection
-                                                                .userID,
-                                                            profileImage: NetworkImage(
-                                                                _userModel
-                                                                    .connection
-                                                                    .profileURL),
-                                                          )));
-                                        },
-                                        icon: Icon(
-                                          Icons.navigation,
-                                          size: 28,
-                                          color: Colors.white,
-                                        ),
-                                      ),
+                                      style: TextStyle(
+                                          color: AppColors.acikMavi
+                                              .withOpacity(1)),
                                     ),
                                   ),
                                 ),
@@ -205,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                                 thickness: 4,
                                 indent: 20,
                                 endIndent: 20,
-                                color: Colors.grey.shade500,
+                                color: AppColors.acikMavi.withOpacity(1),
                               ),
                               SizedBox(
                                 height: 20,
@@ -237,35 +223,19 @@ class _HomePageState extends State<HomePage> {
                                 height: 5,
                               ),
                               Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.fromLTRB(60, 7, 60, 15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(60),
-                                    color: AppColors.acikMor.withOpacity(1.0),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.navigation,
-                                        color: Colors.white,
-                                      ),
-                                      Text(
-                                        "Mesaj At",
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              GestureDetector(
-                                onTap: () => _service.call(number),
-                                child:Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context, rootNavigator: true)
+                                        .push(MaterialPageRoute(
+                                            builder: (context) => ChatPage(
+                                                  me: _userModel.user.userID,
+                                                  it: _userModel
+                                                      .connection.userID,
+                                                  profileImage: NetworkImage(
+                                                      _userModel.connection
+                                                          .profileURL),
+                                                )));
+                                  },
                                   child: Container(
                                     margin: EdgeInsets.fromLTRB(60, 7, 60, 15),
                                     decoration: BoxDecoration(
@@ -275,7 +245,40 @@ class _HomePageState extends State<HomePage> {
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.navigation,
+                                          color: Colors.white,
+                                        ),
+                                        Text(
+                                          "Mesaj At",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    _service.call(number);
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.fromLTRB(60, 7, 60, 15),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(60),
+                                      color:
+                                          AppColors.acikMavi.withOpacity(1.0),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
                                         Icon(
                                           Icons.phone,
@@ -288,16 +291,15 @@ class _HomePageState extends State<HomePage> {
                                       ],
                                     ),
                                   ),
-                                ) ,
+                                ),
                               ),
-
                               SizedBox(
                                 height: 5,
                               ),
                               Text(
                                 _userModel.connection.email.toString(),
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: AppColors.acikMavi.withOpacity(1),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
                                 ),
@@ -339,18 +341,27 @@ class _HomePageState extends State<HomePage> {
                                   },
                                   child: ListTile(
                                     leading: CircleAvatar(
+                                      backgroundColor:
+                                          AppColors.acikMavi.withOpacity(1),
                                       radius: 30,
-                                      backgroundImage: NetworkImage(
-                                          _userModel.connection.profileURL ??
-                                              ""),
+                                      child: CircleAvatar(
+                                        radius: 26,
+                                        backgroundImage: NetworkImage(
+                                            _userModel.connection.profileURL ??
+                                                ""),
+                                      ),
                                     ),
                                     title: Text(
                                       _userModel.connection.name ?? "",
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(
+                                          color: AppColors.acikMavi
+                                              .withOpacity(1)),
                                     ),
                                     subtitle: Text(
                                       _userModel.connection.professional ?? "",
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(
+                                          color: AppColors.acikMavi
+                                              .withOpacity(1)),
                                     ),
                                     trailing: RotationTransition(
                                       turns:
@@ -376,7 +387,8 @@ class _HomePageState extends State<HomePage> {
                                         icon: Icon(
                                           Icons.navigation,
                                           size: 28,
-                                          color: Colors.white,
+                                          color:
+                                              AppColors.acikMavi.withOpacity(1),
                                         ),
                                       ),
                                     ),
@@ -387,7 +399,7 @@ class _HomePageState extends State<HomePage> {
                                 thickness: 4,
                                 indent: 20,
                                 endIndent: 20,
-                                color: Colors.grey.shade500,
+                                color: AppColors.acikMavi.withOpacity(1),
                               ),
                               SizedBox(
                                 height: 15,
@@ -399,13 +411,17 @@ class _HomePageState extends State<HomePage> {
                                   Text(
                                     "Kalan Buluşmalarım\n3",
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 16),
+                                        color:
+                                            AppColors.acikMavi.withOpacity(1),
+                                        fontSize: 16),
                                     textAlign: TextAlign.center,
                                   ),
                                   Text(
                                     "Kalan Anketlerim\n2",
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 16),
+                                        color:
+                                            AppColors.acikMavi.withOpacity(1),
+                                        fontSize: 16),
                                     textAlign: TextAlign.center,
                                   )
                                 ],
@@ -416,18 +432,58 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 "Sonraki Buluşma İçin Son Tarih\n 27 Mayıs 2020",
                                 style: TextStyle(
-                                    color: Colors.white, fontSize: 16),
+                                    color: AppColors.acikMavi.withOpacity(1),
+                                    fontSize: 16),
                                 textAlign: TextAlign.center,
                               ),
                               SizedBox(
                                 height: 15,
                               ),
                               Expanded(
-                                child: Container(
-                                    margin: EdgeInsets.fromLTRB(60, 15, 60, 7),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushReplacementNamed(
+                                        context, "/arrangeMeeting");
+                                  },
+                                  child: Container(
+                                      margin:
+                                          EdgeInsets.fromLTRB(60, 15, 60, 7),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(60),
+                                        color: AppColors.pembe.withOpacity(1.0),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.date_range,
+                                            color: Colors.white,
+                                          ),
+                                          Text(
+                                            "Buluşma Ayarla",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ],
+                                      )),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushReplacementNamed(
+                                        context, "/fillSurvey");
+                                  },
+                                  child: Container(
+                                    margin: EdgeInsets.fromLTRB(60, 7, 60, 15),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(60),
-                                      color: AppColors.pembe.withOpacity(1.0),
+                                      color: AppColors.acikMor.withOpacity(1.0),
                                     ),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -435,40 +491,15 @@ class _HomePageState extends State<HomePage> {
                                           MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
                                         Icon(
-                                          Icons.date_range,
+                                          Icons.assignment,
                                           color: Colors.white,
                                         ),
                                         Text(
-                                          "Buluşma Ayarla",
+                                          "Anket Doldur",
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       ],
-                                    )),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Expanded(
-                                child: Container(
-                                  margin: EdgeInsets.fromLTRB(60, 7, 60, 15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(60),
-                                    color: AppColors.acikMor.withOpacity(1.0),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.assignment,
-                                        color: Colors.white,
-                                      ),
-                                      Text(
-                                        "Anket Doldur",
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -510,7 +541,7 @@ class _HomePageState extends State<HomePage> {
                     icon: Icon(
                       Icons.menu,
                       size: 28,
-                      color: Colors.white,
+                      color: AppColors.acikMavi.withOpacity(1),
                     ),
                     onPressed: () => _scaffoldKey.currentState.openDrawer()),
                 IconButton(
@@ -518,7 +549,7 @@ class _HomePageState extends State<HomePage> {
                   icon: Icon(
                     Icons.notifications,
                     size: 28,
-                    color: Colors.white,
+                    color: AppColors.acikMavi.withOpacity(1),
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -534,7 +565,8 @@ class _HomePageState extends State<HomePage> {
               "ANA  SAYFA",
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.acikMavi.withOpacity(1),
+                fontWeight: FontWeight.bold,
                 fontSize: 22,
               ),
             ),

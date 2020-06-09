@@ -34,7 +34,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    UserModel _userModel = Provider.of<UserModel>(context);
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
@@ -62,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: <Widget>[
                       Container(
                         decoration: BoxDecoration(
-                            color: AppColors.acikMor,
+                            color: AppColors.acikMor.withOpacity(0.8),
                             borderRadius: BorderRadius.circular(50)),
                         padding: EdgeInsets.only(top: 5, bottom: 5),
                         child: Text(
@@ -111,10 +110,12 @@ class _LoginPageState extends State<LoginPage> {
           child: FutureBuilder<String>(
             future: getSavedEmail(),
             builder: (context, result) {
-              debugPrint(">>> login_page >>> _buildEmailTF >>> savedMail >>> ${result.data}");
+              debugPrint(
+                  ">>> login_page >>> _buildEmailTF >>> savedMail >>> ${result.data}");
               mailController = TextEditingController(text: result.data);
-              if(result.hasData){
+              if (result.hasData) {
                 return TextFormField(
+                  cursorColor: AppColors.acikMor.withOpacity(0.8),
                   controller: mailController,
                   keyboardType: TextInputType.emailAddress,
                   style: TextStyle(
@@ -137,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 );
-              } else{
+              } else {
                 return Center(child: CircularProgressIndicator());
               }
             },
@@ -158,10 +159,11 @@ class _LoginPageState extends State<LoginPage> {
           height: 50.0,
           child: FutureBuilder<String>(
             future: getSavedPass(),
-            builder: (context, result){
+            builder: (context, result) {
               passController = TextEditingController(text: result.data);
-              if(result.hasData){
+              if (result.hasData) {
                 return TextFormField(
+                  cursorColor: AppColors.acikMor.withOpacity(0.8),
                   controller: passController,
                   obscureText: true,
                   style: TextStyle(
@@ -202,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Text(
           'Şifremi Unuttum',
           style: TextStyle(
-            color: AppColors.acikMor,
+            color: AppColors.acikMor.withOpacity(0.8),
             fontWeight: FontWeight.bold,
             fontFamily: 'OpenSans',
             fontSize: 15,
@@ -245,8 +247,9 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       child: RaisedButton(
         padding: EdgeInsets.all(15.0),
-        color: AppColors.acikMor,
-        onPressed: () => onLogInPressed(mailController.text, passController.text, context),
+        color: AppColors.acikMor.withOpacity(0.8),
+        onPressed: () =>
+            onLogInPressed(mailController.text, passController.text, context),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
@@ -269,11 +272,11 @@ class _LoginPageState extends State<LoginPage> {
     updateLoginData();
     final _userModel = Provider.of<UserModel>(context, listen: false);
     try {
-      User user = await _userModel.signIn(mailController.text, passController.text);
-      if (user != null){
-
-      }
-        Navigator.pushReplacementNamed(context, _userModel.user.type == "MOD" ? '/adminHome' : '/home');
+      User user =
+          await _userModel.signIn(mailController.text, passController.text);
+      if (user != null) {}
+      Navigator.pushReplacementNamed(
+          context, _userModel.user.type == "MOD" ? '/adminHome' : '/home');
     } catch (e) {
       showDialog(
           context: context,
@@ -299,5 +302,4 @@ class _LoginPageState extends State<LoginPage> {
   Future<String> getSavedPass() async {
     return await storage.read(key: "_pass") ?? "";
   }
-
 }

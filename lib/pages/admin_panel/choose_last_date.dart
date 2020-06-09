@@ -1,3 +1,4 @@
+import 'package:agucareer/pages/admin_panel/admin_home_page.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -72,38 +73,10 @@ class _ChooseLastDate extends State<ChooseLastDate> {
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () {
-                  String _selectedMonth = "";
-                  _selectedDate = newDateTime;
-                  if (_selectedDate.month == 1) {
-                    _selectedMonth = "Ocak";
-                  } else if (_selectedDate.month == 2) {
-                    _selectedMonth = "Şubat";
-                  } else if (_selectedDate.month == 3) {
-                    _selectedMonth = "Mart";
-                  } else if (_selectedDate.month == 4) {
-                    _selectedMonth = "Nisan";
-                  } else if (_selectedDate.month == 5) {
-                    _selectedMonth = "Mayıs";
-                  } else if (_selectedDate.month == 6) {
-                    _selectedMonth = "Haziran";
-                  } else if (_selectedDate.month == 7) {
-                    _selectedMonth = "Temmuz";
-                  } else if (_selectedDate.month == 8) {
-                    _selectedMonth = "Ağustos";
-                  } else if (_selectedDate.month == 9) {
-                    _selectedMonth = "Eylül";
-                  } else if (_selectedDate.month == 10) {
-                    _selectedMonth = "Ekim";
-                  } else if (_selectedDate.month == 11) {
-                    _selectedMonth = "Kasım";
-                  } else {
-                    _selectedMonth = "Aralık";
-                  }
-                  setState(() {
-                    _selectedDateFormat =
-                    "${_selectedDate.day} $_selectedMonth ${_selectedDate.year}";
-                  });
-
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AdminHomePage()));
                 },
                 elevation: 0,
               ),
@@ -149,6 +122,7 @@ class _ChooseLastDate extends State<ChooseLastDate> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
                 color: AppColors.koyuMor.withOpacity(1.0),
                 fontSize: 22,
               ),

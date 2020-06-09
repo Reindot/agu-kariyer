@@ -52,7 +52,7 @@ class ProfilDuzenleWidget extends StatelessWidget {
                 margin: EdgeInsets.only(left: 60, right: 60),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                    color: AppColors.acikMor,
+                    color: AppColors.acikMor.withOpacity(0.8),
                     borderRadius: BorderRadius.circular(50)
                 ),
                 child: Text(
@@ -94,7 +94,7 @@ class ProfilDuzenleWidget extends StatelessWidget {
                         margin: EdgeInsets.only(top: 20),
                         child: FlatButton(
                           onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProfilePage(_userModel.user))),
-                          color: AppColors.acikMor,
+                          color: AppColors.acikMor.withOpacity(0.8),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                           ),
@@ -127,7 +127,7 @@ class ProfilDuzenleWidget extends StatelessWidget {
                         margin: EdgeInsets.only(top: 20),
                         child: FlatButton(
                           onPressed: () => _updateUserData(context),
-                          color: AppColors.acikMor,
+                          color: AppColors.acikMor.withOpacity(0.8),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(30)),
                           ),
