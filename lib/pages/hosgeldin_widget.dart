@@ -41,7 +41,7 @@ class HosgeldinWidget extends StatelessWidget {
                         Container(
                           height: 52,
                           child: RaisedButton(
-                            color: AppColors.acikMor,
+                            color: AppColors.acikMor.withOpacity(0.8),
                             onPressed: () => this.onButtonTwoPressed(context),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.0),
