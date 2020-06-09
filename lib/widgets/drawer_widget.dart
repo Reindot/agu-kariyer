@@ -2,10 +2,8 @@ import 'dart:ui';
 import 'package:agucareer/pages/admin_panel/admin_home_page.dart';
 import 'package:agucareer/pages/all_chats_page.dart';
 import 'package:agucareer/pages/all_files_page.dart';
-import 'package:agucareer/pages/arrange_meeting.dart';
 import 'package:agucareer/pages/profil_duzenle_widget.dart';
 import 'package:agucareer/pages/profil_page.dart';
-import 'package:agucareer/pages/survey_pages/fill_survey_page.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +49,7 @@ class DrawerWidget {
             leading: Icon(Icons.home),
             title: Text("Ana Sayfa"),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushReplacementNamed(context, "/home");
             },
           ),
           ListTile(
@@ -97,10 +95,7 @@ class DrawerWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ArrangeMeeting()));
+                    Navigator.pushReplacementNamed(context, "/arrangeMeeting");
                   }),
             ),
           ),
@@ -117,8 +112,7 @@ class DrawerWidget {
               leading: Icon(Icons.assignment),
               title: Text("Anket Doldur"),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => FillSurvey()));
+                Navigator.pushReplacementNamed(context, "/fillSurvey");
               }),
           ListTile(
               contentPadding: EdgeInsets.only(left: 30),

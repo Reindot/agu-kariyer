@@ -4,11 +4,9 @@ import 'package:agucareer/models/file_model.dart';
 import 'package:agucareer/pages/view_file_page.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class AllFilesPage extends StatefulWidget {
@@ -17,7 +15,7 @@ class AllFilesPage extends StatefulWidget {
 }
 
 class _AllFilesPageState extends State<AllFilesPage> {
-  double FilesLength;
+  double filesLength;
   @override
   Widget build(BuildContext context) {
     final _userModel = Provider.of<UserModel>(context);
@@ -100,11 +98,6 @@ class _AllFilesPageState extends State<AllFilesPage> {
     );
   }
 
-  String _showTimeStamp(Timestamp date) {
-    var _formatter = DateFormat.Hm();
-    return _formatter.format(date.toDate());
-  }
-
   _getCustomAppBar() {
     return PreferredSize(
       preferredSize: Size.fromHeight(100),
@@ -127,7 +120,7 @@ class _AllFilesPageState extends State<AllFilesPage> {
                     icon: Icon(
                       Icons.arrow_back,
                       size: 28,
-                      color: Colors.white,
+                      color: AppColors.acikMavi.withOpacity(1),
                     ),
                     onPressed: () => Navigator.pop(context)),
               ],
@@ -138,7 +131,7 @@ class _AllFilesPageState extends State<AllFilesPage> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColors.acikMavi.withOpacity(1),
                 fontSize: 22,
               ),
             ),

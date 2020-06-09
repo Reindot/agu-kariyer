@@ -22,6 +22,45 @@ class SifremiUnuttumWidget extends StatelessWidget {
         margin: EdgeInsets.only(top: 10, bottom: 30),
         child: ListView(
           children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  width: 118,
+                  height: 53,
+                  margin: EdgeInsets.only(top: 20, left: 20),
+                  child: FlatButton(
+                    onPressed: () => this.onArrowLeftPressed(context),
+                    color: AppColors.acikMor.withOpacity(0.8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    textColor: Colors.white,
+                    padding: EdgeInsets.all(0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/icon-back.png",
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Geri",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
             Container(
               height: 200,
               margin: EdgeInsets.all(30),
