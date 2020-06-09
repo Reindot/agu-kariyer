@@ -157,36 +157,50 @@ class _NotificationPageState extends State<NotificationPage> {
 
                     case "MONTHLY_REMINDER":
                       {
-                        Container(
-                          child: GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    ArrangeMeeting(),
-                              );
-                            },
-                            child: Container(
-                                margin: EdgeInsets.only(bottom: 2),
-                                padding: EdgeInsets.only(top: 22, bottom: 22),
-                                decoration: BoxDecoration(
-                                  color: AppColors.acikMavi.withOpacity(1),
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(75)),
+                        return GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  ArrangeMeeting(),
+                            );
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 2),
+                            padding: EdgeInsets.only(top: 22, bottom: 22),
+                            decoration: BoxDecoration(
+                              color: AppColors.pembe.withOpacity(1),
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(75)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.white,
+                                  offset: Offset(0, 2),
                                 ),
-                                child: Card(
-                                  elevation: 0,
-                                  color: AppColors.acikMavi,
-                                  child: ListTile(
-                                    leading: CircleAvatar(
-                                      radius: 30,
-                                      backgroundImage: NetworkImage(""),
+                              ],
+                            ),
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(width: screenSize.width / 12),
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage:
+                                      NetworkImage(chat.profileURL),
+                                ),
+                                SizedBox(width: screenSize.width / 15),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      "Bu Ay İçerisinde Yeni Bir Buluşma Ayarlamalısın.",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade400,
+                                          fontSize: 16),
                                     ),
-                                    title: Text(
-                                        "Bu Ay İçerisinde Yeni Bir Buluşma Ayarlamalısın",
-                                        style: TextStyle(color: Colors.white)),
-                                  ),
-                                )),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       }
@@ -194,30 +208,44 @@ class _NotificationPageState extends State<NotificationPage> {
 
                     case "DAILY_REMINDER":
                       {
-                        return Container(
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                                margin: EdgeInsets.only(bottom: 2),
-                                padding: EdgeInsets.only(top: 22, bottom: 22),
-                                decoration: BoxDecoration(
-                                  color: AppColors.acikMavi.withOpacity(1),
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(75)),
+                        return GestureDetector(
+                          onTap: () => {},
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 2),
+                            padding: EdgeInsets.only(top: 22, bottom: 22),
+                            decoration: BoxDecoration(
+                              color: AppColors.pembe.withOpacity(1),
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(75)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.white,
+                                  offset: Offset(0, 2),
                                 ),
-                                child: Card(
-                                  elevation: 0,
-                                  color: AppColors.acikMavi,
-                                  child: ListTile(
-                                    leading: CircleAvatar(
-                                      radius: 30,
-                                      backgroundImage: NetworkImage(""),
+                              ],
+                            ),
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(width: screenSize.width / 12),
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage:
+                                      NetworkImage(chat.profileURL),
+                                ),
+                                SizedBox(width: screenSize.width / 15),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      "Buluşmana 24 saat var.",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade400,
+                                          fontSize: 16),
                                     ),
-                                    title: Text(
-                                        "Bir sonraki buluşmana 24 Saat var!",
-                                        style: TextStyle(color: Colors.white)),
-                                  ),
-                                )),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       }
@@ -225,67 +253,95 @@ class _NotificationPageState extends State<NotificationPage> {
 
                     case "LAST_NOTIFICATION":
                       {
-                        return Container(
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                                margin: EdgeInsets.only(bottom: 2),
-                                padding: EdgeInsets.only(top: 22, bottom: 22),
-                                decoration: BoxDecoration(
-                                  color: AppColors.acikMor.withOpacity(1),
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(75)),
+                        return GestureDetector(
+                          onTap: () => {},
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 2),
+                            padding: EdgeInsets.only(top: 22, bottom: 22),
+                            decoration: BoxDecoration(
+                              color: AppColors.pembe.withOpacity(1),
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(75)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.white,
+                                  offset: Offset(0, 2),
                                 ),
-                                child: Card(
-                                  elevation: 0,
-                                  color: AppColors.acikMor,
-                                  child: ListTile(
-                                    leading: CircleAvatar(
-                                      radius: 30,
-                                      backgroundImage: NetworkImage(""),
+                              ],
+                            ),
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(width: screenSize.width / 12),
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage:
+                                      NetworkImage(chat.profileURL),
+                                ),
+                                SizedBox(width: screenSize.width / 15),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      "Buluşmana 2 saat kaldı, hazırlanıp yola çıkmalısın.",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade400,
+                                          fontSize: 16),
                                     ),
-                                    title: Text(
-                                        "Bir sonraki buluşmana 2 Saat Kaldı. Hazırlanıp yola çıkmalısın",
-                                        style: TextStyle(color: Colors.white)),
-                                  ),
-                                )),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       }
                       break;
 
-                    case "CONFIRM_MEETING":
+                    case "MEETING_DONE":
                       {
-                        return Container(
-                          child: GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    _MeetingCheckDialog(),
-                              );
-                            },
-                            child: Container(
-                                margin: EdgeInsets.only(bottom: 2),
-                                padding: EdgeInsets.only(top: 22, bottom: 22),
-                                decoration: BoxDecoration(
-                                  color: AppColors.acikMor.withOpacity(1),
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(75)),
+                        return GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  _MeetingCheckDialog(),
+                            );
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 2),
+                            padding: EdgeInsets.only(top: 22, bottom: 22),
+                            decoration: BoxDecoration(
+                              color: AppColors.pembe.withOpacity(1),
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(75)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.white,
+                                  offset: Offset(0, 2),
                                 ),
-                                child: Card(
-                                  elevation: 0,
-                                  color: AppColors.acikMor,
-                                  child: ListTile(
-                                    leading: CircleAvatar(
-                                      radius: 30,
-                                      backgroundImage: NetworkImage(""),
+                              ],
+                            ),
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(width: screenSize.width / 12),
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage:
+                                      NetworkImage(chat.profileURL),
+                                ),
+                                SizedBox(width: screenSize.width / 15),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      "Buluşma Tarihin Geçti. Mentörünle buluştuğunu onaylıyor musun?",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade400,
+                                          fontSize: 16),
                                     ),
-                                    title: Text(
-                                        "Buluşma Tarihin Geçti. Mentörünle buluştuğunu onaylıyor musun?",
-                                        style: TextStyle(color: Colors.white)),
-                                  ),
-                                )),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       }
@@ -293,36 +349,50 @@ class _NotificationPageState extends State<NotificationPage> {
 
                     case "FILL_SURVEY":
                       {
-                        return Container(
-                          child: GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    SelectSurvey(),
-                              );
-                            },
-                            child: Container(
-                                margin: EdgeInsets.only(bottom: 2),
-                                padding: EdgeInsets.only(top: 22, bottom: 22),
-                                decoration: BoxDecoration(
-                                  color: AppColors.acikMavi.withOpacity(1),
-                                  borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(75)),
+                        return GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) =>
+                                  SelectSurvey(),
+                            );
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 2),
+                            padding: EdgeInsets.only(top: 22, bottom: 22),
+                            decoration: BoxDecoration(
+                              color: AppColors.pembe.withOpacity(1),
+                              borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(75)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.white,
+                                  offset: Offset(0, 2),
                                 ),
-                                child: Card(
-                                  elevation: 0,
-                                  color: AppColors.acikMavi,
-                                  child: ListTile(
-                                    leading: CircleAvatar(
-                                      radius: 30,
-                                      backgroundImage: NetworkImage(""),
+                              ],
+                            ),
+                            child: Row(
+                              children: <Widget>[
+                                SizedBox(width: screenSize.width / 12),
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage:
+                                  NetworkImage(chat.profileURL),
+                                ),
+                                SizedBox(width: screenSize.width / 15),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      "Ahmet Soran ile yaptığın görüşmenin geri bildirim anketini doldurmalısın",
+                                      style: TextStyle(
+                                          color: Colors.grey.shade400,
+                                          fontSize: 16),
                                     ),
-                                    title: Text(
-                                        "Ahmet Soran ile yaptığın görüşmenin geri bildirim anketini doldurmalısın",
-                                        style: TextStyle(color: Colors.white)),
-                                  ),
-                                )),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       }
