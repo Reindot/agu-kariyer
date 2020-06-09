@@ -70,7 +70,7 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
             child: TextFormField(
               keyboardType: TextInputType.text,
               style: TextStyle(
-                color: AppColors.koyuMor,
+                color: AppColors.acikMavi,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'OpenSans',
               ),
@@ -79,11 +79,11 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
                 contentPadding: EdgeInsets.only(top: 14.0),
                 prefixIcon: Icon(
                   Icons.announcement,
-                  color: AppColors.koyuMor.withOpacity(0.4),
+                  color: AppColors.acikMavi.withOpacity(0.4),
                 ),
                 hintText: 'Duyurunuz',
                 hintStyle: TextStyle(
-                  color: AppColors.koyuMor.withOpacity(0.4),
+                  color: AppColors.acikMavi.withOpacity(0.6),
                   fontWeight: FontWeight.bold,
                   fontFamily: 'OpenSans',
                 ),
@@ -128,10 +128,10 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
         children: <Widget>[
           Spacer(flex: 1),
           Theme(
-            data: ThemeData(unselectedWidgetColor: AppColors.koyuMor),
+            data: ThemeData(unselectedWidgetColor: AppColors.acikMor),
             child: Checkbox(
               value: _sendToMentor,
-              activeColor: AppColors.koyuMor,
+              activeColor: AppColors.acikMor,
               checkColor: Colors.white,
               onChanged: (value) {
                 setState(() {
@@ -142,14 +142,18 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
           ),
           Text(
             'Mentöre Yolla',
-            style: darkPurpleTextStyle,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+              color: AppColors.acikMor
+            ),
           ),
           Spacer(flex: 3),
           Theme(
-            data: ThemeData(unselectedWidgetColor: AppColors.koyuMor),
+            data: ThemeData(unselectedWidgetColor: AppColors.acikMor),
             child: Checkbox(
               value: _sendToStudent,
-              activeColor: AppColors.koyuMor,
+              activeColor: AppColors.acikMor,
               checkColor: Colors.white,
               onChanged: (value) {
                 setState(() {
@@ -160,7 +164,11 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
           ),
           Text(
             'Öğrenciye Yolla',
-            style: darkPurpleTextStyle,
+            style:  TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
+                color: AppColors.acikMor
+            ),
           ),
           Spacer(flex: 1),
         ],

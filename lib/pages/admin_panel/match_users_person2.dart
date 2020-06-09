@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../arrange_meeting.dart';
+import 'admin_home_page.dart';
 
 class MatchUserPerson2 extends StatefulWidget{
   int fix = 1;
@@ -136,9 +137,10 @@ class _MatchUserPerson2 extends State<MatchUserPerson2>{
                                       fontWeight: FontWeight.bold),
                                 ),
                                 onTap: () {
-                                  setState(() {
-                                    _selectedName = filteredUsers[index].name;
-                                  });
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => AdminHomePage()));
                                 },
                               ),
                             ) ,
