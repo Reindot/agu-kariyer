@@ -67,7 +67,14 @@ class FirestoreDBService implements DBService {
           .where("userID", isEqualTo: user.modID)
           .getDocuments();
     } else {
-      return List<User>();
+      querySnapshot1 = await _firestore
+          .collection("users")
+          .where("type", isEqualTo: "MENTOR")
+          .getDocuments();
+      querySnapshot2 = await _firestore
+          .collection("users")
+          .where("type", isEqualTo: "STUDENT")
+          .getDocuments();
     }
 
     List<User> list1 = querySnapshot1.documents
