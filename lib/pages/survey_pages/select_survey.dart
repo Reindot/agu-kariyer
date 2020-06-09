@@ -1,4 +1,3 @@
-import 'package:agucareer/models/user_model.dart';
 import 'package:agucareer/values/colors.dart';
 import 'package:agucareer/viewmodels/user_model.dart';
 import 'package:agucareer/widgets/drawer_widget.dart';
@@ -44,18 +43,18 @@ class _SelectSurveyState extends State<SelectSurvey> {
         children: <Widget>[
           Text("Anket Seç",
               style: TextStyle(
-                  color: AppColors.koyuMor.withOpacity(1),
+                  color: AppColors.acikMavi.withOpacity(1),
                   letterSpacing: 1.5,
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'OpenSans')),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           Card(
             margin:
             EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-            color: AppColors.acikMavi.withOpacity(1),
+            color: AppColors.koyuMor.withOpacity(0.8),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(60.0),
             ),
@@ -81,7 +80,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
           Card(
             margin:
             EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-            color: AppColors.acikMavi.withOpacity(1),
+            color: AppColors.koyuMor.withOpacity(0.8),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(60.0),
             ),
@@ -107,7 +106,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
           Card(
             margin:
             EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-            color: AppColors.acikMavi.withOpacity(1),
+            color: AppColors.koyuMor.withOpacity(0.8),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(60.0),
             ),
@@ -133,7 +132,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
           Card(
             margin:
             EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-            color: AppColors.acikMavi.withOpacity(1),
+            color: AppColors.koyuMor.withOpacity(0.8),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(60.0),
             ),
@@ -159,7 +158,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
           Card(
             margin:
             EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-            color: AppColors.acikMavi.withOpacity(1),
+            color: AppColors.koyuMor.withOpacity(0.8),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(60.0),
             ),
@@ -209,7 +208,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
                     icon: Icon(
                       Icons.menu,
                       size: 28,
-                      color: Colors.white,
+                      color: AppColors.acikMavi.withOpacity(1),
                     ),
                     onPressed: () => _scaffoldKey.currentState.openDrawer()),
                 IconButton(
@@ -217,7 +216,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
                     icon: Icon(
                       Icons.notifications,
                       size: 28,
-                      color: Colors.white,
+                      color: AppColors.acikMavi.withOpacity(1),
                     ),
                     onPressed: () {}),
               ],
@@ -228,7 +227,7 @@ class _SelectSurveyState extends State<SelectSurvey> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColors.acikMavi.withOpacity(1),
                 fontSize: 22,
               ),
             ),
