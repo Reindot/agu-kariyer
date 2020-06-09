@@ -6,7 +6,6 @@ import 'package:agucareer/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../arrange_meeting.dart';
-import '../notifications.dart';
 
 class FillSurvey extends StatefulWidget {
   int fix = 1;
@@ -181,24 +180,11 @@ class _FillSurveyState extends State<FillSurvey> {
                 IconButton(
                     padding: EdgeInsets.all(20),
                     icon: Icon(
-                      Icons.menu,
+                      Icons.arrow_back,
                       size: 28,
                       color: AppColors.acikMavi.withOpacity(1),
                     ),
-                    onPressed: () => _scaffoldKey.currentState.openDrawer()),
-                IconButton(
-                    padding: EdgeInsets.all(20),
-                    icon: Icon(
-                      Icons.notifications,
-                      size: 28,
-                      color: AppColors.acikMavi.withOpacity(1),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => NotificationPage()));
-                    }),
+                    onPressed: () => Navigator.pop(context)),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
             ),
