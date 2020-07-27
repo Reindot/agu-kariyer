@@ -8,8 +8,6 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-
-
 class ChatPage extends StatefulWidget {
   final String me;
   final String it;
@@ -87,17 +85,22 @@ class _ChatPageState extends State<ChatPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: TextField(
-                    controller: _messageController,
-                    cursorColor: Colors.blueGrey,
-                    style: new TextStyle(fontSize: 16.0, color: Colors.black),
-                    decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        filled: true,
-                        hintText: "Mesajınızı yazın",
-                        border: new OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(30.0),
-                            borderSide: BorderSide.none)),
+                  child: Scrollbar(
+                    child: TextField(
+                      controller: _messageController,
+                      cursorColor: Colors.blueGrey,
+                      keyboardType: TextInputType.multiline,
+                      minLines: 1,
+                      maxLines: 5,
+                      style: new TextStyle(fontSize: 16.0, color: Colors.black),
+                      decoration: InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
+                          hintText: "Mesajınızı yazın",
+                          border: new OutlineInputBorder(
+                              borderRadius: new BorderRadius.circular(30.0),
+                              borderSide: BorderSide.none)),
+                    ),
                   ),
                 ),
                 Container(

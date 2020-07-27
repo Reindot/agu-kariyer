@@ -76,11 +76,11 @@ class ProfilDuzenleWidget extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              InputField.standart(_bioController, "Hakkında Anlatmak İstediklerini Gir", "Hakkımda:", Icons.add),
+              InputField.standart(_workController, "Çalışıtığın Yeri Gir", "Çalışma Yeri:", Icons.place),
               SizedBox(
                 height: 20,
               ),
-              InputField.standart(_workController, "Çalışıtığın Yeri Gir", "Çalışma Yeri:", Icons.place),
+              InputField.longTextBox(_bioController, "Hakkında Anlatmak İstediklerini Gir", "Hakkımda:", Icons.add),
               SizedBox(
                 height: 30,
               ),

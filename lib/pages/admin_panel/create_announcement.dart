@@ -68,29 +68,31 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
         children: <Widget>[
           SizedBox(height: 20.0),
           Container(
-            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.only(top: 4, bottom: 4),
             decoration: secondBoxDecorationStyle,
-            height: 50.0,
-            child: TextFormField(
-              controller: _controller,
-              keyboardType: TextInputType.text,
-              style: TextStyle(
-                color: AppColors.acikMavi,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'OpenSans',
-              ),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.only(top: 14.0),
-                prefixIcon: Icon(
-                  Icons.announcement,
-                  color: AppColors.acikMavi.withOpacity(0.4),
-                ),
-                hintText: 'Duyurunuz',
-                hintStyle: TextStyle(
-                  color: AppColors.acikMavi.withOpacity(0.6),
+            child: Scrollbar(
+              child: TextFormField(
+                controller: _controller,
+                minLines: 1,
+                maxLines: 10,
+                keyboardType: TextInputType.multiline,
+                style: TextStyle(
+                  color: AppColors.acikMavi,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'OpenSans',
+                ),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  prefixIcon: Icon(
+                    Icons.announcement,
+                    color: AppColors.acikMavi.withOpacity(0.4),
+                  ),
+                  hintText: 'Duyurunuz',
+                  hintStyle: TextStyle(
+                    color: AppColors.acikMavi.withOpacity(0.6),
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'OpenSans',
+                  ),
                 ),
               ),
             ),
@@ -151,10 +153,9 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
           Text(
             'Mentöre Yolla',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OpenSans',
-              color: AppColors.acikMor
-            ),
+                fontWeight: FontWeight.bold,
+                fontFamily: 'OpenSans',
+                color: AppColors.acikMor),
           ),
           Spacer(flex: 3),
           Theme(
@@ -172,11 +173,10 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
           ),
           Text(
             'Öğrenciye Yolla',
-            style:  TextStyle(
+            style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontFamily: 'OpenSans',
-                color: AppColors.acikMor
-            ),
+                color: AppColors.acikMor),
           ),
           Spacer(flex: 1),
         ],
@@ -230,14 +230,12 @@ class _CreateAnnouncement extends State<CreateAnnouncement> {
 
   sendIt(BuildContext context) {
     String receiver = "";
-    if(_sendToStudent)
-      receiver = "STUDENT";
-    if(_sendToMentor)
-      receiver = "MENTOR";
-    if(_sendToStudent && _sendToMentor)
-      receiver = "ALL";
+    if (_sendToStudent) receiver = "STUDENT";
+    if (_sendToMentor) receiver = "MENTOR";
+    if (_sendToStudent && _sendToMentor) receiver = "ALL";
 
     final _userModel = Provider.of<UserModel>(context, listen: false);
-    _userModel.makeAnnouncement(Notifications(receiver: receiver, text: _controller.text, type: "ANN"));
+    _userModel.makeAnnouncement(
+        Notifications(receiver: receiver, text: _controller.text, type: "ANN"));
   }
 }
