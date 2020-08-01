@@ -110,11 +110,14 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
                                 Spacer(flex: 1),
-                                Text(
-                                  _selectedPlace == null
-                                      ? 'Mekan Seçiniz'
-                                      : _selectedPlace,
-                                  style: TextStyle(color: Colors.white),
+                                Flexible(
+                                  flex: 100,
+                                  child: Text(
+                                    _selectedPlace == null
+                                        ? 'Mekan Seçiniz'
+                                        : _selectedPlace,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                                 Spacer(flex: 2),
                                 Icon(Icons.location_on, color: Colors.white),
@@ -157,11 +160,14 @@ class _ArrangeMeetingState extends State<ArrangeMeeting> {
                                 Spacer(flex: 1),
                                 Icon(Icons.date_range, color: Colors.white),
                                 Spacer(flex: 2),
-                                Text(
-                                  _selectedDate == null
-                                      ? 'Tarih Seçiniz'
-                                      : _selectedDateFormat.toString(),
-                                  style: TextStyle(color: Colors.white),
+                                Flexible(
+                                  flex: 100,
+                                  child: Text(
+                                    _selectedDate == null
+                                        ? 'Tarih Seçiniz'
+                                        : _selectedDateFormat.toString(),
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                                 Spacer(flex: 1),
                               ],
