@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
   final String number = "05334567035";
-  static bool isFirstLoad = true;
+  int selectedConnection = 0;
 
   void initState() {
     super.initState();
@@ -36,10 +36,7 @@ class _HomePageState extends State<HomePage> {
       builder: (context, result) {
         if (result.hasData) {
            var listUser = result.data;
-           if (isFirstLoad) {
-             _userModel.connection = listUser[0];
-             isFirstLoad = false;
-           }
+           _userModel.connection = listUser[selectedConnection];
           return Scaffold(
               key: _scaffoldKey,
               backgroundColor: Colors.white.withOpacity(1),
@@ -82,8 +79,8 @@ class _HomePageState extends State<HomePage> {
                                           GestureDetector(
                                             onTap: () {
                                               setState(() {
-                                                _userModel.connection =
-                                                    userList[index];
+                                                _userModel.connection = userList[index];
+                                                selectedConnection = index;
                                               });
                                             },
                                             child: Card(
@@ -91,20 +88,14 @@ class _HomePageState extends State<HomePage> {
                                                     right: 25, left: 25),
                                                 elevation: 0,
                                                 child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                   children: <Widget>[
                                                     CircleAvatar(
-                                                      backgroundColor:
-                                                          Colors.black,
-                                                      radius: 38,
+                                                      backgroundColor: selectedConnection == index ? Colors.green : Colors.black,
+                                                      radius: selectedConnection == index ? 39 : 38,
                                                       child: CircleAvatar(
-                                                        radius: 36,
-                                                        backgroundImage:
-                                                            NetworkImage(
-                                                                userList[index]
-                                                                    .profileURL),
+                                                        radius: selectedConnection == index ? 35 : 37,
+                                                        backgroundImage: NetworkImage(userList[index].profileURL),
                                                       ),
                                                     ),
                                                     Text(userList[index].name),
