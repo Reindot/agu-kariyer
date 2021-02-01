@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final CallsAndMessagesService _service = locator<CallsAndMessagesService>();
   final String number = "05334567035";
+  static bool isFirstLoad = true;
 
   void initState() {
     super.initState();
@@ -34,6 +35,11 @@ class _HomePageState extends State<HomePage> {
       future: _userModel.getConnections(_userModel.user),
       builder: (context, result) {
         if (result.hasData) {
+           var listUser = result.data;
+           if (isFirstLoad) {
+             _userModel.connection = listUser[0];
+             isFirstLoad = false;
+           }
           return Scaffold(
               key: _scaffoldKey,
               backgroundColor: Colors.white.withOpacity(1),
