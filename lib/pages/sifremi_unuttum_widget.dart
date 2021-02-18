@@ -62,7 +62,6 @@ class SifremiUnuttumWidget extends StatelessWidget {
               ],
             ),
             Container(
-              height: 200,
               margin: EdgeInsets.all(30),
               decoration: BoxDecoration(
                 //color: Colors.white,
@@ -71,7 +70,7 @@ class SifremiUnuttumWidget extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 20,
+                    height: 35,
                   ),
                   Text(
                     "Şifremi Unuttum",
@@ -84,13 +83,13 @@ class SifremiUnuttumWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 70,
+                    height: 50,
                   ),
                   Container(
                     alignment: Alignment.centerLeft,
                     decoration: secondBoxDecorationStyle,
-                    height: 60.0,
                     margin: EdgeInsets.only(right: 10, left: 10),
+                    padding: EdgeInsets.only(top: 3, bottom: 3),
                     child: TextField(
                       cursorColor: AppColors.acikMor.withOpacity(0.8),
                       keyboardType: TextInputType.emailAddress,
@@ -118,6 +117,9 @@ class SifremiUnuttumWidget extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 50,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
