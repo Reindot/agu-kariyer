@@ -34,65 +34,50 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: BoxDecoration(
+      body: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
+        padding: EdgeInsets.symmetric(
+          horizontal: 30.0,
+          vertical: 90.0,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                  color: AppColors.acikMor.withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(50)),
+              padding: EdgeInsets.only(
+                  top: screenSize.height / 100,
+                  bottom: screenSize.height / 100,
+                  right: screenSize.width/20,
+                  left: screenSize.width/20),
+              child: Text(
+                'Kullanıcı Girişi',
+                style: TextStyle(
                   color: Colors.white,
+                  fontFamily: 'OpenSans',
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Container(
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 30.0,
-                    vertical: 90.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                            color: AppColors.acikMor.withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(50)),
-                        padding: EdgeInsets.only(top: 5, bottom: 5),
-                        child: Text(
-                          '      Kullanıcı Girişi       ',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'OpenSans',
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 50.0),
-                      _buildEmailTF(),
-                      SizedBox(height: 10.0),
-                      _buildPasswordTF(),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      _buildRememberMeCheckbox(),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      _buildLoginBtn(context),
-                      _buildForgotPasswordBtn(),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
+            ),
+            SizedBox(height: 50.0),
+            _buildEmailTF(),
+            SizedBox(height: 10.0),
+            _buildPasswordTF(),
+            SizedBox(
+              height: 20.0,
+            ),
+            _buildRememberMeCheckbox(),
+            SizedBox(
+              height: 20.0,
+            ),
+            _buildLoginBtn(context),
+            _buildForgotPasswordBtn(),
+          ],
         ),
       ),
     );
