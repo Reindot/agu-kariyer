@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import '../values/colors.dart';
 
 class MailGonderildiWidget extends StatelessWidget {
-  void onArrowLeftPressed(BuildContext context) => Navigator.pop(context);
-
   void onArrowRightPressed(BuildContext context) => Navigator.pop(context);
 
   @override
@@ -19,8 +17,8 @@ class MailGonderildiWidget extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             Container(
-              height: 300,
               margin: EdgeInsets.all(30),
+              padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: AppColors.acikMor.withOpacity(0.08),
                 borderRadius: BorderRadius.circular(45),
@@ -38,9 +36,6 @@ class MailGonderildiWidget extends StatelessWidget {
                     width: 200,
                     fit: BoxFit.cover,
                   ),
-                  SizedBox(
-                    height: 0,
-                  ),
                   Text(
                     "Şifre Sıfırlama Bilgileriniz E-posta Adresinize Gönderildi.",
                     textAlign: TextAlign.center,
@@ -52,7 +47,7 @@ class MailGonderildiWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 0,
+                    height: 10,
                   ),
                 ],
               ),
